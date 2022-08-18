@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: 蚂蚁没问题
+subtitle: '正当梨花开边了天涯'
 description: ''
 keywords:
 author: John Doe
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://github.com/sisyphus1212/sisyphus1212.github.io
+url: https://sisyphus1212.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
