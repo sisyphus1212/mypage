@@ -769,7 +769,7 @@ disqus:
 gitalk:
   clientID: '21d6136fe98817012da1'
   clientSecret: 'edd3666ced99170fbe6a92d04fe997a2d48c3833'
-  repo: 'sisyphus1212.github.io'
+  repo: 'comments'
   owner: 'sisyphus1212'
   admin: ['sisyphus1212']
   language: zh-CN
@@ -778,6 +778,8 @@ gitalk:
   pagerDirection: last
   distractionFreeMode: false
   createIssueManually: true
+  proxy: /github/login/oauth/access_token
+
   # 默认 proxy 可能会失效，解决方法请见下方链接
   # The default proxy may be invalid, refer to the links for solutions
   # https://github.com/gitalk/gitalk/issues/429
