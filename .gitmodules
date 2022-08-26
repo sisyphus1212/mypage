@@ -1,6 +1,6 @@
-[submodule "sisyphus1212.github.io"]
-	path = sisyphus1212.github.io
-	url = git@github.com:sisyphus1212/sisyphus1212.github.io.git
 [submodule "themes/fluid"]
 	path = themes/fluid
 	url = git@github.com:sisyphus1212/hexo-theme-fluid.git
+[submodule "sisyphus1212.github.io"]
+	path = sisyphus1212.github.io
+	url = git@github.com:sisyphus1212/sisyphus1212.github.io.git
