@@ -784,7 +784,7 @@ gitalk:
   # The default proxy may be invalid, refer to the links for solutions
   # https://github.com/gitalk/gitalk/issues/429
   # https://github.com/Zibri/cloudflare-cors-anywhere
-  proxy: ""
+  proxy: "https://sisyphus1212.sisyphus12.workers.dev/"
 
 # Valine
 # 基于 LeanCloud
