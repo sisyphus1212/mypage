@@ -778,7 +778,7 @@ gitalk:
   pagerDirection: last
   distractionFreeMode: false
   createIssueManually: true
-  proxy: /github/login/oauth/access_token
+  #proxy: /github/login/oauth/access_token
 
   # 默认 proxy 可能会失效，解决方法请见下方链接
   # The default proxy may be invalid, refer to the links for solutions
