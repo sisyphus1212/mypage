@@ -18,11 +18,11 @@
 
 # 用于浏览器标签的图标
 # Icon for browser tab
-favicon: /img/go.png
+favicon: /img/avatar.png
 
 # 用于苹果设备的图标
 # Icon for Apple touch
-apple_touch_icon: /img/go.png
+apple_touch_icon: /img/go.jpg
 
 # 浏览器标签页中的标题分隔符，效果： 文章名 - 站点名
 # Title separator in browser tab, eg: article - site
@@ -87,7 +87,7 @@ fun_features:
 
     # 打印速度，数字越大越慢
     # Typing speed, the larger the number, the slower
-    typeSpeed: 70
+    typeSpeed: 75
 
     # 游标字符
     # Cursor character
@@ -455,7 +455,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: /img/default.png
+  banner_img: /img/6.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
