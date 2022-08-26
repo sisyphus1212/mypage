@@ -769,9 +769,9 @@ disqus:
 gitalk:
   clientID: '21d6136fe98817012da1'
   clientSecret: '844c0f2cb96a4016225a3de3eb3cf3de7d5c93cd'
-  repo: 'git@github.com:sisyphus1212/comments.git'
-  owner: 'sisyphus12'
-  admin: ['sisyphus12']
+  repo: 'sisyphus1212.github.io'
+  owner: 'sisyphus1212'
+  admin: ['sisyphus1212']
   language: zh-CN
   labels: ['Gitalk']
   perPage: 10
