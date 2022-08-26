@@ -455,7 +455,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: /img/friends.jpg
+  banner_img: /img/6.jpg
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -465,7 +465,7 @@ index:
   # 头图黑色蒙版的不透明度，available: 0 - 1.0， 1 是完全不透明
   # Opacity of the banner mask, 1.0 is completely opaque
   # Available: 0 - 1.0
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
 
   # 首页副标题的独立设置
   # Independent config of home page subtitle
@@ -883,9 +883,9 @@ giscus:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/friends.jpg
+  banner_img: /img/6.jpg
   banner_img_height: 60
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
 
 
 #---------------------------
@@ -894,9 +894,9 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: /img/friends.jpg
+  banner_img: /img/6.jpg
   banner_img_height: 60
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
 
   # 分类的排序字段，前面带减号是倒序，不带减号是正序
   # Sort field for categories, with a minus sign is reverse order
@@ -923,9 +923,9 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: /img/friends.jpg
+  banner_img: /img/6.jpg
   banner_img_height: 80
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
   tagcloud:
     min_font: 15
     max_font: 30
@@ -940,9 +940,9 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: /img/friends.jpg
+  banner_img: /img/6.jpg
   banner_img_height: 60
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
   avatar: /img/avatar.png
   name: "Fluid"
   intro: "An elegant theme for Hexo"
@@ -962,9 +962,9 @@ about:
 # Custom Page through `hexo new page`
 #---------------------------
 page:
-  banner_img: /img/friends.jpg
+  banner_img: /img/6.jpg
   banner_img_height: 60
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
 
 
 #---------------------------
@@ -975,7 +975,7 @@ page404:
   enable: true
   banner_img: /img/28.jpg
   banner_img_height: 85
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
   # 重定向到首页的延迟(毫秒)
   # Delay in redirecting to home page (milliseconds)
   redirect_delay: 5000
@@ -987,9 +987,9 @@ page404:
 #---------------------------
 links:
   enable: true
-  banner_img: /img/friends.jpg
+  banner_img: /img/6.jpg
   banner_img_height: 60
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
   # 友链的成员项
   # Member item of page
   items:
