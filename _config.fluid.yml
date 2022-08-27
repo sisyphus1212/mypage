@@ -945,10 +945,8 @@ about:
   banner_img_height: 60
   banner_mask_alpha: 0.2
   avatar: /img/avatar.png
-  name: "Fluid"
-  intro: "An elegant theme for Hexo"
-  # 更多图标可从 https://hexo.fluid-dev.com/docs/icon/ 查找，`class` 代表图标的 css class，添加 `qrcode` 后，图标不再是链接而是悬浮二维码
-  # More icons can be found from https://hexo.fluid-dev.com/docs/en/icon/  `class` is the css class of the icon. If adding `qrcode`, The icon is no longer a link, but a hovering QR code
+  name: "Sisyphus"
+  intro: "c/c++ /linux/fpga/内核/嵌入式"
   icons:
     - { class: "iconfont icon-github-fill", link: "https://github.com", tip: "GitHub" }
     - { class: "iconfont icon-douban-fill", link: "https://douban.com", tip: "豆瓣" }
@@ -995,16 +993,28 @@ links:
   # Member item of page
   items:
     - {
-      title: "Fluid Blog",
-      intro: "主题博客",
-      link: "https://sisyphus1212.github.io/categories/linux",
-      avatar: "/img/favicon.png"
+      title: "SONIC",
+      intro: "白盒交换系统",
+      link: "https://sonic-net.github.io/SONiC/",
+      avatar: "https://sonic-net.github.io/SONiC/assets/img/logo.png"
     }
     - {
-      title: "Fluid Docs",
-      intro: "主题使用指南",
-      link: "https://sisyphus1212.github.io/categories/人文知识",
-      avatar: "/img/favicon.png"
+      title: "OpenVswitch",
+      intro: "服务器虚拟交换机，网络虚拟化解决方案基石之一",
+      link: "https://github.com/openvswitch/ovs",
+      avatar: "https://avatars.githubusercontent.com/u/7143863?s=200&v=4"
+    }
+    - {
+      title: "DPDK",
+      intro: "高性能网络虚拟化解决方案组件之一",
+      link: "https://www.dpdk.org/",
+      avatar: "https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg"
+    }
+    - {
+      title: "p4lang",
+      intro: "白盒交换机数据面可编程开发语言",
+      link: "https://github.com/p4lang/switch",
+      avatar: "https://p4.org/wp-content/uploads/2021/05/Group-81.png"
     }
 
   # 当成员头像加载失败时，替换为指定图片
