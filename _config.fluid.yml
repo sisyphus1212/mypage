@@ -948,9 +948,9 @@ about:
   name: "Sisyphus"
   intro: "c/c++ /linux/fpga/内核/嵌入式"
   icons:
-    - { class: "iconfont icon-github-fill", link: "https://github.com", tip: "GitHub" }
-    - { class: "iconfont icon-douban-fill", link: "https://douban.com", tip: "豆瓣" }
-    - { class: "iconfont icon-wechat-fill", qrcode: "/img/favicon.png" }
+    - { class: "iconfont icon-github-fill", link: "https://github.com/sisyphus1212/", tip: "GitHub" }
+    - { class: "iconfont ", link: " ", tip: " " }
+    - { class: "iconfont icon-wechat-fill", qrcode: "/img/wechat.png" }
 
 
 #---------------------------
