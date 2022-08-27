@@ -350,6 +350,7 @@ navbar:
     - { key: "归档", link: "/archives/", icon: "iconfont icon-archive-fill" }
     - { key: "标签", link: "/tags/", icon: "iconfont icon-tags-fill" }
     - { key: "关于我", link: "/about/", icon: "iconfont icon-user-fill" }
+
     #- { key: "links", link: "/links/", icon: "iconfont icon-link-fill" }
 
 # 搜索功能，基于 hexo-generator-search 插件，若已安装其他搜索插件请关闭此功能，以避免生成多余的索引文件
@@ -986,7 +987,7 @@ page404:
 # Links Page
 #---------------------------
 links:
-  enable: true
+  enable: false
   banner_img: /img/5.png
   banner_img_height: 60
   banner_mask_alpha: 0.2
@@ -996,19 +997,13 @@ links:
     - {
       title: "Fluid Blog",
       intro: "主题博客",
-      link: "https://hexo.fluid-dev.com/",
+      link: "https://sisyphus1212.github.io/categories/linux",
       avatar: "/img/favicon.png"
     }
     - {
       title: "Fluid Docs",
       intro: "主题使用指南",
-      link: "https://hexo.fluid-dev.com/docs/",
-      avatar: "/img/favicon.png"
-    }
-    - {
-      title: "Fluid Repo",
-      intro: "主题 GitHub 仓库",
-      link: "https://github.com/fluid-dev/hexo-theme-fluid",
+      link: "https://sisyphus1212.github.io/categories/人文知识",
       avatar: "/img/favicon.png"
     }
 
@@ -1025,7 +1020,7 @@ links:
   # 评论插件
   # Comment plugin
   comments:
-    enable: true
+    enable: false
     # 指定的插件，需要同时设置对应插件的必要参数
     # The specified plugin needs to set the necessary parameters at the same time
     # Options: utterances | disqus | gitalk | valine | waline | changyan | livere | remark42 | twikoo | cusdis | giscus
