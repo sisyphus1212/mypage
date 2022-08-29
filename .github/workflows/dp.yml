@@ -54,6 +54,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "sisyphus12@aliyun.com"
           git config --global user.name "sisyphus12"
+          git submodule update --init --recursive
 
       - name: Hexo Deploy
         run: |
