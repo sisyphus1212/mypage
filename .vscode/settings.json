@@ -1,0 +1,5 @@
+{
+    "pasteImage.basePath": "${currentFileDir}",
+    "pasteImage.path": "${currentFileDir}/../media",
+    "pasteImage.insertPattern": "${imageSyntaxPrefix}https://github.com/sisyphus1212/images/blob/main/${imageFileName}?raw=true${imageSyntaxSuffix}"
+}
