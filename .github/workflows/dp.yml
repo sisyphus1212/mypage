@@ -39,8 +39,10 @@ jobs:
       - name: Npm Install
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
+          npm update
           npm install hexo-cli -g
           npm install --save
+          npm i hexo -g
 
       - name: Set Key
         env:
