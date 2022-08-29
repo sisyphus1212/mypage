@@ -4,3 +4,6 @@
 [submodule "sisyphus1212.github.io"]
 	path = sisyphus1212.github.io
 	url = git@github.com:sisyphus1212/sisyphus1212.github.io.git
+[submodule "source/media"]
+	path = source/media
+	url = git@github.com:sisyphus1212/images.git
