@@ -58,7 +58,6 @@ jobs:
       - name: Hexo Deploy
         run: |
           ls -lh
-          rm   .deploy_git
           hexo clean
           hexo generate
           hexo deploy
