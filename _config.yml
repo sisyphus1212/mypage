@@ -99,6 +99,9 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: fluid
 
+sitemap:
+    path: sitemap.xml
+    
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
