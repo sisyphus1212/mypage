@@ -1,3 +1,15 @@
+---
+title: dpdk网卡驱动及其 bind、unbind、new_id 等 sys 文件的使用
+date: 2022-08-27 16:04:02
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags: 
+ - dpdk
+ - 网卡驱动
+ - uio
+---
+
 # 网卡接口绑定驱动及其使用的 bind、unbind、new_id 等 sys 文件
 
 ## 一个特定的虚拟机环境
