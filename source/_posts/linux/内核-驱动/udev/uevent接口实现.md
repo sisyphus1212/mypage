@@ -1,7 +1,7 @@
 ---
 title: uevent接口实现
-date: 2022-09-08 16:04:04
-index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-08-23-08-10.png?raw=true
+date: 2022-09-20 16:04:04
+index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-23-08-10.png?raw=true
 categories:
 - [kernel,udev]
 tags:
