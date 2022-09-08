@@ -1,6 +1,6 @@
 ---
 title: x710 offload QinQ 报文 vlan 并支持 rss hash 到多队列
-date: 2022-08-27 16:04:02 dpdk-19.11 支持接口配置速率双工的方法
+date: 2022-09-08 16:04:02 dpdk-19.11 支持接口配置速率双工的方法
 index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
 categories:
 - [dpdk,网络开发,数据包处理]
