@@ -52,7 +52,7 @@ E: USEC_INITIALIZED=1909742190470
 可以看到用的是/lib/systemd/network/99-default.link
 
 # 网卡命名规则
-net.ifnames 的命名规范为：设备类型+设备位置+数字
+net.ifnames(systemd, udev) 的命名规范为：设备类型+设备位置+数字
 设备类型：
 en 表示Ethernet
 wl 表示WLAN
