@@ -1,7 +1,7 @@
 ---
 title: Linux 网卡重命名
 date: 2022-09-17 16:04:02
-index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+index_img: ![](https://github.com/sisyphus1212/images/blob/main/mk-2022-09-08-18-49-08.png?raw=true)
 categories:
 - [linux,网络开发,网卡驱动]
 tags:
