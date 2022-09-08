@@ -9,7 +9,7 @@ tags:
  - 网卡驱动
  - kernel
 ---
-由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此引入net.ifnames 和 biosdevname来创建网络接口
+由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此引入net.ifnames 和 biosdevname来重命名内核创建的网络接口
 因此就有下面三种网卡接口命名方式：
 >1. systemd.link — 底层物理网络设备配置(systemd-udevd)
 >2. udev rule
