@@ -1,4 +1,14 @@
-# dpdk 问题分析：dpdk-20.11 ice 100G 网卡 rss_hash 配置无效问题
+---
+title: dpdk 问题分析：dpdk-20.11 ice 100G 网卡 rss_hash 配置无效问题
+date: 2022-08-27 16:04:02
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 多核,亲核性
+---
+
 ## 问题描述
 使用 dpdk-20.11 testpmd 测试 ice 100G 网卡的时候发现设置 rss_hash 一直不生效，打流确认流量一直被 hash 到第一个队列上，其它的队列没有收到一个包。
 
@@ -40,4 +50,3 @@ In pre-boot or if a DDP package is not loaded by an OS driver, the 800 Series is
 
 ## 解决方法
 下载官方推荐的 ddp 包并复制到 lib/firmware/intel/ice/ddp 目录中，重新启动 testpmd，问题得到解决。
-
