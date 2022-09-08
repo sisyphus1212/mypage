@@ -222,6 +222,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 reboot
 ```
 
+
 在上面Centos7中命名的策略顺序是系统默认的。
 如系统BIOS符合要求，且系统中安装了biosdevname，且biosdevname=1启用，则biosdevname优先；
 如果BIOS不符合biosdevname要求或biosdevname=0，则仍然是systemd的规则优先。
