@@ -10,8 +10,8 @@ tags:
  - kernel
 ---
 # 前言
-由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此就有人考虑根据网卡在物理板子上的topo结构来给网卡命名，于是就引入net.ifnames 和 biosdevname来重命名内核创建的网络接口
-下面根据net.ifnames 和 biosdevname规范实现的几种网卡接口命名方式：
+由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此就有人考虑，根据网卡在物理板子上的topo结构来给网卡命名，于是就引入net.ifnames 和 biosdevname规范，来重命名内核创建的网络接口
+下面是根据net.ifnames 和 biosdevname规范实现的几种网卡接口命名方式：
 1. systemd.link 重命名(systemd-udevd)
 2. udev rule 重命名
 3. biosdevname 重命名 (常见于centos)
@@ -28,7 +28,7 @@ tags:
 #define NET_NAME_USER       3   /* provided by user-space */
 #define NET_NAME_RENAMED    4   /* renamed by user-space */
 ```
-通过udevadm查看网卡具体命名策略
+下面通过udevadm查看网卡具体命名策略，可以看到，是根据/lib/systemd/network/99-default.link进行的命名
 ```bash
  udevadm info /sys/class/net/ifname | grep ID_NET_NAME
 
@@ -51,7 +51,6 @@ E: SYSTEMD_ALIAS=/sys/subsystem/net/devices/bf_pci0
 E: TAGS=:systemd:
 E: USEC_INITIALIZED=1909742190470
 ```
-可以看到是根据/lib/systemd/network/99-default.link进行的命名
 
 ## 网卡命名规则
 net.ifnames(systemd, udev) 的命名规范为：设备类型+设备位置+数字
