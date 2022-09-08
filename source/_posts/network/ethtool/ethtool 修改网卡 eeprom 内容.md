@@ -1,3 +1,13 @@
+---
+title: ethtool 修改网卡 eeprom 内容
+date: 2022-08-27 16:04:02
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 多核,亲核性
+---
 # ethtool 修改网卡 eeprom 内容
 ## 问题描述
 在解决工作中遇到的一个问题时，有对比出出问题的设备网卡的 eeprom 与其它相同固件版本厂商的相同网卡的 eeprom 内容存在区别。
