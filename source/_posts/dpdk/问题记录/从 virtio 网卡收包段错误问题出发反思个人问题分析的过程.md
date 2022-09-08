@@ -1,4 +1,16 @@
-# 从 virtio 网卡收包段错误问题出发反思个人问题分析的过程
+---
+title: 从 virtio 网卡收包段错误问题出发反思个人问题分析的过程
+date: 2022-08-27 16:04:02
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 网卡驱动
+ - 虚拟化
+ - virtio
+---
+
 ## 问题描述
 kvm arm 虚拟机中 dpdk 业务程序使用 virtio 网卡收包时触发段错误，断在如下位置：
 ```c
@@ -164,7 +176,7 @@ vst1q_u64 (uint64_t *a, uint64x2_t b)
 
 ```c
 (gdb) bt
-165         vst1q_u64((void *)&rx_pkts[1]->rx_descriptor_fields1,                                                                                                            
+165         vst1q_u64((void *)&rx_pkts[1]->rx_descriptor_fields1,
 166             pkt_mb[1]);
 ................................
 ```
@@ -201,7 +213,7 @@ $28 = (struct rte_mbuf *) 0x0
 这时候分析得出如下结论：
 1. **virtqueue_enqueue_recv_refill_simple** 函数负责填充 mbuf 地址到 sw_ring 上
 2. 确定 **hw->use_simple_rxtx** 在 **virtio_dev_tx_queue_setup** 中被重新赋值为 1
-3. 确定 l2fwd 与产品 dpdk 业务程序中均先执行 **rx_queue_setup** 再执行 **tx_queue_setup** 
+3. 确定 l2fwd 与产品 dpdk 业务程序中均先执行 **rx_queue_setup** 再执行 **tx_queue_setup**
 
 第三点与第二点因素导致 **rx_queue_setup** 中【不能判断】到 hw->use_simple_rxtx 为 1，则**未填充 sw_ring**，收包函数访问 sw_ring 中为 NULL 的 mbuf 时就会出现段错误。
 
@@ -249,8 +261,8 @@ Date:   Thu Sep 7 14:13:43 2017 +0200
 [2.7.2. Run-time NEON unit detection](https://developer.arm.com/documentation/den0018/a/Compiling-NEON-Instructions/Detecting-presence-of-a-NEON-unit/Run-time-NEON-unit-detection)
 相关的描述信息如下：
 ```
-As the /proc/cpuinfo output is text based, it is often preferred to look at the auxiliary vector 
-/proc/self/auxv. This contains the kernel hwcap in a binary format. The /proc/self/auxv file can 
+As the /proc/cpuinfo output is text based, it is often preferred to look at the auxiliary vector
+/proc/self/auxv. This contains the kernel hwcap in a binary format. The /proc/self/auxv file can
 be easily searched for the AT_HWCAP record, to check for the HWCAP_NEON bit (4096).
 ```
 我当时并没有直接搜索，而是看了下 dpdk 解析 cpuflag 的代码，发现它是通过解析 ```/proc/self/auxv```文件来确定 arm cpu 支持的特殊指令，而不是通过访问 /proc/cpuinfo。其实这个思路是正确的，代码是第一手的资料，网上搜索的信息已经是好多手的资料了，其可信度已经大打折扣，对于这些信息应该批判性看待，不应该盲目的相信。
@@ -271,4 +283,3 @@ be easily searched for the AT_HWCAP record, to check for the HWCAP_NEON bit (409
 在这个问题中使用 l2fwd 做对比实验却没有找到真正的变化量。对于 l2fwd 与 dpdk 业务程序而言，**处理器是否支持 neon 的检测是使用同一套 dpdk 代码做的，变化点不在这里**，变化点实际在**两个程序的接口配置**中，忽略了这个变量，却误将 cpu 是否支持 neon 指令作为变量，进而得出了错误的结论。
 
 这块还需要继续改进！
-

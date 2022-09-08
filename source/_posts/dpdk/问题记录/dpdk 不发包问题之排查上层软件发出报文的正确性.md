@@ -1,4 +1,16 @@
-# dpdk 不发包问题之排查上层软件发出报文的正确性
+---
+title: dpdk 不发包问题之排查上层软件发出报文的正确性
+date: 2022-08-27 16:04:02
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 网卡驱动
+ - 虚拟化
+ - virtio
+---
+
 ## 原始问题
 国产化 ngbe 网卡使用 dpdk pmd 驱动，出现不发包问题，需要在异常环境上排查是否是**上层发出了一个异常的报文**导致。
 
@@ -56,9 +68,9 @@ dpdk 程序中 mbuf 来自于 **mbufpool**。这个 **mbufpool** 在初始化的
 
 最开始我感觉上层程序调用了 **rte_eth_tx_burst** 后报文就通过网卡成功发出去了，然后上层来释放，表面上看上去好像也说得通，后期的分析却推翻了这一结论。
 
-这时我想到在这个答案中我忽略了一个关键的问题：**rte_eth_tx_burst 调用完成并不代表包真的成功发出去了！** 
+这时我想到在这个答案中我忽略了一个关键的问题：**rte_eth_tx_burst 调用完成并不代表包真的成功发出去了！**
 
-那**为什么我会给出这样一个答案呢？** 
+那**为什么我会给出这样一个答案呢？**
 
 主要还是我对发包的底层细节完全不清楚， 不知道 rte_eth_tx_burst 填充了报文的地址到描述符上到网卡真正成功发包这中间还有许多细节，例如网卡访问发包描述符、网卡发起 PCIE 传输请求拷贝报文到网卡内部 fifo、phy 层对报文的电信号转换等等。
 
@@ -108,13 +120,13 @@ ixgbe_tx_free_bufs 函数的主要代码如下：
 	status = txq->tx_ring[txq->tx_next_dd].wb.status;
 	if (!(status & rte_cpu_to_le_32(IXGBE_ADVTXD_STAT_DD)))
 		return 0;
-	
+
 	/*
 	 * first buffer to free from S/W ring is at index
 	 * tx_next_dd - (tx_rs_thresh-1)
 	 */
 	txep = &(txq->sw_ring[txq->tx_next_dd - (txq->tx_rs_thresh - 1)]);
-	
+
 	for (i = 0; i < txq->tx_rs_thresh; ++i, ++txep) {
 		/* free buffers one at a time */
 		m = rte_pktmbuf_prefree_seg(txep->mbuf);
@@ -285,6 +297,3 @@ Index: drivers/net/ngbe/ngbe_rxtx.c
 其实是在这样一个过程中扩大了自己的知识，这部分扩大的知识让你能够更客观的看待面临的问题并进行深入的思考，有了这个过程才不致陷入到不能的陷阱中，进而实现突破，最终做到那些你感觉根本不能做到的事情。
 
 写到这里我觉得网卡的收发包模型在 dpdk 驱动中处于比较核心的位置，其中的原理涉及到了许多我们关注不到的 case，识别这些问题并自己找到合理的解释，这一过程就是在不断的向更核心的方向前进。
-
-
-
