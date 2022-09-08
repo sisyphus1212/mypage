@@ -140,32 +140,9 @@ Name: 在 NamePolicy= 无效时应该使用的网卡名称。 无效的情况包
 # udev rule策略重命名
 udev 辅助工具程序 /lib/udev/rename_device 会根据 /usr/lib/udev/rules.d/60-net.rules 中的指示去查询 /etc/sysconfig/network-script/ifcfg-IFACE 配置文件，根据HWADDR 读取设备名称,如果在ifcfg-xx中匹配到HWADDR=xx:xx:xx:xx:xx:xx参数的网卡接口则选取DEVICE=yyyy中设置的名字作为网卡名称
 
-# 使用 biosdevname 的一致网络设备命名
+# biosdevname 重命名
 biosdevname 根据 /user/lib/udev/rules.d/71-boosdevname.rules
 biosdevname 程序使用系统 BIOS 的信息，特别是类型 9 (System Slot) 和类型 41 （板设备扩展信息）字段包含在 SMBIOS 中。如果系统的 BIOS 没有 SMBIOS 版本 2.6 或更高版本，且此数据不会使用，则不会使用新的命名规则。大多数较旧的硬件不支持此功能，因为缺少包含正确的 SMBIOS 版本和字段信息的 BIOS。
-
-# 禁用一致的网络设备命名
-另外在文件/etc/network/interfaces中配置的网卡名称需要手动修改，把ens160相关的修改为ethx。
-很多网卡驱动在加载时会对虚拟网络接口的名称进行重命名。下面是我的系统上 dmesg 中的部分输出，可以看到最开始虚拟网络接口的名称为 eth0，最后一行的信息中可以看到接口名称被改为了 enp2s0。
-
-```
-[    4.218735] r8169 0000:02:00.0 eth0: RTL8168h/8111h, 30:88:2c:17:55:d7, XID 54100880, IRQ 126
-[    4.218736] r8169 0000:02:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
-[    4.219142] xhci_hcd 0000:00:14.0: hcc params 0x200077c1 hci version 0x110 quirks 0x0000000000009810
-[    4.219435] hub 1-0:1.0: USB hub found
-[    4.219456] hub 1-0:1.0: 12 ports detected
-[    4.220818] r8169 0000:02:00.0 enp2s0: renamed from eth0
-```
-修改/etc/default/grub文件，在（GRUB_CMDLINE_LINUX=）一行增加参数：（net.ifnames=0 biosdevname=0）。之后允许update-grub命令更新grub启动配置文件。重新启动系统，网卡的命名恢复成ethx格式。
-在上面Centos7中命名的策略顺序是系统默认的。
-如系统BIOS符合要求，且系统中安装了biosdevname，且biosdevname=1启用，则biosdevname优先；
-如果BIOS不符合biosdevname要求或biosdevname=0，则仍然是systemd的规则优先。
-如果用户自己定义了udevrule来修改内核设备名字，则用户规则优先。
-
-内核参数组合使用的时候，其结果如下：
-1. 默认内核参数(biosdevname=0，net.ifnames=1): 网卡名”enp5s2”
-1. biosdevname=1，net.ifnames=0：网卡名 “em1”
-1. biosdevname=0，net.ifnames=0：网卡名 “eth0” (最传统的方式,eth0 eth1傻傻分不清)
 
 # ifrename动态重命名网卡
 一些系统中，有根据网口的不同功能重命名 netdev 的需求。这可以通过调用 ifrename 命令来完成。这个命令在我的系统中并没有安装，我首先执行如下命令，搜索需要安装的程序名。
@@ -190,10 +167,10 @@ ifrename [-c configfile] [-i interface] [-n newname]
 一个具体的示例如下：
 
 ```bash
-[sisyphus@ubuntu] arm64 $ sudo /sbin/ifconfig enp2s0 down
-[sisyphus@ubuntu] arm64 $ sudo ifrename -i enp2s0 -n eth0
+[sisyphus@ubuntu]$ sudo /sbin/ifconfig enp2s0 down
+[sisyphus@ubuntu]$ sudo ifrename -i enp2s0 -n eth0
 eth0
-[sisyphus@ubuntu] arm64 $ /sbin/ifconfig eth0
+[sisyphus@ubuntu]$ /sbin/ifconfig eth0
 eth0: flags=4098<BROADCAST,MULTICAST>  mtu 1500
         ether 80:e8:2c:17:f0:77  txqueuelen 1000  (Ethernet)
         RX packets 0  bytes 0 (0.0 B)
@@ -222,3 +199,26 @@ ioctl(3, SIOCSIFNAME, {ifr_name="eth0", ifr_newname="enp2s0"}) = 0
 sock_ioctl -> sock_do_ioctl -> dev_ioctl -> dev_ifsioc -> dev_change_name
 ```
 最终是通过调用 dev_change_name 函数来完成虚拟网卡接口重命名的。
+
+# 禁用一致的网络设备命名
+另外在文件/etc/network/interfaces中配置的网卡名称需要手动修改，把ens160相关的修改为ethx。
+很多网卡驱动在加载时会对虚拟网络接口的名称进行重命名。下面是我的系统上 dmesg 中的部分输出，可以看到最开始虚拟网络接口的名称为 eth0，最后一行的信息中可以看到接口名称被改为了 enp2s0。
+
+```
+[    4.218735] r8169 0000:02:00.0 eth0: RTL8168h/8111h, 30:88:2c:17:55:d7, XID 54100880, IRQ 126
+[    4.218736] r8169 0000:02:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+[    4.219142] xhci_hcd 0000:00:14.0: hcc params 0x200077c1 hci version 0x110 quirks 0x0000000000009810
+[    4.219435] hub 1-0:1.0: USB hub found
+[    4.219456] hub 1-0:1.0: 12 ports detected
+[    4.220818] r8169 0000:02:00.0 enp2s0: renamed from eth0
+```
+修改/etc/default/grub文件，在（GRUB_CMDLINE_LINUX=）一行增加参数：（net.ifnames=0 biosdevname=0）。之后允许update-grub命令更新grub启动配置文件。重新启动系统，网卡的命名恢复成ethx格式。
+在上面Centos7中命名的策略顺序是系统默认的。
+如系统BIOS符合要求，且系统中安装了biosdevname，且biosdevname=1启用，则biosdevname优先；
+如果BIOS不符合biosdevname要求或biosdevname=0，则仍然是systemd的规则优先。
+如果用户自己定义了udevrule来修改内核设备名字，则用户规则优先。
+
+内核参数组合使用的时候，其结果如下：
+1. 默认内核参数(biosdevname=0，net.ifnames=1): 网卡名”enp5s2”
+1. biosdevname=1，net.ifnames=0：网卡名 “em1”
+1. biosdevname=0，net.ifnames=0：网卡名 “eth0” (最传统的方式,eth0 eth1傻傻分不清)
