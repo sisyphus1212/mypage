@@ -6,7 +6,7 @@ categories:
 - [dpdk,网络开发,数据包处理]
 tags:
  - dpdk
- - 多核
+ - 多核,亲核性
 ---
 
 ## 前言
