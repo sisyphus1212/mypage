@@ -10,10 +10,11 @@ tags:
  - kernel
 ---
 由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此引入net.ifnames 和 biosdevname来重命名内核创建的网络接口
-因此引入下面三种网卡常见接口命名方式：
->1. systemd.link — 底层物理网络设备配置(systemd-udevd)
->2. udev rule
->3. biosdevname 常见于centos
+因此引入下面三种网卡接口命名方式：
+1. systemd.link策略重命名(systemd-udevd)
+2. udev rule策略重命名
+3. biosdevname重命名 常见于centos
+4. ifrename动态重命名
 
 # 查看网卡命名
 当前网卡的命名方式可以通过proc文件查看，比如网卡ens160，命名方式为4，即对应内核中的NET_NAME_RENAMED，表示网卡名是被用户空间程序修改的：
@@ -94,7 +95,7 @@ systemd中rule的实际执行顺序:
 3. /lib/udev/rules.d/75-net-description.rules
 4. /usr/lib/udev/rules.d/80-net-name-slot.rules
 
-# systemd.link — 底层物理网络设备配置
+# systemd.link策略重命名
 参考:[http://www.jinbuguo.com/systemd/systemd.link.html]
 在用户空间，默认情况下ubuntu会根据systemd目录下的link文件命名网卡，NamePolicy变量指定了5中命名策略：kernel database onboard slot path，优先级由高到低排列。
 
@@ -135,7 +136,7 @@ Name: 在 NamePolicy= 无效时应该使用的网卡名称。 无效的情况包
 
 注意， 千万不要设置可能被内核用于其他网口的名称(例如 “eth0″)， 这可能会导致 udev 在分配名称时与内核产生竞争， 从而导致不可预期的后果。 最好的做法是使用一些永远不会导致冲突名称或前缀，例如： “internal0″”external0″ 或 “lan0″”lan1″/”lan3″
 
-# udev rule重命名网卡
+# udev rule策略重命名
 udev 辅助工具程序 /lib/udev/rename_device 会根据 /usr/lib/udev/rules.d/60-net.rules 中的指示去查询 /etc/sysconfig/network-script/ifcfg-IFACE 配置文件，根据HWADDR 读取设备名称,如果在ifcfg-xx中匹配到HWADDR=xx:xx:xx:xx:xx:xx参数的网卡接口则选取DEVICE=yyyy中设置的名字作为网卡名称
 
 # 使用 biosdevname 的一致网络设备命名
