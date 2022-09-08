@@ -6,9 +6,7 @@ categories:
 - [dpdk,网络开发,数据包处理]
 tags:
  - dpdk
- - 网卡驱动
- - 虚拟化
- - virtio
+ - 数据转发
 ---
 
 ## 原始问题

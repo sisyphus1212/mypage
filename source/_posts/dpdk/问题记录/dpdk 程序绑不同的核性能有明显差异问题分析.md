@@ -1,4 +1,14 @@
-# dpdk 程序绑不同的核性能有明显差异问题分析
+---
+title: dpdk 程序绑不同的核性能有明显差异问题分析
+date: 2022-08-27 16:04:02
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 多核
+---
+
 ## 前言
 dpdk 程序会将**收发包线程绑定到指定的 cpu 核上**，在多核环境中执行就要配置需要使用的核。在性能测试的时候，发现当收发包线程绑定到 0 核、1 核对应的 cpu 上后，**性能会有明显的下降**，而绑定到 0 核、1 核之后的核上却没有这个问题。
 
@@ -44,11 +54,11 @@ smp_affinity 设定了单个中断被允许执行的 cpu 掩码，内核会以�
 
 
 ```bash
-[longyu@debian-10:20:20:25] 14 $ grep '141:' /proc/interrupts 
+[longyu@debian-10:20:20:25] 14 $ grep '141:' /proc/interrupts
  141:     486315          0          0     596832          0          0          0          0  IR-PCI-MSI 333824-edge      iwlwifi: default queue
-[longyu@debian-10:20:21:07] 14 $ grep '141:' /proc/interrupts 
+[longyu@debian-10:20:21:07] 14 $ grep '141:' /proc/interrupts
  141:     486405          0          0     596832          0          0          0          0  IR-PCI-MSI 333824-edge      iwlwifi: default queue
-[longyu@debian-10:20:21:08] 14 $ grep '141:' /proc/interrupts 
+[longyu@debian-10:20:21:08] 14 $ grep '141:' /proc/interrupts
  141:     486703          0          0     596832          0          0          0          0  IR-PCI-MSI 333824-edge      iwlwifi: default queue
 ```
 上面的操作查了三次 141 号中断的统计计数，输出信息表明中断服务程序在 0 核上与 3 核上执行，141 号中断的 smp_affinity 内容如下：
@@ -74,11 +84,11 @@ ff
 
 操作记录如下：
 ```bash
-[longyu@debian-10:20:30:02] 14 $ grep '141:' /proc/interrupts 
+[longyu@debian-10:20:30:02] 14 $ grep '141:' /proc/interrupts
  141:     520162          0          0     596832       1465          0          0          0  IR-PCI-MSI 333824-edge      iwlwifi: default queue
-[longyu@debian-10:20:30:28] 14 $ grep '141:' /proc/interrupts 
+[longyu@debian-10:20:30:28] 14 $ grep '141:' /proc/interrupts
  141:     520162          0          0     596832       1639          0          0          0  IR-PCI-MSI 333824-edge      iwlwifi: default queue
-[longyu@debian-10:20:30:31] 14 $ grep '141:' /proc/interrupts 
+[longyu@debian-10:20:30:31] 14 $ grep '141:' /proc/interrupts
  141:     520162          0          0     596832       1805          0          0          0  IR-PCI-MSI 333824-edge      iwlwifi: default queue
 ```
 可以看到 0 核与 3 核上的中断计数不再增加，4 核上的中断计数在增加表明**设定生效**。
@@ -108,8 +118,5 @@ softirq 会在中断服务程序中触发，而 **smp_affinity** 掩码决定了
 2. 我们的观测方法存在问题
 
 	观测到 softirq 在某个核上执行，但是具体执行的 softirq 是哪个中断的 softirq 并没有深究
-	
+
 softirq 的工作过程有时间了要研究研究！扩展了这个知识，或许这里的问题便有了答案！
-	
-
-
