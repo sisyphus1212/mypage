@@ -11,7 +11,7 @@ tags:
 ---
 # 前言
 由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此就有人考虑根据网卡在物理板子上的top结构来给网卡命名，于是就引入net.ifnames 和 biosdevname来重命名内核创建的网络接口
-下面根据net.ifnames 和 biosdevname规范实现的三种网卡接口命名方式：
+下面根据net.ifnames 和 biosdevname规范实现的几种网卡接口命名方式：
 1. systemd.link策略重命名(systemd-udevd)
 2. udev rule策略重命名
 3. biosdevname重命名 常见于centos
@@ -96,7 +96,7 @@ systemd中rule的实际执行顺序:
 3. /lib/udev/rules.d/75-net-description.rules
 4. /usr/lib/udev/rules.d/80-net-name-slot.rules
 
-# systemd.link策略重命名
+# systemd.link 重命名
 参考:[http://www.jinbuguo.com/systemd/systemd.link.html]
 在用户空间，默认情况下ubuntu会根据systemd目录下的link文件命名网卡，NamePolicy变量指定了5中命名策略：kernel database onboard slot path，优先级由高到低排列。
 
@@ -137,14 +137,14 @@ Name: 在 NamePolicy= 无效时应该使用的网卡名称。 无效的情况包
 
 注意， 千万不要设置可能被内核用于其他网口的名称(例如 “eth0″)， 这可能会导致 udev 在分配名称时与内核产生竞争， 从而导致不可预期的后果。 最好的做法是使用一些永远不会导致冲突名称或前缀，例如： “internal0″”external0″ 或 “lan0″”lan1″/”lan3″
 
-# udev rule策略重命名
+# udev rule 重命名
 udev 辅助工具程序 /lib/udev/rename_device 会根据 /usr/lib/udev/rules.d/60-net.rules 中的指示去查询 /etc/sysconfig/network-script/ifcfg-IFACE 配置文件，根据HWADDR 读取设备名称,如果在ifcfg-xx中匹配到HWADDR=xx:xx:xx:xx:xx:xx参数的网卡接口则选取DEVICE=yyyy中设置的名字作为网卡名称
 
 # biosdevname 重命名
 biosdevname 根据 /user/lib/udev/rules.d/71-boosdevname.rules
 biosdevname 程序使用系统 BIOS 的信息，特别是类型 9 (System Slot) 和类型 41 （板设备扩展信息）字段包含在 SMBIOS 中。如果系统的 BIOS 没有 SMBIOS 版本 2.6 或更高版本，且此数据不会使用，则不会使用新的命名规则。大多数较旧的硬件不支持此功能，因为缺少包含正确的 SMBIOS 版本和字段信息的 BIOS。
 
-# ifrename动态重命名网卡
+# ifrename动态重命名
 一些系统中，有根据网口的不同功能重命名 netdev 的需求。这可以通过调用 ifrename 命令来完成。这个命令在我的系统中并没有安装，我首先执行如下命令，搜索需要安装的程序名。
 
 ```bash
