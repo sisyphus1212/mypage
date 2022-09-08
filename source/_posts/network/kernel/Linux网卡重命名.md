@@ -201,8 +201,7 @@ sock_ioctl -> sock_do_ioctl -> dev_ioctl -> dev_ifsioc -> dev_change_name
 最终是通过调用 dev_change_name 函数来完成虚拟网卡接口重命名的。
 
 # 禁用一致的网络设备命名
-另外在文件/etc/network/interfaces中配置的网卡名称需要手动修改，把ens160相关的修改为ethx。
-很多网卡驱动在加载时会对虚拟网络接口的名称进行重命名。下面是我的系统上 dmesg 中的部分输出，可以看到最开始虚拟网络接口的名称为 eth0，最后一行的信息中可以看到接口名称被改为了 enp2s0。
+通过 dmesg 中的部分输出，可以看到最开始虚拟网络接口的名称为 eth0，最后一行的信息中可以看到接口名称被改为了 enp2s0。
 
 ```
 [    4.218735] r8169 0000:02:00.0 eth0: RTL8168h/8111h, 30:88:2c:17:55:d7, XID 54100880, IRQ 126
@@ -212,7 +211,7 @@ sock_ioctl -> sock_do_ioctl -> dev_ioctl -> dev_ifsioc -> dev_change_name
 [    4.219456] hub 1-0:1.0: 12 ports detected
 [    4.220818] r8169 0000:02:00.0 enp2s0: renamed from eth0
 ```
-修改/etc/default/grub文件，在（GRUB_CMDLINE_LINUX=）一行增加参数：（net.ifnames=0 biosdevname=0）。之后允许update-grub命令更新grub启动配置文件。重新启动系统，网卡的命名恢复成ethx格式。
+修改/etc/default/grub文件，在（GRUB_CMDLINE_LINUX=）一行增加参数：（net.ifnames=0 biosdevname=0）。之后用update-grub命令更新grub启动配置文件。重新启动系统，网卡的命名恢复成ethx格式。
 在上面Centos7中命名的策略顺序是系统默认的。
 如系统BIOS符合要求，且系统中安装了biosdevname，且biosdevname=1启用，则biosdevname优先；
 如果BIOS不符合biosdevname要求或biosdevname=0，则仍然是systemd的规则优先。
