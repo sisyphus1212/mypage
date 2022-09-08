@@ -6,7 +6,6 @@
 
 ## 使用虚拟机进行模拟
 以前没有修改过 eeprom 内容，只是了解过可以通过 ethtool 命令来 dump eeprom 信息。在 ethtool 命令帮助信息中查找，发现它也可以修改 eeprom 的内容。
-
 不过直接修改物理网卡的 eeprom 可能会把网卡刷成砖，就先使用虚拟机模拟了下。
 
 ### 获取驱动与固件版本信息
@@ -17,7 +16,7 @@ longyu@virt-debian10:~$ sudo ethtool -i enp9s0
 driver: e1000e
 version: 3.2.6-k
 firmware-version: 2.1-0
-expansion-rom-version: 
+expansion-rom-version:
 bus-info: 0000:09:00.0
 supports-statistics: yes
 supports-test: yes
@@ -62,14 +61,14 @@ longyu@virt-debian10:~$ sudo ethtool -e  enp9s0 raw on | od -x
 longyu@virt-debian10:~$ sudo ethtool -e  enp9s0 raw off
 Offset		Values
 ------		------
-0x0000:		52 54 00 08 3f ef 20 04 46 f7 10 20 ff ff ff ff 
-0x0010:		00 00 00 00 6b 02 d3 10 86 80 d3 10 00 00 58 80 
-0x0020:		00 00 01 20 7c 7e ff ff 00 10 c8 00 00 00 04 27 
-0x0030:		c9 6c 50 31 0e 07 0b 46 84 2d 00 01 00 f0 06 07 
-0x0040:		00 60 80 00 04 0f ff 7f 01 4f 00 c6 00 00 ff 20 
-0x0050:		28 00 03 00 00 00 00 00 00 00 03 00 00 00 ff ff 
-0x0060:		00 01 00 c0 1c 12 07 c0 ff ff ff ff ff ff ff ff 
-0x0070:		ff ff ff ff ff ff ff ff 00 00 20 01 ff ff d8 8d 
+0x0000:		52 54 00 08 3f ef 20 04 46 f7 10 20 ff ff ff ff
+0x0010:		00 00 00 00 6b 02 d3 10 86 80 d3 10 00 00 58 80
+0x0020:		00 00 01 20 7c 7e ff ff 00 10 c8 00 00 00 04 27
+0x0030:		c9 6c 50 31 0e 07 0b 46 84 2d 00 01 00 f0 06 07
+0x0040:		00 60 80 00 04 0f ff 7f 01 4f 00 c6 00 00 ff 20
+0x0050:		28 00 03 00 00 00 00 00 00 00 03 00 00 00 ff ff
+0x0060:		00 01 00 c0 1c 12 07 c0 ff ff ff ff ff ff ff ff
+0x0070:		ff ff ff ff ff ff ff ff 00 00 20 01 ff ff d8 8d
 ```
 可以看到 raw 格式开启后，dump 出的内容没有进行任何处理，这里我用 od -x 来转化了下，不然它会**输出一堆乱码**。
 
@@ -85,7 +84,7 @@ enp9s0: flags=4098<BROADCAST,MULTICAST>  mtu 1500
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 0  bytes 0 (0.0 B)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-        device interrupt 23  memory 0xfc240000-fc260000  
+        device interrupt 23  memory 0xfc240000-fc260000
 ```
 可以看到 ifconfig 看到的接口的 mac 地址为 52:54:00:08:3f:ef 正好对应 eeprom 中的前 6 个字节。
 
@@ -96,17 +95,17 @@ enp9s0: flags=4098<BROADCAST,MULTICAST>  mtu 1500
 longyu@virt-debian10:~$ sudo ethtool -e enp9s0 offset 0 length 1
 Offset		Values
 ------		------
-0x0000:		52 
+0x0000:		52
 longyu@virt-debian10:~$ sudo ethtool -e enp9s0 offset 1 length 1
 Offset		Values
 ------		------
-0x0001:		54 
+0x0001:		54
 ```
 上述示例中，第一个命令行指定了 offset 为 0，长度为 1，dump 出的就是 eeprom 中的第 0 字节处的值；第二个命令行指定了 offset 为 1，长度为 1，dump 出的就是 eeprom 中的第 1　个字节处的值。
- 
+
  这里值的一提的是 eeprom 的内容通常是**以字为单位**的，一个字表示**两个字节**的内容，其内部一般是通过 i2c 总线来读取 eeprom 信息的，**而 i2c 总线读取的单位就是字，手册中也是以字为单位描述不同字段的含义的。**
- 
-### -E 选项 
+
+### -E 选项
 上文中与 -E 选项相关的 manual 中的描述信息明确指出，为了避免意外写入 eeprom 造成的问题，修改 eeprom 内容时需要指定一个**设备特定的 magic**，这个 magic 一般是**设备的 vendor 与 device id 的组合**，同时 offset 与 length 参数让我们能够修改指定位置处的指定长度的 eeprom 内容。
 
 关于 magic 校验内容，我们可以从 e100e 驱动中 set_eeprom 的函数数中找到相关的内容。
@@ -140,15 +139,15 @@ static int e1000_set_eeprom(struct net_device *netdev,
 一个具体的示例如下：
 
 ```bash
-longyu@virt-debian10:~$ sudo ethtool -e enp9s0  offset 0 length 1 
+longyu@virt-debian10:~$ sudo ethtool -e enp9s0  offset 0 length 1
 Offset		Values
 ------		------
-0x0000:		52 
+0x0000:		52
 longyu@virt-debian10:~$ sudo ethtool -E enp9s0 magic 0x10d38086 offset 0 length 1 value 0xFF
-longyu@virt-debian10:~$ sudo ethtool -e enp9s0  offset 0 length 1 
+longyu@virt-debian10:~$ sudo ethtool -e enp9s0  offset 0 length 1
 Offset		Values
 ------		------
-0x0000:		ff 
+0x0000:		ff
 ```
 可以看到，在修改前 eeprom 0 字节处内容为 52，修改后值变为了 FF，修改成功。
 
@@ -162,11 +161,11 @@ eeprom 内容更新后，**checksum 内容**也需要随之更新。checksum 一
 
 
 ```
-      The  strtoul() function converts the initial part of the string in nptr to an unsigned 
-      long int value according to the given base, which must be between 2 and 36 
+      The  strtoul() function converts the initial part of the string in nptr to an unsigned
+      long int value according to the given base, which must be between 2 and 36
       inclusive, or be the special value 0.
 
-      The string may begin with an arbitrary amount of white space (as determined by 
+      The string may begin with an arbitrary amount of white space (as determined by
       isspace(3)) followed by a single optional '+' or '-' sign.  If base is zero or 16,
       the  string  may then include a "0x" prefix, and the number will be read in base
       16; otherwise, a zero base is taken as 10 (decimal) unless the next character is
@@ -181,4 +180,3 @@ stroull(str, &endp, 0)
 
 ## 其它的设定 eeprom 内容的方式
 除了 ethtool 设定 eeprom 内容之外，我们也可以制作一个 dos 盘引导系统，使用 eepudate 命令来获取、更新 eeprom，这种方式相对麻烦一点。
-

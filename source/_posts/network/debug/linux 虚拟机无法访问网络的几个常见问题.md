@@ -45,7 +45,7 @@ link-local      0.0.0.0         255.255.0.0     U     1000   0        0 ens3
 ### 删除一条路由信息
 使用 ```route```命令删除路由信息使用的参数如下：
 
-```bash       
+```bash
 route  [-v] [-A family |-4|-6] del [-net|-host] target [gw Gw] [netmask Nm] [metric M] [[dev] If]
 ```
 删除一条默认路由可以执行 ```route del default [[dev] If]```命令。机器上有多个网络端口的情况下，可以通过指定 dev 参数来删除指定端口的默认路由配置。
@@ -58,7 +58,7 @@ longyu@longyu-pc:~$ sudo route del default ens8
 执行成功后，执行 route 命令查询系统中目前的路由表信息如下：
 
 ```bash
-longyu@longyu-pc:~$ sudo route 
+longyu@longyu-pc:~$ sudo route
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 default         _gateway        0.0.0.0         UG    100    0        0 ens3
@@ -77,7 +77,7 @@ PING www.wshifen.com (104.193.88.77) from 192.168.122.202 ens8: 56(84) bytes of 
 --- www.wshifen.com ping statistics ---
 12 packets transmitted, 0 received, 100% packet loss, time 274ms
 ```
-### 添加一个默认网关的路由信息 
+### 添加一个默认网关的路由信息
 在上面的操作中，我们已经删除了 ens8 端口的默认路由配置，这导致我们无法通过 ens8 端口来访问互联网。要恢复正常，我们可以将删除的默认路由添加回来。
 
 ```route```命令添加路由可以通过指定如下参数来完成。
@@ -93,7 +93,7 @@ longyu@longyu-pc:~$ sudo route add default gw 192.168.122.1 ens8
 这里需要注意的是在将 192.168.122.1 设置为默认网关之前，要确保 192.168.122.1 能够被访问到。添加成功后再次执行 ```route```命令有如下输出：
 
 ```bash
-longyu@longyu-pc:~$ sudo route 
+longyu@longyu-pc:~$ sudo route
 Kernel IP routing table
 Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 default         _gateway        0.0.0.0         UG    0      0        0 ens8
@@ -139,4 +139,3 @@ rtt min/avg/max/mdev = 266.688/268.135/270.384/1.666 ms
 1. 执行一次接口 down、up
 2. 解绑驱动后重新绑定网卡接口
 3. 重启机器
-
