@@ -51,7 +51,7 @@ E: SYSTEMD_ALIAS=/sys/subsystem/net/devices/bf_pci0
 E: TAGS=:systemd:
 E: USEC_INITIALIZED=1909742190470
 ```
-可以看到用的是/lib/systemd/network/99-default.link
+可以看到是根据/lib/systemd/network/99-default.link进行的命名
 
 ## 网卡命名规则
 net.ifnames(systemd, udev) 的命名规范为：设备类型+设备位置+数字
