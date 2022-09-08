@@ -52,49 +52,6 @@ E: TAGS=:systemd:
 E: USEC_INITIALIZED=1909742190470
 ```
 
-## 网卡命名规则
-net.ifnames(systemd, udev) 的命名规范为：设备类型+设备位置+数字
-设备类型：
-en 表示Ethernet
-wl 表示WLAN
-ww 表示无线广域网WWAN
-
-|  format   | description  |
-|  ----  | ----  |
-| ```o<index>```  | on-board device index number ,集成设备索引号|
-| ```s<slot>[f<functoin>][d<dev_id>]```  | hotplug slot index number,扩展槽的索引号  |
-| ```x<MAC>``` | MAC address ,基于MAC进行命名|
-| ```p<bus>s<slot>[f<function>][d<dev_id>]```| PCI geographical location ,PCI扩展总线 |
-|```p<bus>s<slot>[f<function>][u<port>][...][c<config>][i<interface>] ```| USB port numberchain |
-```
-实际的例子:
-​ eno1 板载网卡
-​ enp0s2 pci网卡
-​ ens33 pci网卡
-​ wlp3s0 PCI无线网卡
-​ wwp0s29f7u2i2 4Gmodem
-​ wlp0s2f1u4u1 连接在USB Hub上的无线网卡
-​ enx78e7d1ea46da pci网卡
-```
-biosdevname 的命名规范：
-|  device   | name  |
-|  ----  | ----  |
-| Embedded network interface(LOM) | ```em[1234....]``` |
-| PCI card network interface | ```p<slot>p<ethernet port>``` |
-| Virtual function | ```p<slot>p<ethernet port>_<virtual_interface>``` |
-```
-实际的例子:
-​ em1 板载网卡
-​ p3p4 pci网卡
-​ p3p4_1 虚拟网卡
-```
-systemd中rule的实际执行顺序:
-按照如下顺序执行udev的rule
-1. /usr/lib/udev/rules.d/60-net.rules
-2. /usr/lib/udev/rules.d/71-biosdevname.rules
-3. /lib/udev/rules.d/75-net-description.rules
-4. /usr/lib/udev/rules.d/80-net-name-slot.rules
-
 # systemd.link 重命名
 参考:[http://www.jinbuguo.com/systemd/systemd.link.html]
 在用户空间，默认情况下ubuntu会根据systemd目录下的link文件命名网卡。
@@ -141,9 +98,52 @@ udev 辅助工具程序 /lib/udev/rename_device 会根据 /usr/lib/udev/rules.d/
 ```c
 SUBSYSTEM=="net",ACTION=="add",DRIVERS=="?*",ATTR{address}=="需要修改名称的网卡MAC地址",ATTR｛type｝=="1",KERNEL=="myeth*",NAME="myeth0"
 ```
+## net.ifnames(systemd, udev) 的命名规范为：设备类型+设备位置+数字
+udev 和 systemd.link都是使用该规则
+设备类型：
+en 表示Ethernet
+wl 表示WLAN
+ww 表示无线广域网WWAN
+
+|  format   | description  |
+|  ----  | ----  |
+| ```o<index>```  | on-board device index number ,集成设备索引号|
+| ```s<slot>[f<functoin>][d<dev_id>]```  | hotplug slot index number,扩展槽的索引号  |
+| ```x<MAC>``` | MAC address ,基于MAC进行命名|
+| ```p<bus>s<slot>[f<function>][d<dev_id>]```| PCI geographical location ,PCI扩展总线 |
+|```p<bus>s<slot>[f<function>][u<port>][...][c<config>][i<interface>] ```| USB port numberchain |
+```
+实际的例子:
+​ eno1 板载网卡
+​ enp0s2 pci网卡
+​ ens33 pci网卡
+​ wlp3s0 PCI无线网卡
+​ wwp0s29f7u2i2 4Gmodem
+​ wlp0s2f1u4u1 连接在USB Hub上的无线网卡
+​ enx78e7d1ea46da pci网卡
+```
+
 # biosdevname 重命名
 biosdevname 根据 /user/lib/udev/rules.d/71-boosdevname.rules
 biosdevname 程序使用系统 BIOS 的信息，特别是类型 9 (System Slot) 和类型 41 （板设备扩展信息）字段包含在 SMBIOS 中。如果系统的 BIOS 没有 SMBIOS 版本 2.6 或更高版本，且此数据不会使用，则不会使用新的命名规则。大多数较旧的硬件不支持此功能，因为缺少包含正确的 SMBIOS 版本和字段信息的 BIOS。
+## biosdevname 的命名规范：
+|  device   | name  |
+|  ----  | ----  |
+| Embedded network interface(LOM) | ```em[1234....]``` |
+| PCI card network interface | ```p<slot>p<ethernet port>``` |
+| Virtual function | ```p<slot>p<ethernet port>_<virtual_interface>``` |
+```
+实际的例子:
+​ em1 板载网卡
+​ p3p4 pci网卡
+​ p3p4_1 虚拟网卡
+```
+systemd中rule的实际执行顺序:
+按照如下顺序执行udev的rule
+1. /usr/lib/udev/rules.d/60-net.rules
+2. /usr/lib/udev/rules.d/71-biosdevname.rules
+3. /lib/udev/rules.d/75-net-description.rules
+4. /usr/lib/udev/rules.d/80-net-name-slot.rules
 
 # ifrename动态重命名
 一些系统中，有根据网口的不同功能重命名 netdev 的需求。这可以通过调用 ifrename 命令来完成。这个命令在我的系统中并没有安装，我首先执行如下命令，搜索需要安装的程序名。
