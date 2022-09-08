@@ -142,11 +142,8 @@ udev 辅助工具程序 /lib/udev/rename_device 会根据 /usr/lib/udev/rules.d/
 biosdevname 根据 /user/lib/udev/rules.d/71-boosdevname.rules
 biosdevname 程序使用系统 BIOS 的信息，特别是类型 9 (System Slot) 和类型 41 （板设备扩展信息）字段包含在 SMBIOS 中。如果系统的 BIOS 没有 SMBIOS 版本 2.6 或更高版本，且此数据不会使用，则不会使用新的命名规则。大多数较旧的硬件不支持此功能，因为缺少包含正确的 SMBIOS 版本和字段信息的 BIOS。
 
-# GRUB_CMDLINE_LINUX配置网卡名
-修改/etc/default/grub文件，在（GRUB_CMDLINE_LINUX=）一行增加参数：（net.ifnames=0 biosdevname=0）。之后允许update-grub命令更新grub启动配置文件。重新启动系统，网卡的命名恢复成ethx格式。
-另外在文件/etc/network/interfaces中配置的网卡名称需要手动修改，把ens160相关的修改为ethx。
-
 # 禁用一致的网络设备命名
+另外在文件/etc/network/interfaces中配置的网卡名称需要手动修改，把ens160相关的修改为ethx。
 很多网卡驱动在加载时会对虚拟网络接口的名称进行重命名。下面是我的系统上 dmesg 中的部分输出，可以看到最开始虚拟网络接口的名称为 eth0，最后一行的信息中可以看到接口名称被改为了 enp2s0。
 
 ```
@@ -157,9 +154,16 @@ biosdevname 程序使用系统 BIOS 的信息，特别是类型 9 (System Slot) 
 [    4.219456] hub 1-0:1.0: 12 ports detected
 [    4.220818] r8169 0000:02:00.0 enp2s0: renamed from eth0
 ```
-一般来说上述行为并没有啥影响，但在特定的业务场景下可能需要禁止这种行为。要禁止这种行为，可以通过设定 linux 内核启动参数 net.ifrenames 来实现。
+修改/etc/default/grub文件，在（GRUB_CMDLINE_LINUX=）一行增加参数：（net.ifnames=0 biosdevname=0）。之后允许update-grub命令更新grub启动配置文件。重新启动系统，网卡的命名恢复成ethx格式。
+在上面Centos7中命名的策略顺序是系统默认的。
+如系统BIOS符合要求，且系统中安装了biosdevname，且biosdevname=1启用，则biosdevname优先；
+如果BIOS不符合biosdevname要求或biosdevname=0，则仍然是systemd的规则优先。
+如果用户自己定义了udevrule来修改内核设备名字，则用户规则优先。
 
-设定 net.ifrenames=0 ，表示不对 netdev 重命名，这样网络接口名称将会保持 eth0、eth1 这种模式的名字。
+内核参数组合使用的时候，其结果如下：
+1. 默认内核参数(biosdevname=0，net.ifnames=1): 网卡名”enp5s2”
+1. biosdevname=1，net.ifnames=0：网卡名 “em1”
+1. biosdevname=0，net.ifnames=0：网卡名 “eth0” (最传统的方式,eth0 eth1傻傻分不清)
 
 # ifrename动态重命名网卡
 一些系统中，有根据网口的不同功能重命名 netdev 的需求。这可以通过调用 ifrename 命令来完成。这个命令在我的系统中并没有安装，我首先执行如下命令，搜索需要安装的程序名。
