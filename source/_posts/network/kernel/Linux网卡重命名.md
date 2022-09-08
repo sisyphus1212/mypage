@@ -104,15 +104,7 @@ Link文件分别位于：
 1. 本机网络目录(/etc/systemd/network)。
 
 所有的Link文件(无论位于哪个目录中)，统一按照文件名的字典顺序处理。 对于不同目录下的同名Link文件， 仅以优先级最高的目录中的那一个为准。 具体说来就是： /etc/ 的优先级最高、 /run/ 的优先级居中、 /usr/lib/ 的优先级最低。
-
-NamePolicy变量指定了5中命名策略：kernel database onboard slot path，优先级由高到低排列。
-
-```bash
-# cat /lib/systemd/network/99-default.link
-[Link]
-NamePolicy=kernel database onboard slot path
-MACAddressPolicy=persistent
-```
+在这里只详细介绍一下Link文件中的MACAddressPolicy和NamePolicy：
 
 ## MACAddressPolicy
 应该如何设置网卡的MAC地址：
