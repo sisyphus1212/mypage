@@ -1,3 +1,14 @@
+---
+title: x710 offload QinQ 报文 vlan 并支持 rss hash 到多队列
+date: 2022-08-27 16:04:02 dpdk-19.11 支持接口配置速率双工的方法
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 多核,亲核性
+---
+
 # x710 offload QinQ 报文 vlan 并支持 rss hash 到多队列
 ## 问题描述
 对于五元组随机变化的 QinQ 报文，需要实现如下需求：
@@ -118,4 +129,3 @@ https://doc.dpdk.org/api-2.2/structrte__eth__rxmode.html
 https://linkthedevil.gitbook.io/little-things-about-dataplane/3
 
 https://dev.dpdk.narkive.com/lCYIb96o/dpdk-vlan-header-insertion-and-removal
-
