@@ -10,7 +10,7 @@ tags:
  - kernel
 ---
 
-# linux udev 机制-2-实现原理
+## linux udev 机制-2-实现原理
 经过前面章节的铺垫，对于 udev 以及 udev 的 rules 编写已经有了一个基本的概念，足够应付一些简单的应用场景，但是，这是不够的，作为一名合格的软件工程师，尤其是嵌入式软件工程师，必须深入到实现原理，了解 udev 的来龙去脉。
 
 ## 内核对设备的处理
@@ -18,15 +18,15 @@ tags:
 
 内核中的驱动程序负责初始化设备，同时提供设备操作接口并导出到用户空间，实际上，内核是完全有权限直接在用户空间创建设备接口的，而且 devfs 也是这么做的，但是后续证明这一部分工作完全是可以在用户空间做的，也可以更灵活地实现，同时 devfs 本身也有各种各样的问题，也就推进了 udev 的发展，因此，2.6 之后的版本中，设备接口由 udevd 守护进程在用户空间接管。
 
-之前是直接通过内核创建，现在改为由用户空间管理，然而用户空间自然是无法接触到内核信息的，因此，需要实现内核与用户空间之间的通信，linux 中采用的是 netlink 套接字机制，这是一种异步通信机制，对于 netlink 套接字的介绍和使用，可以参考我的另一篇博客：TODO,详细地说明了 netlink 如何实现用户与内核、用户与用户之间的通信。
+之前是直接通过内核创建，现在改为由用户空间管理，然而用户空间自然是无法接触到内核信息的，因此，需要实现内核与用户空间之间的通信，linux 中采用的是 netlink 套接字机制，这是一种异步通信机制，对于 netlink 套接字的介绍和使用，可以参https://github.com/sisyphus1212/bloc_test/tree/master/brief_record/linux_driver/linux_udev_mech/uevent/netlink 详细地说明了 netlink 如何实现用户与内核、用户与用户之间的通信。
 
 另一个必要重要的点是，内核与用户之间传递了什么数据？对于设备的变动，在内核中为描述为设备事件，而 kuevent 事件机制专门用来处理内核事件，kuevent 是建立在 kobject/kset 结构之上的，也就是和 sysfs 强相关的。
 
-对于某些行为，kuevent 会自动通过 netlink 将数据发送到用户空间，比如当驱动中直接或间接地调用了 kset_create_and_add 接口时，最终会调用到 kobject_uevent 函数，该函数负责设备信息的发送。同时，驱动程序中也可以显式地调用 kobject_uevent 相关的接口，直接发送设备消息到用户空间。关于内核的 kuevent 机制以及 kuevent 的实现，可以操作这一篇博客，在这篇博客中，详细讲解了数据内容的组织以及数据的发送。
+对于某些行为，kuevent 会自动通过 netlink 将数据发送到用户空间，比如当驱动中直接或间接地调用了 kset_create_and_add 接口时，最终会调用到 kobject_uevent 函数，该函数负责设备信息的发送。同时，驱动程序中也可以显式地调用 kobject_uevent 相关的接口，直接发送设备消息到用户空间。关于内核的 kuevent 机制以及 kuevent 的实现，可以参考https://github.com/sisyphus1212/bloc_test/tree/master/demo_code/kobject_and_kset。
 
 netlink 属于套接字的一种，用户空间的 udevd 守护进程一直在监听该套接字，也就能收到对应的内核消息。内核消息的格式通常是这样的:TODO.
 
-同时内核发送消息是广播的形式，你甚至可以自己实现一个应用程序来监听内核消息。如果你想在用户空间监听内核消息，可以试试我提供的这个 netlink server 端程序，用它来监听内核的 netlink 设备信息,TODO。
+同时内核发送消息是广播的形式，你甚至可以自己实现一个应用程序来监听内核消息。如果你想在用户空间监听内核消息，可以试试我提供的这个 netlink server 端程序，用它来监听内核的 netlink 设备信息。https://github.com/sisyphus1212/bloc_test/tree/master/brief_record/linux_driver/linux_udev_mech/uevent/netlink
 
 在内核发送的消息中，有三个关键字是固定存在的：ACTION=,DEVPATH=,SUBSYSTEM=,同时内核中也可以以键值对的方式自定义地添加关键字，比如 driver=，这些关键字将会自动地添加到 udev 的关键字列表中，而在用户空间的 udev rules 文件中，匹配字段和关键字远远不止这几个，这是因为 udev 本身支持一些默认的、自定义的关键字，并不是所有匹配关键字都是由内核提供的，比如 KERNEL=，这是 udev 通过判断设备内核名称所创建的关键字，在内核信息中是不包含 KERNEL= 这个关键字的,所以如果要完全了解 udev 的配置项,除了了解内核发送的 netlink 消息,同时需要了解 udev 本身对设备的处理。
 
@@ -59,6 +59,9 @@ udevadm info 支持以下选项:
 
 ### udevadm trigger
 udev 的另一个调试利器就是 udevadm trigger，在系统启动时 udevd 会在内核驱动都初始化完成之后再启动，也就监听不到系统启动时内核发送的设备信息，正是由 udevadm trigger 重新生成设备事件，对于 udevd 来说，将这些设备信息当成由内核发送的来处理。
+### 示例
+一般systemd-udev-trigger.service中应用udevadm trigger回放coldplug：
+ExecStart=/bin/udevadm trigger --type=subsystems --action=add ; /bin/udevadm trigger --type=devices --action=add
 
 同时，在系统正常运行时，基于调试的目的，也完全可以触发某个设备事件来模拟热插拔，下面是 udevadm trigger 的使用方法：
 * -v, --verbose：显示将会被触发的设备列表，该设备列表对应 /sys/devices 目录下的大部分设备文件。
