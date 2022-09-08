@@ -28,7 +28,7 @@ tags:
 #define NET_NAME_USER       3   /* provided by user-space */
 #define NET_NAME_RENAMED    4   /* renamed by user-space */
 ```
-网卡具体的命名策略可以通过udevadm查看，可以看到，是根据/lib/systemd/network/99-default.link进行的命名
+网卡具体的命名策略可以通过udevadm查看，可以看到enp62s0，是根据/lib/systemd/network/99-default.link进行的命名
 ```bash
  udevadm info /sys/class/net/ifname | grep ID_NET_NAME
 
