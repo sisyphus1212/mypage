@@ -12,9 +12,9 @@ tags:
 # 前言
 由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此就有人考虑根据网卡在物理板子上的topo结构来给网卡命名，于是就引入net.ifnames 和 biosdevname来重命名内核创建的网络接口
 下面根据net.ifnames 和 biosdevname规范实现的几种网卡接口命名方式：
-1. systemd.link策略重命名(systemd-udevd)
-2. udev rule策略重命名
-3. biosdevname重命名 常见于centos
+1. systemd.link 重命名(systemd-udevd)
+2. udev rule 重命名
+3. biosdevname 重命名 (常见于centos)
 4. ifrename动态重命名
 
 ## 查看网卡命名
