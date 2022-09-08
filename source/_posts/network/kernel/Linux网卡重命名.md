@@ -97,7 +97,15 @@ systemd中rule的实际执行顺序:
 
 # systemd.link 重命名
 参考:[http://www.jinbuguo.com/systemd/systemd.link.html]
-在用户空间，默认情况下ubuntu会根据systemd目录下的link文件命名网卡，NamePolicy变量指定了5中命名策略：kernel database onboard slot path，优先级由高到低排列。
+在用户空间，默认情况下ubuntu会根据systemd目录下的link文件命名网卡。
+Link文件分别位于：
+1. 系统网络目录(/usr/lib/systemd/network)。
+1. 运行时网络目录(/run/systemd/network)。
+1. 本机网络目录(/etc/systemd/network)。
+
+所有的Link文件(无论位于哪个目录中)，统一按照文件名的字典顺序处理。 对于不同目录下的同名Link文件， 仅以优先级最高的目录中的那一个为准。 具体说来就是： /etc/ 的优先级最高、 /run/ 的优先级居中、 /usr/lib/ 的优先级最低。
+
+NamePolicy变量指定了5中命名策略：kernel database onboard slot path，优先级由高到低排列。
 
 ```bash
 # cat /lib/systemd/network/99-default.link
@@ -220,7 +228,7 @@ net.ifnames=0 biosdevname=0
 grub2-mkconfig -o /boot/grub2/grub.cfg
 reboot
 ```
-
+如果系统管理员想要屏蔽 /usr/lib/ 目录中的某个Link文件， 那么最佳做法是在 /etc/ 目录中创建一个 指向 /dev/null 的同名符号链接， 即可彻底屏蔽 /usr/lib/ 目录中的同名文件。
 
 在上面Centos7中命名的策略顺序是系统默认的。
 如系统BIOS符合要求，且系统中安装了biosdevname，且biosdevname=1启用，则biosdevname优先；
