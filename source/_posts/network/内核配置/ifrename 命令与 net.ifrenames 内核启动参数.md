@@ -9,14 +9,15 @@ tags:
  - 网卡驱动
  - kernel
 ---
-由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此引入net.ifnames 和 biosdevname来重命名内核创建的网络接口
-因此引入下面三种网卡接口命名方式：
+# 前言
+由于内核启动时对于多网络接口的枚举是并行的，这导致每次创建的ethx 与真实的物理口之间的映射关系是无法预测的, 因此就有人考虑根据网卡在物理板子上的top结构来给网卡命名，于是就引入net.ifnames 和 biosdevname来重命名内核创建的网络接口
+下面根据net.ifnames 和 biosdevname规范实现的三种网卡接口命名方式：
 1. systemd.link策略重命名(systemd-udevd)
 2. udev rule策略重命名
 3. biosdevname重命名 常见于centos
 4. ifrename动态重命名
 
-# 查看网卡命名
+## 查看网卡命名
 当前网卡的命名方式可以通过proc文件查看，比如网卡ens160，命名方式为4，即对应内核中的NET_NAME_RENAMED，表示网卡名是被用户空间程序修改的：
 ```bash
 # cat /sys/class/net/ens160/name_assign_type
@@ -52,7 +53,7 @@ E: USEC_INITIALIZED=1909742190470
 ```
 可以看到用的是/lib/systemd/network/99-default.link
 
-# 网卡命名规则
+## 网卡命名规则
 net.ifnames(systemd, udev) 的命名规范为：设备类型+设备位置+数字
 设备类型：
 en 表示Ethernet
