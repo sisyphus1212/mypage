@@ -3,7 +3,7 @@ title: linux_udev机制实现-1
 date: 2022-08-27 16:04:02
 index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-08-23-08-10.png?raw=true
 categories:
-- [dpdk,网络开发,数据包处理]
+- [kernel,udev]
 tags:
  - netlink
  - linux驱动
