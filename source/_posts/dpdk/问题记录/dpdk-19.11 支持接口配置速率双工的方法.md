@@ -1,4 +1,13 @@
-# dpdk-19.11 支持接口配置速率双工的方法
+---
+title: dpdk-19.11 支持接口配置速率双工的方法
+date: 2022-08-27 16:04:02 dpdk-19.11 支持接口配置速率双工的方法
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 多核,亲核性
+---
 # 前言
 常见的 igb 电口网卡有支持速率双工配置的需求，在 dpdk-19.11 中却没有配置网卡速率双工的接口，为此需要进行开发，实现方法需要通过研究不同网卡的驱动代码来确定。
 
@@ -18,10 +27,10 @@ dpdk-19.11 中的 igb 网卡驱动在执行 eth_igb_start up 接口的时候会�
 1354     } else {
 1355         num_speeds = 0;
 1356         autoneg = (*speeds & ETH_LINK_SPEED_FIXED) == 0;
-1357     
+1357
 1358         /* Reset */
 1359         hw->phy.autoneg_advertised = 0;
-1360         
+1360
 1361         if (*speeds & ~(ETH_LINK_SPEED_10M_HD | ETH_LINK_SPEED_10M |
 1362                 ETH_LINK_SPEED_100M_HD | ETH_LINK_SPEED_100M |
 1363                 ETH_LINK_SPEED_1G | ETH_LINK_SPEED_FIXED)) {
@@ -31,11 +40,11 @@ dpdk-19.11 中的 igb 网卡驱动在执行 eth_igb_start up 接口的时候会�
 1367         if (*speeds & ETH_LINK_SPEED_10M_HD) {
 1368             hw->phy.autoneg_advertised |= ADVERTISE_10_HALF;
 1369             num_speeds++;
-1370         }   
+1370         }
 ...............
 1387         if (num_speeds == 0 || (!autoneg && (num_speeds > 1)))
 1388             goto error_invalid_config;
-1389 
+1389
 1390         /* Set/reset the mac.autoneg based on the link speed,
 1391          * fixed or not
 1392          */

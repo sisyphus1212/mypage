@@ -1,10 +1,21 @@
+---
+title: x710 hash 分片与非分片 tcp 报文异常问题
+date: 2022-08-27 16:04:02 dpdk-19.11 支持接口配置速率双工的方法
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 多核,亲核性
+---
+
 # x710 hash 分片与非分片 tcp 报文异常问题
 ## 问题描述
 当 rss_hf 中配置了 **ETH_RSS_FRAG_IPV4** 与 **ETH_RSS_NONFRAG_IPV4_TCP** 参数后，一些连接的分片报文会被 hash 到其它队列中，**由于这些分片的报文没有 L4 port number**。
 
 当不配置 **ETH_RSS_NONFRAG_IPV4_TCP** 时，**ETH_RSS_FRAG_IPV4** 哈希函数不会应用到非分片报文上，这些报文将会被投递到队列 0。
 
-## 异常 hash 配置 
+## 异常 hash 配置
  配置内容如下：
  ```c
         #define RSS_X710_KEY_SIZE 52
@@ -18,7 +29,7 @@
             0x6d, 0x5a, 0x6d, 0x5a, 0x6d, 0x5a, 0x6d, 0x5a,
             0x6d, 0x5a, 0x6d, 0x5a,
         };
-   
+
         port_conf->rxmode.mq_mode = ETH_MQ_RX_RSS;
 
         port_conf->rx_adv_conf.rss_conf.rss_key = tr_rss_key_x710;
@@ -161,7 +172,7 @@ int sym_hash_set(int port_id, int enable)
             0x6d, 0x5a, 0x6d, 0x5a, 0x6d, 0x5a, 0x6d, 0x5a,
             0x6d, 0x5a, 0x6d, 0x5a,
         };
-        
+
     #define RSS_X710_KEY_SIZE 52
 
     port_conf->rxmode.mq_mode = ETH_MQ_RX_RSS;
@@ -183,11 +194,11 @@ int sym_hash_set(int port_id, int enable)
 ```
 测试结果：不能 hash 到多队列。
 
-6.**不设置 rss_key，只设置 rss_hf 为 ETH_RSS_PROTO_MASK** 
+6.**不设置 rss_key，只设置 rss_hf 为 ETH_RSS_PROTO_MASK**
 
 测试结果：能够 hash 到多队列，tcp 分片报文 hash 异常。
 
-**7.不设置 rss_key，只设置 rss_hf 为 ETH_RSS_IP** 
+**7.不设置 rss_key，只设置 rss_hf 为 ETH_RSS_IP**
 
 测试结果：不能 hash 到多队列。
 
@@ -211,7 +222,7 @@ int sym_hash_set(int port_id, int enable)
 ```
 测试结果：能够 hash 到对队列，tcp 分片报文 hash 异常。
 
-10. 不设置 rss_key，设置 rss_hf 值如下： 
+10. 不设置 rss_key，设置 rss_hf 值如下：
 ```c
 ETH_RSS_NONFRAG_IPV4_TCP
 ```
@@ -280,8 +291,8 @@ dpdk 官方 bugzilla 检索：
             0x6d, 0x5a, 0x6d, 0x5a, 0x6d, 0x5a, 0x6d, 0x5a,
             0x6d, 0x5a, 0x6d, 0x5a,
         };
-        
-        
+
+
         port_conf->rxmode.mq_mode = ETH_MQ_RX_RSS;
         port_conf->rx_adv_conf.rss_conf.rss_key = tr_rss_key_x710;
         port_conf->rx_adv_conf.rss_conf.rss_key_len = RSS_X710_KEY_SIZE;
@@ -290,7 +301,7 @@ dpdk 官方 bugzilla 检索：
 ETH_RSS_NONFRAG_IPV4_SCTP | ETH_RSS_NONFRAG_IPV4_OTHER | ETH_RSS_IPV6 |
 ETH_RSS_FRAG_IPV6 | ETH_RSS_NONFRAG_IPV6_TCP | ETH_RSS_NONFRAG_IPV6_UDP
 | ETH_RSS_NONFRAG_IPV6_SCTP | ETH_RSS_NONFRAG_IPV6_OTHER;
-        
+
         struct rte_eth_hash_filter_info hinfo;
         uint32_t idx = 0;
         uint32_t offset = 0;

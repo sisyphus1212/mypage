@@ -1,3 +1,13 @@
+---
+title: l2fwd 支持 x710 通过 fdir 过滤非分片 ipv4 udp 报文
+date: 2022-08-27 16:04:02 dpdk-19.11 支持接口配置速率双工的方法
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - 多核,亲核性
+---
 # l2fwd 支持 x710 通过 fdir 过滤非分片 ipv4 udp 报文
 ## 问题描述
 需要通过 x710 网卡 fdir 功能过滤非分片 ipv4 udp 报文，直接在网卡硬件上丢弃。
