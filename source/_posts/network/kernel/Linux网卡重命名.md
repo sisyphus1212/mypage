@@ -139,7 +139,9 @@ Name: 在 NamePolicy= 无效时应该使用的网卡名称。 无效的情况包
 
 # udev rule 重命名
 udev 辅助工具程序 /lib/udev/rename_device 会根据 /usr/lib/udev/rules.d/60-net.rules 中的指示去查询 /etc/sysconfig/network-script/ifcfg-IFACE 配置文件，根据HWADDR 读取设备名称,如果在ifcfg-xx中匹配到HWADDR=xx:xx:xx:xx:xx:xx参数的网卡接口则选取DEVICE=yyyy中设置的名字作为网卡名称
-
+```c
+SUBSYSTEM=="net",ACTION=="add",DRIVERS=="?*",ATTR{address}=="需要修改名称的网卡MAC地址",ATTR｛type｝=="1",KERNEL=="myeth*",NAME="myeth0"
+```
 # biosdevname 重命名
 biosdevname 根据 /user/lib/udev/rules.d/71-boosdevname.rules
 biosdevname 程序使用系统 BIOS 的信息，特别是类型 9 (System Slot) 和类型 41 （板设备扩展信息）字段包含在 SMBIOS 中。如果系统的 BIOS 没有 SMBIOS 版本 2.6 或更高版本，且此数据不会使用，则不会使用新的命名规则。大多数较旧的硬件不支持此功能，因为缺少包含正确的 SMBIOS 版本和字段信息的 BIOS。
@@ -211,7 +213,15 @@ sock_ioctl -> sock_do_ioctl -> dev_ioctl -> dev_ifsioc -> dev_change_name
 [    4.219456] hub 1-0:1.0: 12 ports detected
 [    4.220818] r8169 0000:02:00.0 enp2s0: renamed from eth0
 ```
-修改/etc/default/grub文件，在（GRUB_CMDLINE_LINUX=）一行增加参数：（net.ifnames=0 biosdevname=0）。之后用update-grub命令更新grub启动配置文件。重新启动系统，网卡的命名恢复成ethx格式。
+执行grub2-mkconfig -o /boot/grub2/grub.cfg命令生成更新grub配置参数:
+```c
+vim /etc/default/grub
+net.ifnames=0 biosdevname=0
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+reboot
+```
+
 在上面Centos7中命名的策略顺序是系统默认的。
 如系统BIOS符合要求，且系统中安装了biosdevname，且biosdevname=1启用，则biosdevname优先；
 如果BIOS不符合biosdevname要求或biosdevname=0，则仍然是systemd的规则优先。
