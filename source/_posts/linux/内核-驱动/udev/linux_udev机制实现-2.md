@@ -133,6 +133,12 @@ add@/devices/platform/ocp/44e3e000.rtc/rtc/rtc0/omap_rtc_scratch0 ACTION=add DEV
 ```
 udevadm test [options] [devpath]
 ```
+模拟一个udev事件，打印出debug信息。
+
+常用：
+udevadm test $(udevadm info -q path -n /dev/sda) 2>&1  ;加载前测试设备规则
+udevadm test /sys/class/block/sda    ;也可指定设备路径，加载前测试设备规则
+udevadm test-builtin [options] [command] devpath
 
 需要注意的是，这个命令只支持 /sys 下的设备文件，而不支持 /dev 目录下的设备节点，udevadm test 命令的输出为：
 * 哪些配置目录、文件的时间戳被更新，哪个配置文件将会使用
