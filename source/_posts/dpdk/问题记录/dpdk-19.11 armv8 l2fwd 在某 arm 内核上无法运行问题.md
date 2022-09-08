@@ -1,4 +1,14 @@
-# dpdk-19.11 armv8 l2fwd 在某 arm 内核上无法运行问题
+---
+title: dpdk-19.11 armv8 l2fwd 在某 arm 内核上无法运行问题
+date: 2022-08-17 16:04:02
+index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
+categories:
+- [dpdk,网络开发,数据包处理]
+tags:
+ - dpdk
+ - linux
+---
+
 ## 问题描述
 编译 dpdk-19.11 arm 版本的 l2fwd，在指定的 arm 内核上运行，有如下报错信息：
 
@@ -96,7 +106,7 @@ index 9f32766..2c67cdc 100644
 @@ -47,6 +47,9 @@ CONFIG_RTE_TOOLCHAIN_GCC=y
  # to address minimum DMA alignment across all arm64 implementations.
  CONFIG_RTE_CACHE_LINE_SIZE=128
- 
+
 +# Most ARMv8 systems doesn't support NUMA
 +CONFIG_RTE_EAL_NUMA_AWARE_HUGEPAGES=n
 +
