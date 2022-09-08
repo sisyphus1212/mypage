@@ -1,5 +1,5 @@
 ---
-title: Linux 网卡命名
+title: Linux 网卡重命名
 date: 2022-09-17 16:04:02
 index_img: https://www.dpdk.org/wp-content/uploads/sites/35/2021/03/DPDK_logo-01-1.svg
 categories:
