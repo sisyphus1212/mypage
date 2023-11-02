@@ -31,8 +31,7 @@ jobs:
 
       - name: "Add GitHub to the SSH known hosts file"
         run: |
-          which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
-          eval $(ssh-agent -s)
+          apt-get install openssh-client -y
           echo "$PAGE_PRIVATEKEY" | tr -d '\r' | ssh-add -
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           #mkdir -p -m 0700 /home/runner/.ssh
