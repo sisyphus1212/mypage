@@ -28,7 +28,9 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATEKEY }}
+          ssh-private-key: |
+            ${{ secrets.PAGE_PRIVATEKEY }}
+            ${{ secrets.SSH_PRIVATEKEY }}
 
       - name: git init
         run: |
@@ -57,12 +59,6 @@ jobs:
           npm install hexo-cli -g
           npm install --save
           npm i hexo -g
-
-      - name: 🔑 Setup SSH
-        if: ${{ github.ref == 'refs/heads/master' }}
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.PAGE_PRIVATEKEY }}
 
       - name: Hexo Deploy
         run: |
