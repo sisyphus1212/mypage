@@ -39,12 +39,13 @@ jobs:
           DEPLOY_KEY: ${{ secrets.SSH_PRIVATEKEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          echo $DEPLOY_KEY > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.email "lcj@aliyun.com"
           git config --global user.name "lcj"
           git submodule update --init --recursive
+          echo "=================================="
           npm update
           npm install hexo-cli -g
           npm install --save
