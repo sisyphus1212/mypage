@@ -51,6 +51,8 @@ jobs:
       - name: Hexo Deploy
         run: |
           ls -lh
+          git config --global user.email "lcj@aliyun.com"
+          git config --global user.name "lcj"
           hexo clean
           hexo generate
           hexo deploy
