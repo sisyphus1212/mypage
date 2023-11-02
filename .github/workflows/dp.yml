@@ -24,6 +24,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
+      - name: "Add GitHub to the SSH known hosts file"
+        run: |
+          mkdir -p -m 0700 /home/runner/.ssh
+          curl --silent https://api.github.com/meta  | jq --raw-output '"github.com "+.ssh_keys[]' >> /home/runner/.ssh/known_hosts
+          chmod 600 /home/runner/.ssh/known_hosts
+
       - name: 🔑 Setup SSH
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: webfactory/ssh-agent@v0.7.0
