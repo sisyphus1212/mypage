@@ -1,3 +1,6 @@
+---
+---
+
 # igb_uio.ko 的 md5sum 为啥又变化了？
 ## 问题描述
 最近在合代码到 kni 模块后，重新编译发布 dpdk，发现 **igb_uio.ko md5sum 也变化了**。
