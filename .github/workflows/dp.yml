@@ -40,7 +40,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "$SSH_PRIVATE_KEY"
-       #ssh-add - <<< "$PAGE_PRIVATEKEY"
+          ssh-add - <<< "$PAGE_PRIVATEKEY"
        #mkdir -p -m 0700 /home/runner/.ssh
        #curl --silent https://api.github.com/meta  | jq --raw-output '"github.com "+.ssh_keys[]'
        #chmod 600 /home/runner/.ssh/known_hosts
