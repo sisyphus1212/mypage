@@ -22,6 +22,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: git init
+        env:
+          DEPLOY_KEY: ${{ secrets.SSH_PRIVATEKEY }}
+        run: |
+            cat $DEPLOY_KEY
+            mkdir -p ~/.ssh
+            echo $DEPLOY_KEY > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            git config --global user.email "lcj@aliyun.com"
+            git config --global user.name "lcj"
+            git submodule update --init --recursive
 
       # Runs a set of commands using the runners shell
       - name: Set Node
@@ -43,20 +55,6 @@ jobs:
           npm install hexo-cli -g
           npm install --save
           npm i hexo -g
-
-      - name: git init
-        env:
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATEKEY }}
-        run: |
-            cat $DEPLOY_KEY
-            mkdir -p ~/.ssh
-            echo $DEPLOY_KEY > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            ssh-keyscan github.com >> ~/.ssh/known_hosts
-            git config --global user.email "lcj@aliyun.com"
-            git config --global user.name "lcj"
-            git submodule update --init --recursive
-
 
       - name: Hexo Deploy
         run: |
