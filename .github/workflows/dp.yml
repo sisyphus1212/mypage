@@ -21,7 +21,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Clone repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.HEXO }}
+          submodules: true
 
       # Runs a set of commands using the runners shell
       - name: Set Node
@@ -43,18 +47,6 @@ jobs:
           npm install hexo-cli -g
           npm install --save
           npm i hexo -g
-
-      - name: Set Key
-        env:
-          DEPLOY_KEY: ${{ secrets.HEXO }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.email "sisyphus12@aliyun.com"
-          git config --global user.name "sisyphus12"
-          git submodule update --init --recursive
 
       - name: Hexo Deploy
         run: |
