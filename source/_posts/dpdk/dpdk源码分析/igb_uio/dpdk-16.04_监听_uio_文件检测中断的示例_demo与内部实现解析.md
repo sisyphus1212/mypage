@@ -5,7 +5,8 @@
 这个问题最终通过修改 igb_uio 的代码修复，修复后我不禁在想用户态是怎样工作的？以前大概知道是通过 epoll 来监控 uio 文件的，却并不清楚具体的流程。
 
 在本文中，我使用 dpdk-16.04 中断线程模拟 demo 来进一步研究 dpdk 通过 uio 文件监控网卡中断事件的关键过程。
-## dpdk 监听 uio 文件检测中断的示例 demo
+
+## dpdk监听uio文件检测中断的示例demo
 demo 运行机器内核信息：
 
 ```bash
@@ -25,7 +26,7 @@ Network devices using DPDK-compatible driver
 为了解决编译问题，对 dpdk-16.04 igb_uio.c 代码做了如下修改：
 
 ```c
---- lib/librte_eal/linuxapp/igb_uio/igb_uio.c  
+--- lib/librte_eal/linuxapp/igb_uio/igb_uio.c
 +++ lib/librte_eal/linuxapp/igb_uio/igb_uio.c
 @@ -442,7 +442,7 @@
         case RTE_INTR_MODE_MSIX:
@@ -210,10 +211,10 @@ struct rte_intr_source {
 ```
 
 dpdk-16.04 没有检查中断回调的唯一性，存在注册多个相同中断回调的情况。
-### 2. 支持高效的事件监控，及时捕获处理中断事件
 
+### 2. 支持高效的事件监控，及时捕获处理中断事件
 dpdk-16.04 使用 epoll 来监控中断事件，注册中断时，pci 网卡绑定到 igb_uio 生成的 uio 文件的句柄会被添加到 epoll 事件中，注册完成后通过 epoll_wait 来监控是否有中断触发。
+
 ### 3. 支持中断事件动态注册与销毁
 dpdk-16.04 创建了一个 pipe 用于重新构建中断监听事件。pipe 的 read 端也被添加到 epoll 事件中，在注册中断完成后会向 pipe 的 write 端写入数据，中断处理线程监控到 pipe read 端有数据，则重新构建中断事件。
 	同样当在销毁一个中断事件的最后也会向 pipe 的 write 端写入数据，通知中断处理线程，重新构建事件监听列表。
-	
