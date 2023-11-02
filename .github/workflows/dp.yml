@@ -36,7 +36,7 @@ jobs:
           echo "$PAGE_PRIVATEKEY" | tr -d '\r' | ssh-add -
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           mkdir -p -m 0700 /home/runner/.ssh
-          curl --silent https://api.github.com/meta  | jq --raw-output '"github.com "+.ssh_keys[]' >> /home/runner/.ssh/known_hosts
+          curl --silent https://api.github.com/meta  | jq --raw-output '"github.com "+.ssh_keys[]'
           chmod 600 /home/runner/.ssh/known_hosts
 
       - name: git init
