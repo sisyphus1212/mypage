@@ -75,6 +75,7 @@ jobs:
           ssh-add -D
           ssh-add - <<< "$PAGE_PRIVATEKEY"
           ssh-add -l
+          bash ./sed_images_path.sh
           hexo clean
           hexo generate
           hexo deploy
