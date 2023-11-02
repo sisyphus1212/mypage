@@ -1,3 +1,6 @@
+---
+---
+
 # dpdk-16.04 igb_uio 模块分析
 igb_uio 是 dpdk 内部实现的将网卡映射到用户态的内核模块，它是 uio 模块的一个实例。
 
@@ -29,7 +32,7 @@ static const struct file_operations uio_fops = {
     cdev->owner = THIS_MODULE;
 	cdev->ops = &uio_fops;
 	kobject_set_name(&cdev->kobj, "%s", name);
-	
+
 	result = cdev_add(cdev, uio_dev, UIO_MAX_DEVICES);
 ```
 我们对 /dev/uioxx 文件的操作最终都会对应到**对 uio_fops 的不同方法的调用上**。
@@ -74,7 +77,7 @@ struct uio_info {
 436         udev->info.mmap = igbuio_dom0_pci_mmap;
 437 #endif
 438     udev->info.priv = udev;
-	
+
 ...........................................................
 
 478     /* register uio driver */
@@ -84,7 +87,7 @@ struct uio_info {
 ```c
 332 static int
 333 igbuio_setup_bars(struct pci_dev *dev, struct uio_info *info)
-334 {   
+334 {
 335     int i, iom, iop, ret;
 336     unsigned long flags;
 337     static const char *bar_names[PCI_STD_RESOURCE_END + 1]  = {
@@ -95,10 +98,10 @@ struct uio_info {
 342         "BAR4",
 343         "BAR5",
 344     };
-345     
+345
 346     iom = 0;
 347     iop = 0;
-348     
+348
 349     for (i = 0; i < ARRAY_SIZE(bar_names); i++) {
 350         if (pci_resource_len(dev, i) != 0 &&
 351                 pci_resource_start(dev, i) != 0) {
@@ -118,7 +121,7 @@ struct uio_info {
 365             }
 366         }
 367     }
-368     
+368
 369     return (iom != 0) ? ret : -ENOENT;
 370 }
 ```
@@ -232,19 +235,19 @@ igb_uio pci 驱动实例及初始化代码如下：
 546     .probe = igbuio_pci_probe,
 547     .remove = igbuio_pci_remove,
 548 };
-549 
+549
 550 static int __init
 551 igbuio_pci_init_module(void)
 552 {
 553     int ret;
-554 
+554
 555     ret = igbuio_config_intr_mode(intr_mode);
 556     if (ret < 0)
 557         return ret;
-558 
+558
 559     return pci_register_driver(&igbuio_pci_driver);
 560 }
-561 
+561
 ```
 igbuio_config_intr_mode 配置模块使用的中断模型，intr_mode 是 igb_uio 模块定义的一个模块参数，在加载模块的时候提供，没有指定时，默认使用 MSIX 中断模型。
 
@@ -266,11 +269,11 @@ igbuio_config_intr_mode 配置模块使用的中断模型，intr_mode 是 igb_ui
 379     struct rte_uio_pci_dev *udev;
 380     struct msix_entry msix_entry;
 381     int err;
-382 
+382
 383     udev = kzalloc(sizeof(struct rte_uio_pci_dev), GFP_KERNEL);
 384     if (!udev)
 385         return -ENOMEM;
-386 
+386
 387     /*
 388      * enable device: ask low-level code to enable I/O and
 389      * memory
@@ -280,7 +283,7 @@ igbuio_config_intr_mode 配置模块使用的中断模型，intr_mode 是 igb_ui
 393         dev_err(&dev->dev, "Cannot enable PCI device\n");
 394         goto fail_free;
 395     }
-396 
+396
 397     /*
 398      * reserve device's PCI memory regions for use by this
 399      * module
@@ -290,30 +293,30 @@ igbuio_config_intr_mode 配置模块使用的中断模型，intr_mode 是 igb_ui
 403         dev_err(&dev->dev, "Cannot request regions\n");
 404         goto fail_disable;
 405     }
-406 
+406
 407     /* enable bus mastering on the device */
 408     pci_set_master(dev);
 410     /* remap IO memory */
 411     err = igbuio_setup_bars(dev, &udev->info);
 412     if (err != 0)
 413         goto fail_release_iomem;
-414 
+414
 415     /* set 64-bit DMA mask */
 416     err = pci_set_dma_mask(dev,  DMA_BIT_MASK(64));
 417     if (err != 0) {
 418         dev_err(&dev->dev, "Cannot set DMA mask\n");
 419         goto fail_release_iomem;
 420     }
-421 
+421
 422     err = pci_set_consistent_dma_mask(dev, DMA_BIT_MASK(64));
 423     if (err != 0) {
 424         dev_err(&dev->dev, "Cannot set consistent DMA mask\n");
 425         goto fail_release_iomem;
 426     }
-427 
+427
 .................................................................
 439     udev->pdev = dev;
-440 
+440
 441     switch (igbuio_intr_mode_preferred) {
 442     case RTE_INTR_MODE_MSIX:
 443         /* Only 1 msi-x vector needed */
@@ -339,29 +342,29 @@ igbuio_config_intr_mode 配置模块使用的中断模型，intr_mode 是 igb_ui
 463         udev->mode = RTE_INTR_MODE_NONE;
 464         udev->info.irq = 0;
 465         break;
-466 
+466
 467     default:
 468         dev_err(&dev->dev, "invalid IRQ mode %u",
 469             igbuio_intr_mode_preferred);
 470         err = -EINVAL;
 471         goto fail_release_iomem;
 472     }
-473 
+473
 474     err = sysfs_create_group(&dev->dev.kobj, &dev_attr_grp);
 475     if (err != 0)
 476         goto fail_release_iomem;
-477 
+477
 ..............................................................
 480     if (err != 0)
 481         goto fail_remove_group;
-482 
+482
 483     pci_set_drvdata(dev, udev);
-484 
+484
 485     dev_info(&dev->dev, "uio device registered with irq %lx\n",
 486          udev->info.irq);
-487 
+487
 488     return 0;
-489 
+489
 490 fail_remove_group:
 491     sysfs_remove_group(&dev->dev.kobj, &dev_attr_grp);
 492 fail_release_iomem:
@@ -373,7 +376,7 @@ igbuio_config_intr_mode 配置模块使用的中断模型，intr_mode 是 igb_ui
 498     pci_disable_device(dev);
 499 fail_free:
 500     kfree(udev);
-501 
+501
 502     return err;
 503 }
 ```
@@ -422,7 +425,7 @@ uio_write 是**写入 uio 设备文件时**内核中**最终调用到**的写入
 ```c
 static ssize_t uio_write(struct file *filep, const char __user *buf,
 			size_t count, loff_t *ppos)
-{	
+{
 	struct uio_listener *listener = filep->private_data;
 	struct uio_device *idev = listener->dev;
 	ssize_t retval;
