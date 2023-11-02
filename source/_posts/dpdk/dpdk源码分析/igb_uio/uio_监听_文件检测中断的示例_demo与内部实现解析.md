@@ -4,8 +4,7 @@
 这个问题最终通过修改 igb_uio 的代码修复，修复后我不禁在想用户态是怎样工作的？以前大概知道是通过 epoll 来监控 uio 文件的，却并不清楚具体的流程
 在本文中，我使用 dpdk-16.04 中断线程模拟 demo 来进一步研究 dpdk 通过 uio 文件监控网卡中断事件的关键过程
 
-## 监听uio文件检测中断的示例demo
-demo 运行机器内核信息：
+# 监听uio文件检测中断的示例
 
 ```bash
 longyu@debian:~/epoll$ uname -a
