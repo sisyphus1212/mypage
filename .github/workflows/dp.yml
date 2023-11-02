@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-20.04
     environment:
       name: github-pages
+
     env:
       PAGE_PRIVATEKEY: ${{ secrets.PAGE_PRIVATEKEY }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATEKEY }}
