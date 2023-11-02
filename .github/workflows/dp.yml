@@ -21,6 +21,7 @@ jobs:
       name: github-pages
 
     env:
+      SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       PAGE_PRIVATEKEY: ${{ secrets.PAGE_PRIVATEKEY }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATEKEY }}
 
@@ -33,6 +34,7 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "$SSH_PRIVATE_KEY"
           ssh-add - <<< "$PAGE_PRIVATEKEY"
        #mkdir -p -m 0700 /home/runner/.ssh
