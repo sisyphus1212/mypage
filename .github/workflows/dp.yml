@@ -31,13 +31,12 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATEKEY }}
 
       - name: git init
-        env:
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATEKEY }}
         run: |
             git config --global user.email "lcj@yusur.tcch"
             git config --global user.name "lcj"
             git status
             git submodule update --init --recursive
+            ssh-add - <<< "${{ secrets.PAGE_PRIVATEKEY }}"
 
       # Runs a set of commands using the runners shell
       - name: Set Node
