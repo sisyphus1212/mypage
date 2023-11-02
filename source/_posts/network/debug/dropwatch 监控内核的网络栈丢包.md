@@ -1,11 +1,10 @@
 ---
-title: githubpage+vscocd+hexo构建笔记博客
-date: 2022-08-29 18:21:45
+title: dropwatch 监控内核的网络栈丢包
+date: 2023-11-01 18:21:45
 categories:
 - [kernel, 网络开发]
 tags: 网络网络协议栈
 ---
-
 # dropwatch 监控内核的网络栈丢包
 
 ## dropwatch 的功能
