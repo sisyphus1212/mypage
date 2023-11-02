@@ -20,6 +20,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
       # Runs a set of commands using the runners shell
       - name: Set Node
         uses: actions/setup-node@v2
@@ -45,7 +48,6 @@ jobs:
           git config --global user.email "lcj@aliyun.com"
           git config --global user.name "lcj"
           git submodule update --init --recursive
-          echo "=================================="
           npm update
           npm install hexo-cli -g
           npm install --save
