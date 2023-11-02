@@ -40,9 +40,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "$SSH_PRIVATE_KEY"
-          ssh-add - <<< "$PAGE_PRIVATEKEY"
           ssh-add -l
-
 
       - name: git init
         run: |
@@ -74,6 +72,9 @@ jobs:
 
       - name: Hexo Deploy
         run: |
+          ssh-add -D
+          ssh-add - <<< "$PAGE_PRIVATEKEY"
+          ssh-add -l
           hexo clean
           hexo generate
           hexo deploy
