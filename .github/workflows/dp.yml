@@ -36,7 +36,6 @@ jobs:
 
       - name: "Add GitHub to the SSH known hosts file"
         run: |
-          eval "$(ssh-agent -s)"
           mkdir -p ~/.ssh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
