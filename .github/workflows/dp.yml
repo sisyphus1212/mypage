@@ -36,7 +36,6 @@ jobs:
             git config --global user.name "lcj"
             git status
             git submodule update --init --recursive
-            ssh-add - <<< "${{ secrets.PAGE_PRIVATEKEY }}"
 
       # Runs a set of commands using the runners shell
       - name: Set Node
@@ -58,6 +57,12 @@ jobs:
           npm install hexo-cli -g
           npm install --save
           npm i hexo -g
+
+      - name: 🔑 Setup SSH
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.PAGE_PRIVATEKEY }}
 
       - name: Hexo Deploy
         run: |
