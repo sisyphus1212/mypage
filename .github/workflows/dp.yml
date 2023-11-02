@@ -26,7 +26,7 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.SSH_PRIVATEKEY }}
         run: |
-            cat $DEPLOY_KEY
+            echo $DEPLOY_KEY
             mkdir -p ~/.ssh
             echo $DEPLOY_KEY > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
