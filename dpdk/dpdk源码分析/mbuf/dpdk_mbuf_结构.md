@@ -1,3 +1,6 @@
+---
+---
+
 # 不懂 dpdk mbuf 结构？此篇文章带你超神
 # dpdk 中 mbuf 的结构
 ![https://doc.dpdk.org/guides/prog_guide/mbuf_lib.html](https://img-blog.csdnimg.cn/2021061518410674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvbmd5dV93bHo=,size_16,color_FFFFFF,t_70)
@@ -23,7 +26,7 @@ mbuf 的日常操作主要有如下几类：
 6. 获取 mbuf 的 tailroom 的位置
 7. 使用 mbuf 的 headroom 在 dataroom 前插入指定长度数据
 8. 使用 mbuf 的 tailroom 在 dataroom 后插入指定长度数据
-9. 使用已有的 mbuf 克隆一个新的 mbuf 
+9. 使用已有的 mbuf 克隆一个新的 mbuf
 
 使用较为频繁的函数接口为申请 mbuf、释放 mbuf 等。
 
@@ -107,12 +110,12 @@ dpdk 收包逻辑中，核心过程是**解析收包描述符中的字段并填�
 dpdk-16.04 中 mbuf 结构的 rearm_data 标号标识一个连续 6 字节长度的起始位置，相关定义如下：
 
 ```c
-	/* next 6 bytes are initialised on RX descriptor rearm */                                                                                                         	
+	/* next 6 bytes are initialised on RX descriptor rearm */
 	MARKER8 rearm_data;
     uint16_t data_off;
 
-    /**  
-     * 16-bit Reference counter.                                                                                                                                             
+    /**
+     * 16-bit Reference counter.
      * It should only be accessed using the following functions:
      * rte_mbuf_refcnt_update(), rte_mbuf_refcnt_read(), and
      * rte_mbuf_refcnt_set(). The functionality of these functions (atomic,
@@ -122,7 +125,7 @@ dpdk-16.04 中 mbuf 结构的 rearm_data 标号标识一个连续 6 字节长度
     union {
         rte_atomic16_t refcnt_atomic; /**< Atomically accessed refcnt */
         uint16_t refcnt;              /**< Non-atomically accessed refcnt */
-    };   
+    };
     uint8_t nb_segs;          /**< Number of segments. */
     uint8_t port;             /**< Input port. */
 
@@ -134,7 +137,7 @@ dpdk-20.11 中 rearm_data 标识 8 个字节的起始位置，相关定义如下
 496     /* next 8 bytes are initialised on RX descriptor rearm */
 497     MARKER64 rearm_data;
 498     uint16_t data_off;
-499 
+499
 500     /**
 501      * Reference counter. Its size should at least equal to the size
 502      * of port field (16 bits), to support zero-copy broadcast.
@@ -151,12 +154,12 @@ dpdk-20.11 中 rearm_data 标识 8 个字节的起始位置，相关定义如下
 513         uint16_t refcnt;
 514     };
 515     uint16_t nb_segs;         /**< Number of segments. */
-516 
+516
 517     /** Input port (16 bits to support more than 256 virtual ports).
 518      * The event eth Tx adapter uses this field to specify the output port.
 519      */
 520     uint16_t port;
-521 
+521
 522     uint64_t ol_flags;        /**< Offload features. */
 ```
 dpdk-20.11 mbuf 结构中 port 与 nb_segs 的大小变为了 **2 个字节**，带来的影响是 rearm_data 标识指向一个 **8-byte** 长度的起始位置，而 16.04 为 **6-byte**。
@@ -185,7 +188,7 @@ dpdk 程序运行中需要频繁的申请与释放 mbuf，这些过程每次都�
 dpdk-19.11 中有如下代码：
 
 ```c
-    m->buf_iova = rte_mempool_virt2iova(m) + mbuf_size;  
+    m->buf_iova = rte_mempool_virt2iova(m) + mbuf_size;
 ```
 **rte_mempool_virt2iova** 函数用于将 mbuf 的地址转化为物理地址，将物理地址加上 **mbuf_size** 执行 **mbuf** 中 **headroom** 起始位置的物理地址，可以从本文开篇出的那张图上看出来。
 
