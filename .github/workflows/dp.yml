@@ -23,14 +23,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: 🔑 Setup SSH
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATEKEY }}
+
       - name: git init
         env:
           DEPLOY_KEY: ${{ secrets.SSH_PRIVATEKEY }}
         run: |
-            mkdir -p ~/.ssh
-            echo $DEPLOY_KEY >  ~/.ssh/id_rsa
-            chmod 400 ~/.ssh/id_rsa
-            ssh-keyscan github.com >> ~/.ssh/known_hosts
             git config --global user.email "lcj@aliyun.com"
             git config --global user.name "lcj"
             git status
