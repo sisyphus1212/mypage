@@ -31,7 +31,7 @@ jobs:
           chmod 600 /home/runner/.ssh/known_hosts
 
       - name: 🔑 Setup SSH
-        if: ${{ github.ref == 'refs/heads/master' }}
+        #if: ${{ github.ref == 'refs/heads/master' }}
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: |
