@@ -18,7 +18,7 @@ dropwatch 功能可以用来监控内核的网络栈丢弃的数据包。
 dropwatch 功能需要开启 CONFIG_NET_DROP_MONITOR 配置，在我的虚机中，相关的配置信息如下：
 
 ```
-longyu@debian:~$ grep 'NET_DROP_MONITOR' /boot/config-4.19.0-8-amd64
+lcj@debian:~$ grep 'NET_DROP_MONITOR' /boot/config-4.19.0-8-amd64
 CONFIG_NET_DROP_MONITOR=m
 ```
 
@@ -29,10 +29,10 @@ CONFIG_NET_DROP_MONITOR=m
 操作记录如下：
 
 ```
-longyu@debian:~$ find /lib/modules/4.19.0-8-amd64/ -name '*monitor.ko'
+lcj@debian:~$ find /lib/modules/4.19.0-8-amd64/ -name '*monitor.ko'
 /lib/modules/4.19.0-8-amd64/kernel/net/core/drop_monitor.ko
-longyu@debian:~$ sudo modprobe drop_monitor
-longyu@debian:~$ lsmod | grep 'drop_monitor'
+lcj@debian:~$ sudo modprobe drop_monitor
+lcj@debian:~$ lsmod | grep 'drop_monitor'
 drop_monitor           20480  0
 ```
 
@@ -95,14 +95,14 @@ configure: error: Couldn't find or include bfd.h
 这应该是需要安装某个库的头文件。我执行 apt-cache search 搜索相关的内容，并根据经验选择安装 libbsd-dev 函数库，这之后发现还有问题。操作记录如下：
 
 ```
-longyu@debian:~/dropwatch-1.5.3$ sudo apt-cache search bsd | grep libbsd
+lcj@debian:~/dropwatch-1.5.3$ sudo apt-cache search bsd | grep libbsd
 libbsd-dev - utility functions from BSD systems - development files
 libbsd0 - utility functions from BSD systems - shared library
 libbsd-arc4random-perl - CPAN's BSD::arc4random -- Perl bindings for arc4random
 libbsd-resource-perl - BSD process resource limit and priority functions
-longyu@debian:~/dropwatch-1.5.3$
-longyu@debian:~/dropwatch-1.5.3$ sudo apt-get install libbsd-dev
-longyu@debian:~/dropwatch-1.5.3$
+lcj@debian:~/dropwatch-1.5.3$
+lcj@debian:~/dropwatch-1.5.3$ sudo apt-get install libbsd-dev
+lcj@debian:~/dropwatch-1.5.3$
 ```
 
 网上搜索找到了如下链接：[compile errors using bfd.h on linux](https://stackoverflow.com/questions/8003763/compile-errors-using-bfd-h-on-linux).
@@ -127,7 +127,7 @@ main.c:23:10: fatal error: readline/readline.h: No such file or directory
 执行如下命令解决这个问题：
 
 ```
-longyu@debian:~/dropwatch-1.5.3$ sudo apt-get install libreadline-dev
+lcj@debian:~/dropwatch-1.5.3$ sudo apt-get install libreadline-dev
 ```
 
 再次 make 又报了如下错误：
@@ -139,33 +139,33 @@ longyu@debian:~/dropwatch-1.5.3$ sudo apt-get install libreadline-dev
 执行如下命令可以解决这个问题：
 
 ```
-longyu@debian:~/dropwatch-1.5.3$ sudo apt-get install libnl-genl-3-dev
+lcj@debian:~/dropwatch-1.5.3$ sudo apt-get install libnl-genl-3-dev
 ```
 
 ### 成功编译
 
 ```
-longyu@debian:~/dropwatch-1.5.3$ make
+lcj@debian:~/dropwatch-1.5.3$ make
 make  all-recursive
-make[1]: Entering directory '/home/longyu/dropwatch-1.5.3'
+make[1]: Entering directory '/home/lcj/dropwatch-1.5.3'
 Making all in src
-make[2]: Entering directory '/home/longyu/dropwatch-1.5.3/src'
+make[2]: Entering directory '/home/lcj/dropwatch-1.5.3/src'
 /bin/bash ../libtool  --tag=CC   --mode=link gcc -g -Wall -Werror -I/usr/include/libnl3  -g -O2 -lnl-3 -lnl-genl-3 -lreadline -lpcap -lbfd  -o dropwatch main.o lookup.o lookup_kas.o lookup_bfd.o  -lpcap
 libtool: link: gcc -g -Wall -Werror -I/usr/include/libnl3 -g -O2 -o dropwatch main.o lookup.o lookup_kas.o lookup_bfd.o  -lnl-3 -lnl-genl-3 -lreadline -lbfd -lpcap
 /bin/bash ../libtool  --tag=CC   --mode=link gcc -g -Wall -Werror -I/usr/include/libnl3  -g -O2 -lnl-3 -lnl-genl-3 -lreadline -lpcap -lbfd  -o dwdump dwdump.o  -lpcap
 libtool: link: gcc -g -Wall -Werror -I/usr/include/libnl3 -g -O2 -o dwdump dwdump.o  -lnl-3 -lnl-genl-3 -lreadline -lbfd -lpcap
-make[2]: Leaving directory '/home/longyu/dropwatch-1.5.3/src'
+make[2]: Leaving directory '/home/lcj/dropwatch-1.5.3/src'
 Making all in doc
-make[2]: Entering directory '/home/longyu/dropwatch-1.5.3/doc'
+make[2]: Entering directory '/home/lcj/dropwatch-1.5.3/doc'
 make[2]: Nothing to be done for 'all'.
-make[2]: Leaving directory '/home/longyu/dropwatch-1.5.3/doc'
+make[2]: Leaving directory '/home/lcj/dropwatch-1.5.3/doc'
 Making all in tests
-make[2]: Entering directory '/home/longyu/dropwatch-1.5.3/tests'
+make[2]: Entering directory '/home/lcj/dropwatch-1.5.3/tests'
 make[2]: Nothing to be done for 'all'.
-make[2]: Leaving directory '/home/longyu/dropwatch-1.5.3/tests'
-make[2]: Entering directory '/home/longyu/dropwatch-1.5.3'
-make[2]: Leaving directory '/home/longyu/dropwatch-1.5.3'
-make[1]: Leaving directory '/home/longyu/dropwatch-1.5.3'
+make[2]: Leaving directory '/home/lcj/dropwatch-1.5.3/tests'
+make[2]: Entering directory '/home/lcj/dropwatch-1.5.3'
+make[2]: Leaving directory '/home/lcj/dropwatch-1.5.3'
+make[1]: Leaving directory '/home/lcj/dropwatch-1.5.3'
 ```
 
 ## 运行 dropwatch
@@ -173,7 +173,7 @@ make[1]: Leaving directory '/home/longyu/dropwatch-1.5.3'
 进入 src 目录中执行 dropwatch 命令，操作记录如下：
 
 ```
-longyu@debian:~/dropwatch-1.5.3/src$ ./dropwatch
+lcj@debian:~/dropwatch-1.5.3/src$ ./dropwatch
 Initializing null lookup method
 dropwatch> start
 Enabling monitoring...
@@ -198,7 +198,7 @@ Issue Ctrl-C to stop monitoring
 dropwatch -l kas 指定使用内核符号表。
 
 ```
-longyu@debian:~/dropwatch-1.5.3/src$ ./dropwatch -l kas
+lcj@debian:~/dropwatch-1.5.3/src$ ./dropwatch -l kas
 Initializing kallsyms db
 dropwatch> start
 Enabling monitoring...
@@ -265,7 +265,7 @@ ffffffffc01098c9 t cleanup_module       [i2c_piix4]
 使用 root 权限执行 dropwatch 命令，记录信息如下：
 
 ```
-longyu@debian:~/dropwatch-1.5.3/src$ sudo ./dropwatch -l kas
+lcj@debian:~/dropwatch-1.5.3/src$ sudo ./dropwatch -l kas
 Initializing kallsyms db
 dropwatch> start
 Enabling monitoring...
