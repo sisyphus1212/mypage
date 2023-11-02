@@ -16,5 +16,5 @@ tags: 其它
 ![1698914274740](../../medias/image/images/1698914274740.png)
 
 
-
-![1698953627464](../../medias/image_0/github_action/1698953627464.png)
+                 https://github.com/sisyphus1212/images_0/blob/main/github_action/1698953627464.png?raw=true
+![1698953627464](https://github.com/sisyphus1212/images_0/blob/main/github_action/1698953627464.png?raw=true)
