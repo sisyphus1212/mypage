@@ -31,6 +31,7 @@ jobs:
             echo $DEPLOY_KEY > ~/.ssh/id_rsa
             echo "=============================="
             cat  ~/.ssh/id_rsa
+            ls -dh ~/.ssh/id_rsa
             echo "=============================="
             chmod 600 ~/.ssh/id_rsa
             ssh-keyscan github.com >> ~/.ssh/known_hosts
