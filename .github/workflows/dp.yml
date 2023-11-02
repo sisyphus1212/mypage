@@ -48,6 +48,7 @@ jobs:
           npm install --save
           npm i hexo -g
 
+      - uses: actions/checkout@v3
       - name: Hexo Deploy
         run: |
           ls -lh
