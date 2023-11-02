@@ -27,11 +27,11 @@ jobs:
         env:
           DEPLOY_KEY: ${{ secrets.SSH_PRIVATEKEY }}
         run: |
-            echo "=============================="
-            echo $DEPLOY_KEY
-            echo "=============================="
             mkdir -p ~/.ssh
             echo $DEPLOY_KEY > ~/.ssh/id_rsa
+            echo "=============================="
+            cat  ~/.ssh/id_rsa
+            echo "=============================="
             chmod 600 ~/.ssh/id_rsa
             ssh-keyscan github.com >> ~/.ssh/known_hosts
             git config --global user.email "lcj@aliyun.com"
