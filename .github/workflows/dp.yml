@@ -41,6 +41,7 @@ jobs:
           ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "$SSH_PRIVATE_KEY"
           echo "$PAGE_PRIVATEKEY" > ./PAGE_PRIVATEKEY
+          chmod  0600  ./PAGE_PRIVATEKEY
           ssh-add ./PAGE_PRIVATEKEY
           ssh-add -l
 
