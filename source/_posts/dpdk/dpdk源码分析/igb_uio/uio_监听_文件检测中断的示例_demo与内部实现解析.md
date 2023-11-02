@@ -5,7 +5,6 @@
 在本文中，我使用 dpdk-16.04 中断线程模拟 demo 来进一步研究 dpdk 通过 uio 文件监控网卡中断事件的关键过程
 
 # 监听uio文件检测中断的示例
-
 ```bash
 longyu@debian:~/epoll$ uname -a
 Linux debian 4.19.0-18-amd64 #1 SMP Debian 4.19.208-1 (2021-09-29) x86_64 GNU/Linux
