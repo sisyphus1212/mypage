@@ -19,6 +19,11 @@ jobs:
     runs-on: ubuntu-20.04
     environment:
       name: github-pages
+    env:
+      PAGE_PRIVATEKEY: ${{ secrets.PAGE_PRIVATEKEY }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATEKEY }}
+
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -26,17 +31,13 @@ jobs:
 
       - name: "Add GitHub to the SSH known hosts file"
         run: |
+          which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+          eval $(ssh-agent -s)
+          echo "$PAGE_PRIVATEKEY" | tr -d '\r' | ssh-add -
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           mkdir -p -m 0700 /home/runner/.ssh
           curl --silent https://api.github.com/meta  | jq --raw-output '"github.com "+.ssh_keys[]' >> /home/runner/.ssh/known_hosts
           chmod 600 /home/runner/.ssh/known_hosts
-
-      - name: 🔑 Setup SSH
-        #if: ${{ github.ref == 'refs/heads/master' }}
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: |
-            ${{ secrets.PAGE_PRIVATEKEY }}
-            ${{ secrets.SSH_PRIVATEKEY }}
 
       - name: git init
         run: |
