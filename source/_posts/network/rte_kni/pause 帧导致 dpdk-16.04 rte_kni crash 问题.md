@@ -1,3 +1,15 @@
+---
+title: dpdk 程序创建 kni 虚拟网络接口失败的问题
+date: 2022-09-07 16:04:02
+index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-18-49-08.png?raw=true
+categories:
+- [linux,网络开发,网卡驱动]
+tags:
+ - linux
+ - 网卡驱动
+ - kernel
+---
+
 # pause 帧导致 dpdk-16.04 rte_kni crash 问题
 ## 问题描述
 系统运行时，内核 crash，oops 信息如下：
@@ -35,7 +47,7 @@
 <4>[17934.852314]  [<ffffffff810de1e6>] do_vfs_ioctl+0x418/0x459
 <4>[17934.852398]  [<ffffffff810de278>] sys_ioctl+0x51/0x75
 <4>[17934.852482]  [<ffffffff8158fffb>] system_call_fastpath+0x16/0x1b
-<0>[17934.852562] Code: 08 8b 80 68 cf 00 00 eb 06 8b 80 a8 41 00 00 89 c1 48 01 8a 40 14 00 00 85 c0 0f 84 a6 00 00 00 31 c0 eb 0e 49 8b 88 38 02 00 00 <f0> 80 61 30 fb ff c0 49 83 c0 08 3b 82 20 02 00 00 7c e6 e9 83 
+<0>[17934.852562] Code: 08 8b 80 68 cf 00 00 eb 06 8b 80 a8 41 00 00 89 c1 48 01 8a 40 14 00 00 85 c0 0f 84 a6 00 00 00 31 c0 eb 0e 49 8b 88 38 02 00 00 <f0> 80 61 30 fb ff c0 49 83 c0 08 3b 82 20 02 00 00 7c e6 e9 83
 <1>[17934.854260] RIP  [<ffffffffa009b135>] ixgbe_update_stats+0x38b/0xc7f [rte_kni]
 <4>[17934.854421]  RSP <ffff8806feeb7c38>
 <0>[17934.854495] CR2: 0000000000000030
@@ -103,7 +115,7 @@ static void ixgbe_update_xoff_rx_lfc(struct ixgbe_adapter *adapter)
 
 	for (i = 0; i < adapter->num_tx_queues; i++)
 		clear_bit(__IXGBE_HANG_CHECK_ARMED,
-			  &adapter->tx_ring[i]->state);	
+			  &adapter->tx_ring[i]->state);
 }
 ```
 
@@ -143,7 +155,7 @@ static void ixgbe_update_xoff_rx_lfc(struct ixgbe_adapter *adapter)
 ```c
 	for (i = 0; i < adapter->num_tx_queues; i++)
 		clear_bit(__IXGBE_HANG_CHECK_ARMED,
-			  &adapter->tx_ring[i]->state);	
+			  &adapter->tx_ring[i]->state);
 ```
 
 根据 crash 信息，出问题的指令如下：

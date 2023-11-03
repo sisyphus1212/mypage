@@ -1,3 +1,15 @@
+---
+title: dpdk 程序创建 kni 虚拟网络接口失败的问题
+date: 2022-09-07 16:04:02
+index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-18-49-08.png?raw=true
+categories:
+- [linux,网络开发,网卡驱动]
+tags:
+ - linux
+ - 网卡驱动
+ - kernel
+---
+
 # dpdk 程序创建 kni 虚拟网络接口失败的问题
 ## 问题描述
 今天接到了同事的一个反馈，说更新了 dpdk 后 kni 口无法正常创建。怀疑可能是 rte_kni.ko 模块存在问题导致创建失败。

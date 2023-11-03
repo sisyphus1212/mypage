@@ -1,3 +1,15 @@
+---
+title: 通过驱动来创建一个eth device
+date: 2022-09-17 16:04:02
+index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-18-49-08.png?raw=true
+categories:
+- [linux,网络开发,网卡驱动]
+tags:
+ - linux
+ - 网卡驱动
+ - kernel
+---
+
 # 限制内核 udp bad checksum 失败告警信息
 ## 问题描述
 某系统 dmesg 信息中有如下内容频繁打印，冲掉了其它相关的信息，需要限制打印。
@@ -10,7 +22,7 @@ UDP: bad checksum. From 10.66.245.93:61525 to 255.255.255.255:137 ulen 58
 内核源码树中的文件名：
 
 ```bash
-net/ipv4/udp.c 
+net/ipv4/udp.c
 ```
 相关源码：
 
@@ -102,7 +114,7 @@ net_ratelimit_state 为内核向用户态导出的可配置接口，它在 net_c
 	相关的项目如下：
 
 	```bash
-	[root] #$ sysctl -a  | grep net.core.message 
+	[root] #$ sysctl -a  | grep net.core.message
 	net.core.message_burst = 10
 	net.core.message_cost = 5
 	```

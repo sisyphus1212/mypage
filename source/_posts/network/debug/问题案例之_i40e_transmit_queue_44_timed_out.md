@@ -1,3 +1,15 @@
+---
+title: 问题案例之：(i40e): transmit queue 44 timed out
+date: 2022-09-07 16:04:02
+index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-18-49-08.png?raw=true
+categories:
+- [linux,网络开发,网卡驱动]
+tags:
+ - linux
+ - 网卡驱动
+ - kernel
+---
+
 # 问题案例之：(i40e): transmit queue 44 timed out
 ## 问题描述
 
@@ -75,7 +87,7 @@
     1a:00.3 Ethernet controller: Intel Corporation Ethernet Connection X722 for 1GbE (rev 09)
     af:00.0 Ethernet controller: Intel Corporation I350 Gigabit Network Connection (rev 01)
     af:00.1 Ethernet controller: Intel Corporation I350 Gigabit Network Connection (rev 01)
-    [localhost ~]$ 
+    [localhost ~]$
 ```
 2. 网卡驱动与固件相关信息
 
@@ -84,7 +96,7 @@
     driver: i40e
     version: 1.6.27-k
     firmware-version: 3.33 0x80000f09 255.65535.255
-    expansion-rom-version: 
+    expansion-rom-version:
     bus-info: 0000:1a:00.2
     supports-statistics: yes
     supports-test: yes
@@ -99,10 +111,10 @@
     [localhost ~]$ ethtool eno3
     Settings for eno3:
             Supported ports: [ TP ]
-            Supported link modes:   1000baseT/Full 
+            Supported link modes:   1000baseT/Full
             Supported pause frame use: Symmetric
             Supports auto-negotiation: Yes
-            Advertised link modes:  1000baseT/Full 
+            Advertised link modes:  1000baseT/Full
             Advertised pause frame use: No
             Advertised auto-negotiation: Yes
             Speed: 1000Mb/s
@@ -156,7 +168,7 @@
 
 
 ```bash
-[localhost ~]$ grep 'DCB' /boot/config-3.10.0-693.el7.x86_64 
+[localhost ~]$ grep 'DCB' /boot/config-3.10.0-693.el7.x86_64
 CONFIG_DCB=y
 ```
 
@@ -188,7 +200,7 @@ CONFIG_DCB=y
 2. 修改 centos 的 initrd
 
     查看 /boot 目录以及 grub 的配置文件，确定 centos 并没有使用 initrd，而是使用了 initramfs。按照常规的方法解压这个 initramfs 文件，没有找到相关的驱动，不过我发现解压出来的东西的大小远小于 initramfs 文件的大小。
-    
+
 **全局 find 没有找到其它路径存在的 i40e 相关的 ko 文件**，看来还得搞搞 initramfs。
 
 ### cenots 的 initramfs 的机关
