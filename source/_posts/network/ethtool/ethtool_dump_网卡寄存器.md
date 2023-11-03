@@ -5,10 +5,11 @@ categories:
 - [linux内核网络, 网卡]
 tags:
  - 网卡
+ - ethool
  - linux内核网络
 ---
-
 # ethtool 支持 dump 网卡的寄存器
+
 最新版 ethtool 支持如下网卡的 dump：
 
 ```c
@@ -55,12 +56,14 @@ static const struct {
 ```
 
 ## ethtool dump 网卡寄存器的主要工作原理
+
 1. ethtool 中首先通过 ioctl 调用底层驱动实现的 **get_regs_len** 函数，获取到 dump 寄存器的大小
 2. ethtool 使用获取到的寄存器空间大小申请内存空间
 3. 调用驱动中实现的 get_regs 函数来读取寄存器信息，并填充到之前申请的内存空间中
 4. 最后 在ethtool 中调用适配的不同网卡驱动的 dump_regs 函数来解析并打印读取到的寄存器值
 
 ## ethtool.c 中解析获取到的寄存器值的函数
+
 ethtool.c 中的 dump_regs 函数完成**解析** dump 出来的寄存器信息的功能。
 
 对于 gregs_dump_hex 为 0 的情况，它会**遍历 driver_list** 列表，这就是上面我列出来的那个很长的表喽，它会用 info->driver 中的**驱动名称****匹配** **driver_list**，匹配到了一个则**调用相应的 func 函数**来完成寄存器解析工作，因为可能存在**嵌套的 regs 结构体内容**，这个过程会不断的**递归执行**。
@@ -135,4 +138,3 @@ static void ixgbe_get_regs(struct net_device *netdev, struct ethtool_regs *regs,
 	regs_buff[5] = IXGBE_READ_REG(hw, IXGBE_LEDCTL);
 	regs_buff[6] = IXGBE_READ_REG(hw, IXGBE_FRTIMER);
 ```
-
