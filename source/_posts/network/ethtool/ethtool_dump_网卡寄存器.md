@@ -1,5 +1,14 @@
-# ethtool 支持 dump i40e 网卡的寄存器
+---
+title: ethtool dump 网卡的寄存器
+date: 2023-11-03 15:11:45
+categories:
+- [linux内核网络, 网卡]
+tags:
+ - 网卡
+ - linux内核网络
+---
 
+# ethtool 支持 dump 网卡的寄存器
 最新版 ethtool 支持如下网卡的 dump：
 
 ```c
@@ -44,8 +53,6 @@ static const struct {
 #endif
 };
 ```
-
-可以看到列表中没有 i40e 网卡，这意味着我们要 dump i40e 驱动支持的网卡需要自己编写单独的解析函数并注册到上述列表中。
 
 ## ethtool dump 网卡寄存器的主要工作原理
 1. ethtool 中首先通过 ioctl 调用底层驱动实现的 **get_regs_len** 函数，获取到 dump 寄存器的大小
@@ -101,20 +108,6 @@ nested:
 }
 ```
 
-## ethtool 支持 dump i40e 网卡寄存器需要修改的文件
-
-1. 修改内核中的 i40e 源码添加 get_regs_len 与 get_regs 函数
-
-	参考 i40e_register.h 头文件中的寄存器定义来搞
-
-2. 修改 ethtool 命令的源码
-
-	增加一个 i40e.c，其中编写 i40e 寄存器内容的解析函数
-	
-	同时在 ethtool driver_list 中添加一个 i40e driver 表项
-
-3. 修改 ethtool 命令的编译脚本
-
 ## ixgbe 内核态驱动中 dump 寄存器的实现参考
 
 ixgbe 内核态驱动中 ixgbe_get_regs 函数的部分实现如下：
@@ -127,7 +120,7 @@ static void ixgbe_get_regs(struct net_device *netdev, struct ethtool_regs *regs,
 	struct ixgbe_hw *hw = &adapter->hw;
 	u32 *regs_buff = p;
 	u8 i;
-	
+
 	memset(p, 0, IXGBE_REGS_LEN * sizeof(u32));
 
 	regs->version = (1 << 24) | hw->revision_id << 16 | hw->device_id;
@@ -142,14 +135,4 @@ static void ixgbe_get_regs(struct net_device *netdev, struct ethtool_regs *regs,
 	regs_buff[5] = IXGBE_READ_REG(hw, IXGBE_LEDCTL);
 	regs_buff[6] = IXGBE_READ_REG(hw, IXGBE_FRTIMER);
 ```
-
-可以看到，上述代码的主要逻辑在于不断调用 IXGBE_READ_REG 来读取不同偏移量代表的寄存器的值并存储到相应的 buf 中，其实没有啥技术含量，不过要细心一点。
-
-## i40e 网卡的特别之处
-i40e 网卡内部实现了一个 admin queue，一部分读写寄存器的操作被建议通过调用 i40e_asq_send_command 来发送一个相应的命令来获取，其实也可以直接读取寄存器的值。
-
-## 最终的方案
-dump i40e 寄存器的功能写了一些，发现了 ethregs 这个命令，发现它可以直接 dump x710 网卡的寄存器，就使用这个工具来搞了。
-
-关于 ethregs 工具，可以从我的 [ethregs dump Intel 网卡寄存器工具](https://blog.csdn.net/Longyu_wlz/article/details/108739721) 这篇文章中获取相关的信息。
 
