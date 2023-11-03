@@ -7,9 +7,8 @@ tags: 其它
 ---
 # github action介绍
 
-github action 是一个由 GitHub 提供的自动化工作流程平台(ci/cd)，用于帮助开发人员构建、测试、部署和管理其软件项目, 说人话就是一个能自动化触发的脚本运行环境, 比如在检测到我们push代码后自动检查代码合规性，自动编译代码并打包,下图是github_action 运行逻辑图:
+github action 是一个由 GitHub 提供的自动化工作流程平台(ci/cd)，用于帮助开发人员构建、测试、部署和管理其软件项目, 说人话就是一个能自动化触发的脚本运行环境, 比如：github action检测到我们push代码后,可以自动检查代码合规性，自动编译代码并打包发布,下图是github_action 运行逻辑图:
 ![github_action_逻辑图](../../medias/images_0/github_action/1698980204213.png)
-在使用这玩意时最头疼的问题就是各种权限问题，这里来给大家说明一下如何配置。
 
 github 的每个repositories 仓库都可以关联到一个github action,  其工作流程大体分三步：
 
@@ -24,12 +23,16 @@ github 的每个repositories 仓库都可以关联到一个github action,  其�
 
 举个例子，这是我github page 自动化部署的配置文件[dp.yml](https://github.com/sisyphus1212/mypage/blob/74d506540d6bf3ec4b062a1b05bd332d3d8844e9/.github/workflows/dp.yml)
 
-这个文件里面，像这些run命令下就可以任意使用shell 命令操作[github action run 命令](../../medias/images_0/github_action/1698982166108.png)
+像这些run标签下就可以任意使用shell 命令
+![github action run 命令](../../medias/images_0/github_action/1698982166108.png)
 
 ## github action 获取repositories 仓库
-我们要使用github action 完成我们期望的任务，首先就得让github action  能自动拉取我们的获取repositories，对于与项目关联的action 我们可以直接使用这个语句：
+使用这玩意时最头疼的问题就是各种权限问题，这里来给大家说明一下如何配置。
+
+我们要使用github action 完成我们期望的任务，首先就得让github action能自动访问我们repositories，对于与项目关联的action 我们可以直接使用这个语句：
 ![actions/checkout@v2](../../medias/images_0/github_action/1698982686133.png)
 但是往往我们的项目还会关联到其它项目，这样github action 去访问关联的其它项目时就会出现权限问题，github提供的解决方案是通过tocken 或者非对称秘钥解决，非对称秘钥是一种比较方便的方式，这里主要就介绍这种方式。
+
 ![私钥/公钥](../../medias/images_0/github_action/1698983377964.png)
 要github action对repositories读写访问，我们先得给项目分一个公钥，然后在将对应私钥传递给github action，下面就是一个repositories给配置公钥和传递私钥的地方：
 environments：配置私钥(可以配置不同项目的私钥)
