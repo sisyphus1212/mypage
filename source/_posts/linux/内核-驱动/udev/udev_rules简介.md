@@ -3,15 +3,14 @@ title: udev机制实现
 date: 2022-09-20 16:04:02
 index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-23-08-10.png?raw=true
 categories:
-- [kernel,udev]
+- [linux, 网络开发, 驱动, udev]
 tags:
  - netlink
  - linux驱动
  - kernel
 ---
-
-
 udev 可以实现的内容:
+
 * 重新为设备节点命名
 * 通过创建链接的方式针对同一个设备提供一个持久化的命名
 * 根据程序输出命令设备节点
@@ -25,13 +24,13 @@ rules 文件被保存在 /etc/udev/rules.d 目录下
 
 rules 文件以词法顺序进行解析,
 
-
 基本规则:
 KERNEL-匹配内核名称
 subsystem-匹配子系统名称
 driver-与支持设备的驱动程序名称匹配
 
 分配系统资源:
+
 * name:创建的设备名称
 * symlink:创建的软链接列表
 
@@ -40,14 +39,11 @@ driver-与支持设备的驱动程序名称匹配
 一个比较重要的规则:当设备找到对应的 rule 时,并不会停止该节点的处理,而是继续搜寻匹配所有的 rules 文件,
 所以一个变动的设备可以有多次匹配.
 
-
 PROGRAM 关键字是执行脚本用于取名
 RUN     关键字是执行脚本
 
-
 https://www.freedesktop.org/software/systemd/man/udev.html
 https://wiki.archlinux.org/index.php/Udev
-
 
 如果手动地发送了 add,系统会自动发送 remove.
 
@@ -69,7 +65,6 @@ TION=addDEVPATH=/module/kset_create_delSUBSYSTEM=moduleSEQNUM=3676
 KERNEL 对应名称,一般来说,就是 $PATH 的最后一个分量.
 KERNELS:沿路径向上查找.
 
-
 SUBSYSTEM 对应 subsystem 字段.
 SUBSYSTEMS:沿路径向上查找
 
@@ -80,7 +75,6 @@ NAME:针对网络设备,匹配消息中的 NAME 字段.
 ENV 表示全局变量,可以直接设置全局变量,也可以直接使用全局变量,这个全局变量不是系统级别的,而是 udev rules 的全局变量.
 注意:通过内核发送过来的键值对中的 key 会被自动设定为全局变量,比如 SUBSYSTEM,DEVPATH 等.
 
-
 GOTO:与 LABEL 相对应,跳转到 LABEL 处.
 
 ATTR:对应目录下的文件,ATTR{$FILE_NAME} 做判断,但是需要注意权限问题
@@ -89,7 +83,6 @@ ATTR:对应目录下的文件,ATTR{$FILE_NAME} 做判断,但是需要注意权�
 ATTR{foo}=="foo"  该语句表示判断当前文件夹下是否有 foo 文件,且其值为 foo.
 
 ATTRS:和 ATTR 差不多,只是当找不到对应的文件的时候,会根据 DEVPATH 向上找,如果父级目录找到对应的属性文件也可以匹配.
-
 
 DRIVER:只有在消息中设置了 DRIVER 字段的才可以进行匹配.
 DRIVERS:沿路径向上查找.
@@ -120,7 +113,6 @@ db_persist:将消息一直保存在 udev 数据库中,即使使用 udevadm info 
 static_node:创建静态的设备节点.
 
 主要是通过 udev_device_new_from_syspath  获取对应的 device
-
 
 properties 表示属性,也是全局变量 ENV{},这个可以是从内核发出的键值对中的 key,也可以是 udevd 中设置的.
 
@@ -180,7 +172,6 @@ ID_OUI_FROM_DATABASE=Freescale Semiconductor
 
 网卡路径:/sys/devices/platform/30be0000.ethernet/net/eth0
 
-
 input_id:
 
 读取
@@ -190,10 +181,8 @@ capabilities/rel
 capabilities/key
 properties   //父级
 
-
 设置 ID_INPUT_KEY 全局变量
 设置 ID_INPUT 全局变量
-
 
 net_setup_link:
 这个比较重要,通过这个接口来设置网口名称和mac地址.
@@ -202,11 +191,9 @@ net_setup_link:
 link->filename 表示 link 文件的名称.
 程序同时会解析 link 文件，
 
-
 根据 DRIVER 的值设置 ID_NET_DRIVER.
 
 设置 ID_NET_LINK_FILE ID_NET_NAME
-
 
 设置名称,设置 mac.
 

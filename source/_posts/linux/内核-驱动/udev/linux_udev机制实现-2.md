@@ -3,17 +3,18 @@ title: linux_udev机制实现-2
 date: 2022-09-20 16:04:03
 index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-23-08-10.png?raw=true
 categories:
-- [kernel,udev]
+- [linux,网络开发, 驱动, udev]
 tags:
  - netlink
  - linux驱动
  - kernel
 ---
-
 ## linux udev 机制-2-实现原理
+
 经过前面章节的铺垫，对于 udev 以及 udev 的 rules 编写已经有了一个基本的概念，足够应付一些简单的应用场景，但是，这是不够的，作为一名合格的软件工程师，尤其是嵌入式软件工程师，必须深入到实现原理，了解 udev 的来龙去脉。
 
 ## 内核对设备的处理
+
 在 udev 系列的第一章中，我们就提到：对于支持热拔插的设备，先需要在设备树中进行注册，当设备硬件上连接到系统上时，通常硬件上就可以检测到设备的插入，通常是产生硬件中断事件，内核的中断处理中就会匹配到设备相应的驱动程序并执行，这个过程就属于内核中对设备的处理。
 
 内核中的驱动程序负责初始化设备，同时提供设备操作接口并导出到用户空间，实际上，内核是完全有权限直接在用户空间创建设备接口的，而且 devfs 也是这么做的，但是后续证明这一部分工作完全是可以在用户空间做的，也可以更灵活地实现，同时 devfs 本身也有各种各样的问题，也就推进了 udev 的发展，因此，2.6 之后的版本中，设备接口由 udevd 守护进程在用户空间接管。
@@ -31,22 +32,27 @@ netlink 属于套接字的一种，用户空间的 udevd 守护进程一直在�
 在内核发送的消息中，有三个关键字是固定存在的：ACTION=,DEVPATH=,SUBSYSTEM=,同时内核中也可以以键值对的方式自定义地添加关键字，比如 driver=，这些关键字将会自动地添加到 udev 的关键字列表中，而在用户空间的 udev rules 文件中，匹配字段和关键字远远不止这几个，这是因为 udev 本身支持一些默认的、自定义的关键字，并不是所有匹配关键字都是由内核提供的，比如 KERNEL=，这是 udev 通过判断设备内核名称所创建的关键字，在内核信息中是不包含 KERNEL= 这个关键字的,所以如果要完全了解 udev 的配置项,除了了解内核发送的 netlink 消息,同时需要了解 udev 本身对设备的处理。
 
 ## udevd 处理设备数据
+
 udev 软件上的实现分为两部分,一个是 udevd 守护进程,负责监听内核套接字,接收内核信息并处理,另一部分是客户端程序,客户端程序通过和守护进程交互获取设备信息或者对设备进行操作.
 
 在实际的实现中,存在一个问题:在开机启动时,内核会首先对所有设备进行枚举并逐个初始化,而这个时候用户空间还没有启动,udevd 自然也是没有启动的,所以在 udevd 真正被启动时,大部分的系统设备已经初始化完成,udevd 也错过了所有内核发送的设备事件信息.对于这个问题,内核是通过 sysfs 解决的,内核将设备相关的信息导出到 sysfs 中,在 udevd 启动时,通过读取 sysfs 文件系统就可以获取到设备信息,同时,使用客户端程序 udevadm trigger 命令重新生成设备事件,使用 udevadm 工具模拟内核发送设备事件的行为,让 udevd 重新处理错过的那些设备事件.
 
 ## udevadm
+
 udevadm 是官方提供的一个用于调试管理 udevd 的一个客户端程序,集成了数据库查询,监视,触发等关键功能,下面是 udevadm 的相关使用方法.
 
 ### udevadm info
+
 对于 udevd 接收到的设备信息,会把它们存放到 udev 数据库中,使用客户端程序可以实现对数据库的操作,udevadm info 指令用于查询数据库内容.udevadm info 的指令格式如下:
 
 ```
 udevadm info [options] [devpath|file|unit...]
 ```
+
 udevadm info 带有一个选项和查询对象,这个对象可以是 /dev 目录下的某个设备,也可以是 /sys 目录下的某个路径,同时也支持 systemd 中的设备描述文件(必须以.device)结尾.
 
 udevadm info 支持以下选项:
+
 * -q,--query=TYPE:查询的指定类型的设备,TYPE 可以是下列值之一： name, symlink, path, property, all(默认值)
 * -p,--path=DEVPATH:指定目标设备在 /sys 目录下的路径,因此可以省略 /sys 目录前缀,udevadm info --path=/class/block/sda 和 udevadm info /sys/class/block/sda 是等价的.
 * -n,--name=FILE:设备在 /dev 目录下的名称,也可以是一个软链接,同样的 /dev 目录前缀可以省略,udevadm info --name=sda 和 udevadm info /dev/sda 是相等的.
@@ -58,12 +64,16 @@ udevadm info 支持以下选项:
 * -c,--cleanup-db:清除 udev 数据库.
 
 ### udevadm trigger
+
 udev 的另一个调试利器就是 udevadm trigger，在系统启动时 udevd 会在内核驱动都初始化完成之后再启动，也就监听不到系统启动时内核发送的设备信息，正是由 udevadm trigger 重新生成设备事件，对于 udevd 来说，将这些设备信息当成由内核发送的来处理。
+
 ### 示例
+
 一般systemd-udev-trigger.service中应用udevadm trigger回放coldplug：
 ExecStart=/bin/udevadm trigger --type=subsystems --action=add ; /bin/udevadm trigger --type=devices --action=add
 
 同时，在系统正常运行时，基于调试的目的，也完全可以触发某个设备事件来模拟热插拔，下面是 udevadm trigger 的使用方法：
+
 * -v, --verbose：显示将会被触发的设备列表，该设备列表对应 /sys/devices 目录下的大部分设备文件。
 * -n, --dry-run：执行触发的动作，但是最后并不真正触发设备事件，也就是在执行 udevadm trigger 的基础上，最后不将数据发出，其它操作照样执行。
 * -t, --type=TYPE：仅触发特定类型的设备，TYPE 可以是下列值之一： devices(默认值), subsystems
@@ -81,9 +91,8 @@ ExecStart=/bin/udevadm trigger --type=subsystems --action=add ; /bin/udevadm tri
 
 udevadm 的大部分指令都是为了实现灵活地触发设备事件而设计，有个印象就好，需要用到的时候使用 udevadm trigger -h 或者查找[官方手册](https://www.freedesktop.org/software/systemd/man/udevadm.html)就好。
 
-
-
 ### udevadm info 示例
+
 使用 udevadm info 的目的在于查看设备保存在数据库中的信息，同样以 rtc 为例，看看 udevadm info 所展示的信息是否和内核设备事件发送的信息一致：
 
 ```
@@ -104,6 +113,7 @@ E: net.ifnames=0
 ```
 
 其中：
+
 * P 表示 PATH，即设备路径
 * N 表示 Name，对应设备内核名称
 * L 表示 udev 中 OPTION 字段的 link_priority 属性，因为 rtc 是一个软链接，如果为多个不同的设备指定了相同的软连接， 那么实际的软连接将指向 link_priority 值最高的设备。
@@ -122,10 +132,8 @@ add@/devices/platform/ocp/44e3e000.rtc/rtc/rtc0/omap_rtc_scratch0 ACTION=add DEV
 
 经过对比发现,正如前文中所说的,udev 设备信息数据并非完全来自于内核消息,另外的部分可能来自于 /sys 对应目录下设备文件,还有可能是由 udev 程序产生的,比如上文中的 USEC_INITIALIZED 环境变量,link_priority 的值.
 
-
-
-
 ### udevadm test
+
 如果要了解 udev 对内核事件的处理过程，可以通过 udevadm test 命令来实现，该命令模拟一个设备事件，并输出调试信息。
 
 下面是命令的格式：
@@ -133,6 +141,7 @@ add@/devices/platform/ocp/44e3e000.rtc/rtc/rtc0/omap_rtc_scratch0 ACTION=add DEV
 ```
 udevadm test [options] [devpath]
 ```
+
 模拟一个udev事件，打印出debug信息。
 
 常用：
@@ -141,6 +150,7 @@ udevadm test /sys/class/block/sda    ;也可指定设备路径，加载前测试
 udevadm test-builtin [options] [command] devpath
 
 需要注意的是，这个命令只支持 /sys 下的设备文件，而不支持 /dev 目录下的设备节点，udevadm test 命令的输出为：
+
 * 哪些配置目录、文件的时间戳被更新，哪个配置文件将会使用
 * 依次输出 udev 扫描的 .rules 文件，尽管该 .rules 文件没有匹配成功。
 * 依次输出与当前设备匹配的规则，并打印该条规则属于哪个 .rules(规则文件) 的哪一行。
