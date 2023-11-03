@@ -1,3 +1,14 @@
+---
+title: ethtool dump 网卡的寄存器
+date: 2023-11-03 15:11:20
+categories:
+- [linux内核网络, 网卡]
+tags:
+ - 网卡
+ - ethool
+ - linux内核网络
+---
+
 # ethtool 的工作原理
 ## ethtool 是如何工作的？
 源码之前，了无秘密。要知道 ethtool 是如何工作的，我们需要获取到它的源码。
@@ -50,11 +61,11 @@ int send_ioctl(struct cmd_context *ctx, void *cmd)
 
 ifr 结构体中重要的是两个字段：
 
-1. ifr_name 
-    
+1. ifr_name
+
    ifr_name 中保存的内容是我们在命令行中指定的网络设备的名称，如 eth1、ens33 等。
-    
-2. ifr_data 
+
+2. ifr_data
 
    ifr_data 中保存着 ethtool 中更为具体的命令，如 ETHTOOL_GDRVINFO、ETHTOOL_GREGS、ETHTOOL_GWOL 等。
 
