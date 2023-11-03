@@ -1,3 +1,14 @@
+---
+title: ethtool_配置网卡速率双工的流程与_netdevice_的_user_ns_结构
+date: 2023-11-03 15:11:45
+categories:
+- [linux, 内核网络, 网卡驱动]
+tags:
+ - 网卡
+ - ethool
+ - linux内核网络
+---
+
 # ethtool -s 配置网卡速率双工的流程与 netdevice 的 user_ns 结构
 ## strace 跟踪 ethtool -s 执行过程
 ```c

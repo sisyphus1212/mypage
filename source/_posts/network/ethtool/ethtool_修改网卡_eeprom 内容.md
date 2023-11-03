@@ -3,7 +3,7 @@ title: ethtool 修改网卡 eeprom 内容
 date: 2023-11-03 16:04:02
 index_img: https://netdevconf.info/1.1/sites/default/files/logo.png
 categories:
-- [Linux内核网络]
+- [linux, 内核网络, 网卡驱动]
 tags:
  - ethtool
  - 网卡

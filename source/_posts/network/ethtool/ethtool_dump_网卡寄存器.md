@@ -2,7 +2,7 @@
 title: ethtool dump 网卡的寄存器
 date: 2023-11-03 15:11:45
 categories:
-- [linux内核网络, 网卡]
+- [linux, 内核网络, 网卡驱动]
 tags:
  - 网卡
  - ethool
