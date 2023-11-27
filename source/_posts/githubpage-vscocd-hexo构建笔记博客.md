@@ -96,3 +96,6 @@ jobs:
 
 # 项目参考地址
 https://github.com/sisyphus1212/mypage
+
+# github action 配置
+https://sisyphus1212.github.io/2023/11/01/github_action/
