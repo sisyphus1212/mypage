@@ -10,8 +10,8 @@ windows terminal 配合 wsl 可以玩出很多技巧来：
 # ssh密码登录 和 sftp支持
 
 ```shell
-wsl -e sshpass -p lcj@ps-aux sftp -P 12345 root@10.0.25.19
-wsl -e sshpass -p lcj@ps-aux ssh -t root@10.0.25.19 -p 12345
+wsl -e sshpass -p 12345 sftp -P 22 root@10.0.25.19
+wsl -e sshpass -p 12345 ssh -t root@10.0.25.19 -p 22
 ```
 
 ![1701065028724](../../../medias/images_0/windows_treminal/1701065028724.png)
