@@ -46,6 +46,8 @@ A single PCI Express to PCI Bridge: 32 slots
 
 each PCI Express Root Port : 8 functions
 
+The PCI Express Root Ports and PCI Express Downstream ports are seen by
+Firmware/Guest OS as PCI-PCI Bridges.
 
 ![1701778456275](../../medias/pcie_虚拟化/1701778456275.png)
 
@@ -60,3 +62,11 @@ each PCI Express Root Port : 8 functions
 # pcie 拓扑
 
 # pcie 枚举
+
+# pcie 热拔插
+
+any devices plugged into Root Complexes cannot be hot-plugged/hot-unplugged:
+    (1) PCI Express Integrated Endpoints
+    (2) PCI Express Root Ports
+    (3) PCI Express to PCI Bridges
+    (4) pxb-pcie
