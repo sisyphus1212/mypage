@@ -7,8 +7,8 @@ categories:
 tags:
  - kernel network
 ---
-
 # pcie 设备类型
+
 ```
     ----------------------------------------------------------------------------
         |                |                    |                  |
@@ -35,6 +35,28 @@ tags:
     (4) Extra Root Complexes (pxb-pcie), if multiple PCI Express Root Buses
         are needed.
 ```
+
+# PCIE 规格
+
+Each PCI domain：256 buses
+
+A PCI Express Root bus: 32 devices.
+
+A single PCI Express to PCI Bridge: 32 slots
+
+each PCI Express Root Port : 8 functions
+
+
+![1701778456275](../../medias/pcie_虚拟化/1701778456275.png)
+
+![1701778440662](../../medias/pcie_虚拟化/1701778440662.png)
+
+![1701778510427](../../medias/pcie_虚拟化/1701778510427.png)
+
+![1701778479591](../../medias/pcie_虚拟化/1701778479591.png)
+
+![1701778582404](../../medias/pcie_虚拟化/1701778582404.png)
+
 # pcie 拓扑
 
 # pcie 枚举
