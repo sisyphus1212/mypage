@@ -10,29 +10,15 @@ tags:
 ---
 # ethtool 的工作原理
 
-## ethtool 是如何工作的？
-
-源码之前，了无秘密。要知道 ethtool 是如何工作的，我们需要获取到它的源码。
-
-### 如何获取 ethtool 的源码?
-
-这可以通过在网络上搜索来完成，但是我这里有一个非常简单的方法。由于我使用的是 debian 系统，我执行如下命令获取 ethtool 工具的源码：
+debian 系统，获取 ethtool 工具的源码：
 
 ```bash
-longyu@longyu-pc:~$ sudo apt-get source ethtool
+lcj@lcj-pc:~$ sudo apt-get source ethtool
 ```
 
-执行完上述命令之后，查看当前目录，ethtool 的源码包已经下载了下来。在我的系统中相关的文件如
-下：
-
-> ethtool_4.19-1.debian.tar.xz
-> ethtool_4.19.orig.tar.xz
-
-我将这两个文件解压，发现 ethtool 的源码在 ethtool_4.19.orig.tar.xz 中。
+将这两个文件解压，发现 ethtool 的源码在 ethtool_4.19.orig.tar.xz 中。
 
 ### ethtool 的工作流程
-
-通过阅读源码，我大致理清了 ethtool 工具的工作流程。
 
 **ethtool 的核心在于通过 ioctl 的 SIOCETHTOOL 命令来调用网络设备驱动中实现的 ethtool 方法的实例来获取数据，然后根据不同网卡的不同配置格式化数据以输出。**
 
@@ -85,11 +71,3 @@ ethtool 命令执行 ioctl 后进入内核，在内核中控制传递的过程�
 既然不同的网卡会绑定不同的虚函数表，那么我们是怎样通过网卡接口名称获取到这张表的呢？
 
 我想这一定与 ethtool 命令在执行时传递的 devname 有关。既然在 netdev 结构体中有指向 ehtool_ops 虚函数表的指针，那么问题就变成了 devname 表示的网络接口 netdev 结构如何获取到的问题。
-
-## devname 对应的网络接口的 netdev 结构是如何获取到的？
-
-详细的描述请参考我的这篇博文——[ethtool 命令指定的 devname 是在哪里被使用的？](https://blog.csdn.net/Longyu_wlz/article/details/103249749)
-
-## 总结
-
-ethtool 的工作原理非常简单，但是在内核中的调用层次非常复杂。我这里只对 ethtool 的工作原理进行了非常粗糙的描述，忽略了一些细节。理清 ethtool 的工作原理之后，我发现其实只需要关注网卡驱动中的 ethtool_ops 虚函数表的实现以及在 ethtool 调用时传递的 devname 在哪里被使用这两个方面就能够抓住关键。

@@ -1,3 +1,13 @@
+---
+title: linux内核网络设备
+date: 2019-07-20 13:04:02
+index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-23-08-10.png?raw=true
+categories:
+  - [linux, 网络开发]
+tags:
+ - kernel network
+---
+
 # 网卡 promiscuous mode 与 MAC 的一些 filter 功能
 ## 基础知识
 以太网包可以分为如下三种类型：
