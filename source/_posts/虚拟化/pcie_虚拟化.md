@@ -70,3 +70,16 @@ any devices plugged into Root Complexes cannot be hot-plugged/hot-unplugged:
     (2) PCI Express Root Ports
     (3) PCI Express to PCI Bridges
     (4) pxb-pcie
+
+
+### ACPI 基础的 PCI 热插拔
+
+* PCI设备可以通过ACPI（高级配置和电源接口）技术热插拔到PCI-PCI桥接器中。ACPI是一种开放标准，用于设备配置和电源管理，由操作系统控制。
+
+### SHPC 基础的 PCI 热插拔
+
+* PCI设备也可以通过SHPC（Standard Hot Plug Controller）技术热插拔到PCI Express到PCI桥接器中。SHPC是一种硬件机制，允许用户不关闭电脑的情况下，添加或移除PCI设备。
+
+### PCI Express 原生热插拔
+
+* PCI Express设备可以通过PCI Express的原生热插拔功能直接热插拔到PCI Express Root Ports（和PCI Express Downstream Ports）。这是PCI Express规范的一部分，允许设备被安全地添加或移除，而无需关闭或重新启动系统。
