@@ -1,6 +1,6 @@
 ---
-title: ethtool dump 网卡的寄存器
-date: 2023-11-03 15:11:20
+title: ethtool_的工作原理
+date: 2022-11-04 15:11:20
 categories:
 - [linux, 内核网络, 网卡驱动]
 tags:
