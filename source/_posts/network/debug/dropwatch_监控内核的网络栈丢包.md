@@ -150,9 +150,9 @@ make  all-recursive
 make[1]: Entering directory '/home/lcj/dropwatch-1.5.3'
 Making all in src
 make[2]: Entering directory '/home/lcj/dropwatch-1.5.3/src'
-/bin/bash ../libtool  --tag=CC   --mode=link gcc -g -Wall -Werror -I/usr/include/libnl3  -g -O2 -lnl-3 -lnl-genl-3 -lreadline -lpcap -lbfd  -o dropwatch main.o lookup.o lookup_kas.o lookup_bfd.o  -lpcap
+/usr/bin/bash ../libtool  --tag=CC   --mode=link gcc -g -Wall -Werror -I/usr/include/libnl3  -g -O2 -lnl-3 -lnl-genl-3 -lreadline -lpcap -lbfd  -o dropwatch main.o lookup.o lookup_kas.o lookup_bfd.o  -lpcap
 libtool: link: gcc -g -Wall -Werror -I/usr/include/libnl3 -g -O2 -o dropwatch main.o lookup.o lookup_kas.o lookup_bfd.o  -lnl-3 -lnl-genl-3 -lreadline -lbfd -lpcap
-/bin/bash ../libtool  --tag=CC   --mode=link gcc -g -Wall -Werror -I/usr/include/libnl3  -g -O2 -lnl-3 -lnl-genl-3 -lreadline -lpcap -lbfd  -o dwdump dwdump.o  -lpcap
+/usr/bin/bash ../libtool  --tag=CC   --mode=link gcc -g -Wall -Werror -I/usr/include/libnl3  -g -O2 -lnl-3 -lnl-genl-3 -lreadline -lpcap -lbfd  -o dwdump dwdump.o  -lpcap
 libtool: link: gcc -g -Wall -Werror -I/usr/include/libnl3 -g -O2 -o dwdump dwdump.o  -lnl-3 -lnl-genl-3 -lreadline -lbfd -lpcap
 make[2]: Leaving directory '/home/lcj/dropwatch-1.5.3/src'
 Making all in doc
