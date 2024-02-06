@@ -47,6 +47,7 @@ jobs:
             git config --global user.email "lcj@yusur.tcch"
             git config --global user.name "lcj"
             git status
+            git pull
             git submodule update --init --recursive
             cd medias/images_0 && ls -lh && git checkout main && git reset --hard  origin/main && git pull -f
 
