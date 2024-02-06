@@ -1,5 +1,5 @@
 DIRECTORY="./source"
-modify_files=$(find "$DIRECTORY" -type f -mmin -60)
+modify_files=$(git show --name-only --pretty=format:)
 
 IFS=$'\n'
 for file in $modify_files; do
