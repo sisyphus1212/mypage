@@ -1,5 +1,5 @@
 git checkout master; git pull -f
-modify_files="$(echo `pwd`; git show --stat HEAD~1 --name-only --pretty=format:)"
+modify_files="$(echo `pwd`; git log)"
 echo "============"
 echo "$git_log_debug"
 echo "$modify_files"
