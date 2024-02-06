@@ -49,15 +49,15 @@ each PCI Express Root Port : 8 functions
 The PCI Express Root Ports and PCI Express Downstream ports are seen by
 Firmware/Guest OS as PCI-PCI Bridges.
 
-![1701778456275](../../medias/pcie_虚拟化/1701778456275.png)
+![alt text](../../../../../medias/images_0/pcie_虚拟化_1701778456275.png)
 
-![1701778440662](../../medias/pcie_虚拟化/1701778440662.png)
+![alt text](../../../../../medias/images_0/pcie_虚拟化_1701778440662.png)
 
-![1701778510427](../../medias/pcie_虚拟化/1701778510427.png)
+![alt text](../../../../../medias/images_0/pcie_虚拟化_1701778510427.png)
 
-![1701778479591](../../medias/pcie_虚拟化/1701778479591.png)
+![alt text](../../../../../medias/images_0/pcie_虚拟化_1701778479591.png)
 
-![1701778582404](../../medias/pcie_虚拟化/1701778582404.png)
+![alt text](../../../../../medias/images_0/pcie_虚拟化_1701778582404.png)
 
 # pcie 拓扑
 
