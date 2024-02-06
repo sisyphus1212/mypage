@@ -48,7 +48,7 @@ jobs:
             git config --global user.name "lcj"
             git status
             git submodule update --init --recursive
-            cd medias/images_0 && git reset --hard origin/master && git pull -f
+            cd medias/images_0 && git reset --hard  origin/main && git pull -f
 
       # Runs a set of commands using the runners shell
       - name: Set Node
