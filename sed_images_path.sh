@@ -1,4 +1,4 @@
-modify_files="$(git show --stat HEAD~1 --name-only --pretty=format:)"
+modify_files="$(git show --stat --name-only --pretty=format:)"
 echo "============"
 echo "$modify_files"
 echo "============"
