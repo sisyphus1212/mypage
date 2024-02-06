@@ -1,4 +1,4 @@
-git_log_debug=$(git branch)
+git_log_debug=$(git branch -v)
 modify_files="$(git show --name-only --pretty=format:)"
 echo "============"
 echo "$git_log_debug"
