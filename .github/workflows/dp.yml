@@ -29,6 +29,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -47,7 +49,6 @@ jobs:
             git config --global user.email "lcj@yusur.tcch"
             git config --global user.name "lcj"
             git status
-            git pull
             git submodule update --init --recursive
             cd medias/images_0 && ls -lh && git checkout main && git reset --hard  origin/main && git pull -f
 
