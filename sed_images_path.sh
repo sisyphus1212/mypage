@@ -1,5 +1,5 @@
 git_log_debug=$(git branch -v)
-modify_files="$(git show  --stat HEAD^  --name-only   --pretty=format:)"
+modify_files="$(git show --stat HEAD~1 --name-only --pretty=format:)"
 echo "============"
 echo "$git_log_debug"
 echo "$modify_files"
