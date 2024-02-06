@@ -1,4 +1,4 @@
 ===================================================================
 ![alt  text](../../medias/test_image.png)
-![alt   text](../../../../medias/images_0/test_image.png)
-![al t text](../../../../medias/images_0/test_image-1.png)
+![alt  text](../../../../medias/images_0/test_image.png)
+![alt text](../../../../medias/images_0/test_image-1.png)
