@@ -1,5 +1,5 @@
 ---
-title: 通过驱动来创建一个eth device
+title: 内核日志打印限速
 date: 2022-09-17 16:04:02
 index_img: https://github.com/sisyphus1212/images/blob/main/mk-2022-09-20-18-49-08.png?raw=true
 categories:
