@@ -1,7 +1,7 @@
 set -x
 echo "1"
-#modify_files="$(git config --global core.quotepath false;git show --stat --name-only --pretty=format:)"
-modify_files=`find . -name "*.md"`
+modify_files="$(git config --global core.quotepath false;git show --stat --name-only --pretty=format:)"
+#modify_files=`find . -name "*.md"`
 echo "============"
 echo "$modify_files"
 echo "============"
