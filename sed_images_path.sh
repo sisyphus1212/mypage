@@ -1,4 +1,5 @@
 set -x
+echo "1"
 modify_files="$(git show --stat --name-only --pretty=format:)"
 #modify_files=`find . -name "*.md"`
 echo "============"
