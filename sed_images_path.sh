@@ -1,9 +1,9 @@
+set -x
 modify_files="$(git show --stat --name-only --pretty=format:)"
 #modify_files=`find . -name "*.md"`
 echo "============"
 echo "$modify_files"
 echo "============"
-set -x
 IFS=$'\n'
 for file in "$modify_files"; do
     if [[ $file == *.md ]]; then
