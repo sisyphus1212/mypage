@@ -20,5 +20,8 @@ Ubuntu发布两种类型的版本：长期支持（LTS）版本和常规（Inter
 # cdimage服务器，Ubuntu托管
 通过cdimage服务器，Ubuntu托管了各种项目，包括Kubuntu、Lubuntu和Ubuntu MATE等。这些版本虽然没有得到Canonical的商业支持，但完全得到了它们活跃社区的支持。这种包容性凸显了Ubuntu的理念：提供一个多功能平台，满足尽可能多的用户需求，从桌面用户到服务器管理员。
 
+# 自己构建内核
+https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel
+
 # 官方发布地址
 https://releases.ubuntu.com/
