@@ -8,6 +8,7 @@ tags: vscode
 
 在用vscode写笔记时可以利用File Watcher 插件来实现 git的自动pull 和 push，其原理是每当发现文件发生变更保存就会触发对应的git 命令
 
+![filewatcher setting.json](../../../../../medias/images_0/vscode_git_auto_push_image-1.png)
 配置如下：
 ```json
     "filewatcher.commands": [
@@ -22,4 +23,4 @@ tags: vscode
 
 配置成功后可以看到如下状态:
 
-![File Watcher](../../../../../medias/images_0/vscode_git_auto_push_image.png)
+![File Watcher status](../../../../../medias/images_0/vscode_git_auto_push_image.png)
