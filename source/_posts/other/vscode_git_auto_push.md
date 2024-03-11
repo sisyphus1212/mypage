@@ -19,5 +19,7 @@ tags: vscode
         }
     ]
 ```
+
 配置成功后可以看到如下状态:
+
 ![File Watcher](../../../../../medias/images_0/vscode_git_auto_push_image.png)
