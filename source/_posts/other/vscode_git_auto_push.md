@@ -6,7 +6,7 @@ categories:
 tags: vscode
 ---
 
-在用vscode写笔记时可以利用File Watcher 插件来实现git的自动pull 和 push
+在用vscode写笔记时可以利用File Watcher 插件来实现git的自动pull 和 push，其原理是每当发现文件发生变更保存就会触发对应的git 命令
 
 配置如下：
 ```json
