@@ -11,6 +11,6 @@ tags:
 git  init
 git remote add origin "git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/jammy"
 git ls-remote  --tags
-git fetch --depth     1 origin 948bd6b3f8eb95d50cf7acbd0f7d082ab7d8d9db
+git fetch --depth 1 origin 948bd6b3f8eb95d50cf7acbd0f7d082ab7d8d9db
 
 ```
