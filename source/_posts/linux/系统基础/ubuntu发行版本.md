@@ -18,10 +18,12 @@ Ubuntu发布两种类型的版本：长期支持（LTS）版本和常规（Inter
 **22.04.4**: 表示这是该版本的第四个更新，也就是在原始22.04版本之后发布的第四个维护更新。这些更新通常包括安全修复、软件包更新和系统改进，以确保系统的稳定和安全。
 
 # cdimage服务器，Ubuntu托管
-通过cdimage服务器，Ubuntu托管了各种项目，包括Kubuntu、Lubuntu和Ubuntu MATE等。这些版本虽然没有得到Canonical的商业支持，但完全得到了它们活跃社区的支持。这种包容性凸显了Ubuntu的理念：提供一个多功能平台，满足尽可能多的用户需求，从桌面用户到服务器管理员。
+通过cdimage服务器，Ubuntu托管了各种项目，包括Kubuntu、Lubuntu和Ubuntu MATE等。这些版本虽然没有得到Canonical的商业支持，但完全得到了它们活跃社区的支持。 这种包容性凸显了Ubuntu的理念：提供一个多功能平台，满足尽可能多的用户需求，从桌面用户到服务器管理员。
 
 # 自己构建内核
+https://wiki.ubuntu.com/Kernel/Action/GitTheSource
 https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel
+https://wiki.ubuntu.com/Kernel/Dev/KernelGitGuide
 
 # 官方发布地址
 https://releases.ubuntu.com/
