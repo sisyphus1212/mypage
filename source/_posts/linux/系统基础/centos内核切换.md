@@ -13,7 +13,7 @@ https://vault.centos.org/
 
 # 替换repolist
 ```shell
-cat << EOF | sudo tee /etc/yum.repos.d/CentOS-Vault.repo
+cat << EOF | tee /etc/yum.repos.d/CentOS-Vault.repo
 [base]
 name=CentOS-8 - Base
 baseurl=https://vault.centos.org/8.4.2105/BaseOS/\$basearch/os/
