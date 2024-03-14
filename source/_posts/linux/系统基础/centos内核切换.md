@@ -20,3 +20,13 @@ sudo dnf --showduplicates list kernel
 ```shell
 sudo dnf install kernel-4.18.0-305.3.1.el8
 ```
+
+# 设置默认内核
+```shell
+sudo grubby --set-default /boot/vmlinuz-4.18.0-305.3.1.el8.x86_64
+```
+
+# 设置默认内核
+```shell
+sudo grubby --set-default /boot/vmlinuz-4.18.0-305.3.1.el8.x86_64
+```
