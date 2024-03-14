@@ -9,6 +9,7 @@ tags:
 ```shell
 https://vault.centos.org/
 ```
+
 # 替换repolist
 ```shell
 cat << EOF | sudo tee /etc/yum.repos.d/CentOS-Vault.repo
