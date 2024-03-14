@@ -65,4 +65,5 @@ sudo dnf distro-sync -y
 sudo dnf update -y
 sudo dnf install kernel-core -y
 
+
 ```
