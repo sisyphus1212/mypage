@@ -5,6 +5,10 @@ tags:
     - linux
     - centos
 ---
+# centos 仓库地址
+```shell
+
+```
 
 # 查看支持的repolist
 ```shell
