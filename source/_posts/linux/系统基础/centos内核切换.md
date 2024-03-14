@@ -17,3 +17,6 @@ sudo dnf --showduplicates list kernel
 ```
 
 # 安装repolist中存在的内核
+```
+repolist中存在的内核
+```
