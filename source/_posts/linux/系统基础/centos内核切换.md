@@ -11,7 +11,8 @@ tags:
 dnf repolist all
 ```
 
-# 查看支持的repolist
+# 查看repolist中存在的内核
 ```shell
-dnf list available sudo dnf --showduplicates list kernel
+sudo dnf --showduplicates list kernel
 ```
+
