@@ -6,5 +6,7 @@ tags:
     - centos
 ---
 
-# 查看
+# 查看支持的
+```
 dnf list available sudo dnf --showduplicates list kernel
+```
