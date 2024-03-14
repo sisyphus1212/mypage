@@ -16,3 +16,4 @@ dnf repolist all
 sudo dnf --showduplicates list kernel
 ```
 
+# 安装repolist中存在的内核
