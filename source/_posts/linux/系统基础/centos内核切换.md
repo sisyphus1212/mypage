@@ -17,6 +17,6 @@ sudo dnf --showduplicates list kernel
 ```
 
 # 安装repolist中存在的内核
-```
+```shell
 sudo dnf install kernel-4.18.0-305.3.1.el8
 ```
