@@ -1,5 +1,5 @@
 ---
-title: ubuntu内核构建
+title: centos内核切换
 date: 2024-03-08 12:13:09
 tags:
     - linux
