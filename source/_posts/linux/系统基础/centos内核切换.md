@@ -60,5 +60,9 @@ sudo grubby --set-default /boot/vmlinuz-4.18.0-305.3.1.el8.x86_64
 # 切换centos 8 stream
 ```
 sudo dnf install centos-release-stream -y
+sudo dnf swap centos-{linux,stream}-repos -y
+sudo dnf distro-sync -y
+sudo dnf update -y
+sudo dnf install kernel-core -y
 
 ```
