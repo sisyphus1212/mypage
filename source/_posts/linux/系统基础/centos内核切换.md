@@ -6,7 +6,7 @@ tags:
     - centos
 ---
 
-# 查看支持的
+# 查看支持的repolist
 ```
 dnf list available sudo dnf --showduplicates list kernel
 ```
