@@ -28,7 +28,7 @@ grubby --info=ALL
 
 # 查看支持内核
 ```shell
-grubby --info=ALL
+grubby --default-kernel
 ```
 
 # 设置默认内核
