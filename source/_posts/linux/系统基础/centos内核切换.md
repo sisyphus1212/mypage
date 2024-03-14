@@ -8,5 +8,5 @@ tags:
 
 # 查看支持的repolist
 ```
-dnf list available sudo dnf --showduplicates list kernel
+dnf repolist all
 ```
