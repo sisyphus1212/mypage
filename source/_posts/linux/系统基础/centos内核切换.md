@@ -13,6 +13,5 @@ dnf repolist all
 
 # 查看支持的repolist
 ```shell
-dnf repolist all
-```
 dnf list available sudo dnf --showduplicates list kernel
+```
