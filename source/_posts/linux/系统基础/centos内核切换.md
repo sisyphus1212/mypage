@@ -9,6 +9,10 @@ tags:
 ```shell
 https://vault.centos.org/
 ```
+# 查看支持的repolist
+```shell
+dnf repolist all
+```
 
 # 查看支持的repolist
 ```shell
