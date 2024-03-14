@@ -7,7 +7,7 @@ tags:
 ---
 # centos 仓库地址
 ```shell
-
+https://vault.centos.org/
 ```
 
 # 查看支持的repolist
