@@ -5,6 +5,7 @@ tags:
     - linux
     - centos
 ---
+
 # centos 仓库地址
 ```shell
 https://vault.centos.org/
@@ -56,3 +57,4 @@ grubby --default-kernel
 ```shell
 sudo grubby --set-default /boot/vmlinuz-4.18.0-305.3.1.el8.x86_64
 ```
+# 切换
