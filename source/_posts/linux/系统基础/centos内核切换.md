@@ -9,9 +9,21 @@ tags:
 ```shell
 https://vault.centos.org/
 ```
-# 查看支持的repolist
+# 替换repolist
 ```shell
-dnf repolist all
+cat << EOF | sudo tee /etc/yum.repos.d/CentOS-Vault.repo
+[base]
+name=CentOS-8 - Base
+baseurl=https://vault.centos.org/8.4.2105/BaseOS/\$basearch/os/
+gpgcheck=1
+enabled=1
+
+[appstream]
+name=CentOS-8 - AppStream
+baseurl=https://vault.centos.org/8.4.2105/AppStream/\$basearch/os/
+gpgcheck=1
+enabled=1
+EOF
 ```
 
 # 查看支持的repolist
