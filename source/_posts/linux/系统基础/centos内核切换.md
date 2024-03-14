@@ -58,7 +58,7 @@ grubby --default-kernel
 sudo grubby --set-default /boot/vmlinuz-4.18.0-305.3.1.el8.x86_64
 ```
 # 切换centos 8 stream
-```
+```shell
 sudo dnf install centos-release-stream -y
 sudo dnf swap centos-{linux,stream}-repos -y
 sudo dnf clean all
@@ -66,4 +66,9 @@ sudo dnf makecache
 sudo dnf distro-sync -y
 sudo dnf update -y
 sudo dnf install kernel-core -y
+```
+
+# 安装内核开发头文件
+```shell
+sudo dnf install kernel-devel-$(uname -r) kernel-headers-$(uname -r)
 ```
