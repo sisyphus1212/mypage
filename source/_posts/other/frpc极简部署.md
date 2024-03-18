@@ -7,6 +7,7 @@ tags: frp
 ---
 
 ```shell
+remote_port=11
 wget  https://gh-proxy.com/https://github.com/fatedier/frp/releases/download/v0.55.1/frp_0.55.1_linux_amd64.tar.gz
 tar -xvf frp_0.55.1_linux_amd64.tar.gz
 cp frp_0.55.1_linux_amd64/frpc /usr/local/bin/frpc
@@ -37,6 +38,7 @@ token = b9eb1007-2d57-4225-951b-d5883134fc35
 type = tcp
 local_ip = 0.0.0.0
 local_port = 22
+remote_port = 70$(remote_port)
 eof
 
 ```
