@@ -38,7 +38,7 @@ token = b9eb1007-2d57-4225-951b-d5883134fc35
 type = tcp
 local_ip = 0.0.0.0
 local_port = 22
-remote_port = 70$(remote_port)
+remote_port = 70${remote_port}
 eof
 
 ```
