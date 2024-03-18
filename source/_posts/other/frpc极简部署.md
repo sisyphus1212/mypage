@@ -26,7 +26,7 @@ RestartSec=10s
 WantedBy=multi-user.target
 eof
 
-echo << eof >
+echo << eof >  /usr/share/frp/frpc.ini
 [common]
 #server_addr = 192.168.2.71
 #server_port = 7000
