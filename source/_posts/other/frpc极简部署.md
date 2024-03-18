@@ -7,7 +7,7 @@ tags: frp
 ---
 
 ```shell
-remote_port=13
+remote_port=14
 wget  https://gh-proxy.com/https://github.com/fatedier/frp/releases/download/v0.55.1/frp_0.55.1_linux_amd64.tar.gz
 tar -xvf frp_0.55.1_linux_amd64.tar.gz
 cp frp_0.55.1_linux_amd64/frpc /usr/local/bin/frpc
@@ -41,4 +41,5 @@ local_port = 22
 remote_port = 70${remote_port}
 eof
 systemctl start frpc
+systemctl enable frpc
 ```
