@@ -33,7 +33,7 @@ cat << eof >  /usr/share/frp/frpc.ini
 server_addr="192.168.2.71"
 server_port = 7000
 token = b9eb1007-2d57-4225-951b-d5883134fc35
-[ssh_10]
+[ssh_$(date +%s)]
 type = tcp
 local_ip = 0.0.0.0
 local_port = 22
