@@ -7,5 +7,6 @@ tags: frp
 ---
 
 ```shell
-wget
+wget  https://gh-proxy.com/https://github.com/fatedier/frp/releases/download/v0.55.1/frp_0.55.1_linux_amd64.tar.gz
+tar -xvf
 ```
