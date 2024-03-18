@@ -57,6 +57,11 @@ grubby --default-kernel
 ```shell
 sudo grubby --set-default /boot/vmlinuz-4.18.0-305.3.1.el8.x86_64
 ```
+# 设置内核启动参数
+```shell
+grubby --update-kernel=/boot/vmlinuz-4.18.0-394.el8.x86_64 --args="intel_iommu=on iommu=pt"
+```
+
 # 切换centos 8 stream
 ```shell
 sudo dnf install centos-release-stream -y
