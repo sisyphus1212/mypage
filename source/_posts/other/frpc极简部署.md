@@ -26,6 +26,8 @@ RestartSec=10s
 WantedBy=multi-user.target
 eof
 
+mkdir -p  /usr/share/frp
+
 cat << eof >  /usr/share/frp/frpc.ini
 [common]
 server_addr="192.168.2.71"
