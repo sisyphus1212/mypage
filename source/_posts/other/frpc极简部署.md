@@ -11,6 +11,20 @@ wget  https://gh-proxy.com/https://github.com/fatedier/frp/releases/download/v0.
 tar -xvf frp_0.55.1_linux_amd64.tar.gz
 cp frp_0.55.1_linux_amd64/frpc /usr/local/bin/frpc
 cat << eof > /usr/lib/systemd/system/frpc.service
+[Unit]
+Description=frps server daemon
+After=network.target
 
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/frpc -c /usr/share/frp/frpc.ini
+KillMode=process
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
 eof
+
+
 ```
