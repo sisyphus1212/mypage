@@ -26,5 +26,24 @@ RestartSec=10s
 WantedBy=multi-user.target
 eof
 
+echo << eof >
+[common]
+#server_addr = 192.168.2.71
+#server_port = 7000
+#token = b9eb1007-2d57-4225-951b-d5883134fc35
+server_addr="117.50.175.8"
+server_port =8010
+token =99c18640-3481-4977-9f85-fb69037f327p
+[ssh_1]
+type = tcp
+local_ip = 0.0.0.0
+local_port = 65078
+remote_port = 9022
+[vnc_1]
+type = tcp
+local_ip = 0.0.0.0
+local_port = 5901
+remote_port = 9021
+eof
 
 ```
