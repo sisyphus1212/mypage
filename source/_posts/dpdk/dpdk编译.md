@@ -31,6 +31,8 @@ ldconfig
 ## 调整构建选项
 ```shell
 meson setup -Dexamples=l2fwd,l3fwd build
+
+#-m32CFLAGSLDFLAGS-Dc_args=-m32-Dc_link_args=-m32pkg-configPKG_CONFIG_LIBDIR
 meson setup -Dc_args='-m32' -Dc_link_args='-m32' build
 
 两种方式：
