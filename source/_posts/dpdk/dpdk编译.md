@@ -10,5 +10,6 @@ tags: dpdk
 yum install ninja-build
 
 # 方法2：
+wget https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.zip
 
 ```
