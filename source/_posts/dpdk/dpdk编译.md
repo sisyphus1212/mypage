@@ -26,3 +26,5 @@ ninja
 meson install
 ldconfig
 ```
+
+## 调整构建选项
