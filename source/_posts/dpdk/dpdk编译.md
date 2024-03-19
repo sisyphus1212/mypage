@@ -32,6 +32,7 @@ ldconfig
 ```shell
 meson setup -Dexamples=l2fwd,l3fwd build
 
-meson setup -Dbuildtype=debug build
+最初配置构建文件夹时传递 或 给介子：meson setup -Dbuildtype=debug build
+
 
 ```
