@@ -20,3 +20,9 @@ python3 -m pip install ninja
 
 # dpdpk 编译
 ## 无脑编译
+```shell
+cd build
+ninja
+meson install
+ldconfig
+```
