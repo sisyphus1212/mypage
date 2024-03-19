@@ -21,6 +21,7 @@ python3 -m pip install ninja
 # dpdpk 编译
 ## 无脑编译
 ```shell
+meson build
 cd build
 ninja
 meson install
