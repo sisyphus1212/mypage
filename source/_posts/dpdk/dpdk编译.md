@@ -7,7 +7,7 @@ tags: dpdk
 # meson ninja 安装
 ```shell
 # 方法1：
-
+yum install ninja-build
 
 # 方法2：
 
