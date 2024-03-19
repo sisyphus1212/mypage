@@ -15,5 +15,5 @@ python3 -m pip install meson
 
 # 方法3：
 python3 -m pip install meson
-python3 -m pip install meson
+python3 -m pip install ninja
 ```
