@@ -19,3 +19,4 @@ python3 -m pip install ninja
 ```
 
 # dpdpk 编译
+## 无脑编译
