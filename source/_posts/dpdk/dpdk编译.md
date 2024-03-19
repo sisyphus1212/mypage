@@ -11,6 +11,8 @@ yum install ninja-build
 
 # 方法2：
 wget https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.zip
+python3 -m pip install meson
 
+# 方法3：
 
 ```
