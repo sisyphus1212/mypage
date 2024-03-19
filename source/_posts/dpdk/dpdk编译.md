@@ -14,5 +14,6 @@ wget https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-linux.
 python3 -m pip install meson
 
 # 方法3：
-
+python3 -m pip install meson
+python3 -m pip install meson
 ```
