@@ -31,6 +31,7 @@ ldconfig
 ## 调整构建选项
 ```shell
 meson setup -Dexamples=l2fwd,l3fwd build
+meson setup -Dc_args='-m32' -Dc_link_args='-m32' build
 
 两种方式：
 1. 最初配置build文件夹时传递：meson setup -Dbuildtype=debug build
