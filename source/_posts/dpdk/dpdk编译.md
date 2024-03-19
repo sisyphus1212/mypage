@@ -39,3 +39,6 @@ meson setup -Dc_args='-m32' -Dc_link_args='-m32' build
 1. 最初配置build文件夹时传递：meson setup -Dbuildtype=debug build
 2. 配置build文件夹后传递：meson configure -Dbuildtype=debug
 ```
+
+参考：
+https://doc.dpdk.org/guides/linux_gsg/build_dpdk.html
