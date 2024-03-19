@@ -29,3 +29,8 @@ ldconfig
 ```
 
 ## 调整构建选项
+```shell
+meson setup -Dexamples=l2fwd,l3fwd build
+
+meson setup <options> build
+```
