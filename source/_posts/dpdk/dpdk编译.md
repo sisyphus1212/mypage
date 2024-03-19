@@ -32,5 +32,5 @@ ldconfig
 ```shell
 meson setup -Dexamples=l2fwd,l3fwd build
 
-meson setup <options> build
+meson setup -Dbuildtype=debug build
 ```
