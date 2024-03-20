@@ -9,6 +9,9 @@ tags:
  - 网桥
  - kernel
 ---
+# 工具安装
+sudo apt install iproute2
+
 ```shell
 
 ```
