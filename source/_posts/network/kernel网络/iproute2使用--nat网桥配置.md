@@ -12,6 +12,7 @@ tags:
 # 工具安装
 sudo apt install iproute2
 
+# 配置一个nat br0环境
 ```shell
 ip link add veth0 type veth peer name veth1
 
@@ -26,5 +27,4 @@ ip link set br1 up
 ip addr add 10.10.0.1/24 dev br1
 ip link set veth1 master br1
 ip link set veth1 up
-
 ```
