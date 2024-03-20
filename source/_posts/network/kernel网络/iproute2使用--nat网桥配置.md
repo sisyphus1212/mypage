@@ -28,3 +28,4 @@ ip addr add 10.10.0.1/24 dev br1
 ip link set veth1 master br1
 ip link set veth1 up
 ```
+# 验证
