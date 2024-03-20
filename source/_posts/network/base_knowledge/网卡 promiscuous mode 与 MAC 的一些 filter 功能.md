@@ -62,7 +62,7 @@ ifconfig ethx -promisc
 最上方是主机 MAC地址过滤，与其处于相同位置的还有 MNG filter，这里与混淆模式相关的过滤内容是主机 MAC 地址过滤。
 
 主机 MAC 地址过滤的过程详见下图：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200912130702340.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvbmd5dV93bHo=,size_16,color_FFFFFF,t_70#pic_center)手册中对于上图有如下描述内容：
+![alt text](<../../../../../../medias/images_0/网卡 promiscuous mode 与 MAC 的一些 filter 功能_image.png>)手册中对于上图有如下描述内容：
 
 能够成功通过 MAC 地址过滤的包需要满足下面任意一个条件：
 
