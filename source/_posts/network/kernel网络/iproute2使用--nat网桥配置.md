@@ -1,5 +1,5 @@
 ---
-title: Linux 网卡重命名
+title: iproute2使用--nat网桥配置
 date: 2019-09-07 16:04:02
 index_img: https://i.stack.imgur.com/7xTB3.png
 categories:
