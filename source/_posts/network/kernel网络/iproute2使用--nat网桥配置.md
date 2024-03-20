@@ -29,4 +29,6 @@ ip link set veth1 master br1
 ip link set veth1 up
 ```
 # 验证
+```shell
 ip netns exec ns0 ping 1.1.1.1
+```
