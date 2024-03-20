@@ -13,5 +13,18 @@ tags:
 sudo apt install iproute2
 
 ```shell
+ip link add veth0 type veth peer name veth1
+
+ip netns add ns0
+ip link set veth0 netns ns0
+ip netns exec ns0 ip link set veth0 up
+ip netns exec ns0 ip addr add 10.10.0.2/24 dev veth0
+ip netns exec ns0 ip route add default via 10.10.0.1
+
+ip link add br1 type bridge
+ip link set br1 up
+ip addr add 10.10.0.1/24 dev br1
+ip link set veth1 master br1
+ip link set veth1 up
 
 ```
