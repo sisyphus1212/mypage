@@ -57,7 +57,7 @@ ifconfig ethx -promisc
 
 ## 网卡手册中与混淆模式有关的内容
 这里我以 I210 网卡数据手册为例，研究下网卡中对于混淆模式的使用。在 I210 网卡数据手册中对包接收过程的描述中找到了下面这个图:
-![](https://img-blog.csdnimg.cn/20200912130423744.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvbmd5dV93bHo=,size_16,color_FFFFFF,t_70#pic_center)我们可以从上图中看到，当网卡收到数据包后并不会直接将数据包投递给上层处理，而是对数据包执行特定的过滤行为，只有通过了这些过滤的包才会向上层投递，不然会被直接丢弃。
+![alt text](<../../../../../../medias/images_0/网卡 promiscuous mode 与 MAC 的一些 filter 功能_image-1.png>)我们可以从上图中看到，当网卡收到数据包后并不会直接将数据包投递给上层处理，而是对数据包执行特定的过滤行为，只有通过了这些过滤的包才会向上层投递，不然会被直接丢弃。
 
 最上方是主机 MAC地址过滤，与其处于相同位置的还有 MNG filter，这里与混淆模式相关的过滤内容是主机 MAC 地址过滤。
 
