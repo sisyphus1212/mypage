@@ -7,6 +7,8 @@ tags:
 - dpdk
 - 网络开发
 - virtio_net
+- vhost_user
+- vdpa
 ---
 
 ```shell
