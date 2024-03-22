@@ -1,3 +1,14 @@
+---
+title: dpdk 编译
+date: 2023-12-21 14:53:25
+categories:
+- [dpdk, 网络开发]
+tags:
+- dpdk
+- 网络开发
+- virtio_net
+---
+
 ```shell
 static vhost_message_handler_t vhost_message_handlers[VHOST_USER_MAX] = {
 	[VHOST_USER_NONE] = NULL,
