@@ -12,8 +12,7 @@ tags:
 ---
 
 # dpdk vhost_user 协议实现
-```shell
-static vhost_message_handler_t vhost_message_handlers[VHOST_USER_MAX] = {
+
 	[VHOST_USER_NONE] = NULL,
 	[VHOST_USER_GET_FEATURES] = vhost_user_get_features,
 	[VHOST_USER_SET_FEATURES] = vhost_user_set_features,
@@ -46,7 +45,5 @@ static vhost_message_handler_t vhost_message_handlers[VHOST_USER_MAX] = {
 	[VHOST_USER_GET_STATUS] = vhost_user_get_status,
 	[VHOST_USER_SET_CONFIG] = vhost_user_set_config,
 	[VHOST_USER_GET_CONFIG] = vhost_user_get_config,
-};
-```
 
 # dpdk
