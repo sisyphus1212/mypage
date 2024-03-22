@@ -12,7 +12,7 @@ tags:
 ---
 
 # dpdk vhost_user 协议实现
-| VHOST_USER_p      | Description | Test Text     |
+| vhost_user_protocol      | Description | Test Text     |
 	[VHOST_USER_NONE] = NULL,
 	[VHOST_USER_GET_FEATURES] = vhost_user_get_features,
 	[VHOST_USER_SET_FEATURES] = vhost_user_set_features,
