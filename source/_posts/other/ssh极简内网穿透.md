@@ -34,7 +34,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=sshpass -p lcj@ps-aux ssh -T -o StrictHostKeyChecking=no -R 8088:localhost:65078 lcj@192.168.2.71
+ExecStart=sshpass -p lcj@ps-aux ssh -NT -o StrictHostKeyChecking=no -R 8088:localhost:65078 lcj@192.168.2.71
 KillMode=process
 Restart=on-failure
 RestartSec=10s
