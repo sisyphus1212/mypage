@@ -60,5 +60,21 @@ static inline PCIDevice *pcie_dev_find_by_mmcfg_addr(PCIBus *s,
                            PCIE_MMCFG_DEVFN(mmcfg_addr));
 }
 
+static void pcie_mmcfg_data_write(void *opaque, hwaddr mmcfg_addr,
+                                  uint64_t val, unsigned len)
+{
+    PCIExpressHost *e = opaque;
+    PCIBus *s = e->pci.bus;
+    PCIDevice *pci_dev = pcie_dev_find_by_mmcfg_addr(s, mmcfg_addr);
+    uint32_t addr;
+    uint32_t limit;
+
+    if (!pci_dev) {
+        return;
+    }
+    addr = PCIE_MMCFG_CONFOFFSET(mmcfg_addr);
+    limit = pci_config_size(pci_dev);
+    pci_host_config_write_common(pci_dev, addr, limit, val, len);
+}
 
 ```
