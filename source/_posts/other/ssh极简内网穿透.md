@@ -28,6 +28,7 @@ sudo systemctl restart sshd
 # 客户端
 ```sh
 local_port=65078
+remote_port=8088
 
 cat << eof >  /usr/lib/systemd/system/ssh_nat.service
 [Unit]
