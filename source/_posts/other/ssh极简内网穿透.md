@@ -33,6 +33,7 @@ localhost="127.0.0.0"
 remotehost="192.168.2.71"
 user_name="lcj"
 passwd="lcj@ps-aux"
+
 cat << eof >  /usr/lib/systemd/system/ssh_nat.service
 [Unit]
 Description=frps ssh_nat daemon
