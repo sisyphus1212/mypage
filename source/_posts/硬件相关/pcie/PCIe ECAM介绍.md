@@ -1,8 +1,8 @@
 ---
-title: pcie 净载荷转发带宽
+title: PCIe ECAM介绍
 date: 2024-03-23 16:05:52
 categories:
-  - [linux,网络开发]
+  - [接口协议]
 tags:
 - pcie
 - mmio
