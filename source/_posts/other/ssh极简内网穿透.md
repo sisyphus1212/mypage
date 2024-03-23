@@ -29,7 +29,8 @@ sudo systemctl restart sshd
 ```sh
 local_port=65078
 remote_port=8088
-
+localhost=127.0.0.0
+remotehost=192.168.2.71
 cat << eof >  /usr/lib/systemd/system/ssh_nat.service
 [Unit]
 Description=frps ssh_nat daemon
