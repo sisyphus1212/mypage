@@ -27,6 +27,7 @@ sudo systemctl restart sshd
 
 # 客户端
 ```sh
+cat << eof >  ssh
 [Unit]
 Description=frps server daemon
 After=network.target
