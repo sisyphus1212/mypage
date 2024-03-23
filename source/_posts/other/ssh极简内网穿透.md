@@ -41,5 +41,6 @@ RestartSec=10s
 
 [Install]
 WantedBy=multi-user.target
+eof
 ```
 
