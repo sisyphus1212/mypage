@@ -67,9 +67,9 @@ static void pcie_mmcfg_data_write(void *opaque, hwaddr mmcfg_addr,
     uint32_t addr;
     uint32_t limit;
     ...
-    addr = PCIE_MMCFG_CONFOFFSET(mmcfg_addr);
-    limit = pci_config_size(pci_dev);
+    addr = PCIE_MMCFG_CONFOFFSET(mmcfg_addr); // 寄存器偏移
+    limit = pci_config_size(pci_dev); // PCIe配置空间大小是4k
     pci_host_config_write_common(pci_dev, addr, limit, val, len);
 }
-
 ```
+
