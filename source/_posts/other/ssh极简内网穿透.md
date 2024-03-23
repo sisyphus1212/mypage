@@ -34,7 +34,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=sshpass -p 12345 ssh -NT -o StrictHostKeyChecking=no -R 8088:localhost:999 lcj@192.168.2.71
+ExecStart=sshpass -p 12345 ssh -NT -o StrictHostKeyChecking=no  -o ServerAliveInterval=60 -R 8088:localhost:999 lcj@192.168.2.71
 KillMode=process
 Restart=on-failure
 RestartSec=10s
