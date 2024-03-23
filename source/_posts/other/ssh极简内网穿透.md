@@ -29,7 +29,7 @@ sudo systemctl restart sshd
 ```sh
 cat << eof >  /usr/lib/systemd/system/ssh_nat.service
 [Unit]
-Description=frps server daemon
+Description=frps ssh_nat daemon
 After=network.target
 
 [Service]
