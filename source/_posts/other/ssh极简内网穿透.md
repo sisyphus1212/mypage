@@ -42,7 +42,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=sshpass -p ${passwd} ssh -NT -o StrictHostKeyChecking=no  -o ServerAliveInterval=60 -R ${remote_port}:${localhost}:${local_port} ${user_name}@${remotehost} -p ${remote_ssh_port}
+ExecStart=sshpass -p ${passwd} ssh -NTv -o StrictHostKeyChecking=no  -o ServerAliveInterval=60 -R ${remote_port}:${localhost}:${local_port} ${user_name}@${remotehost} -p ${remote_ssh_port}
 KillMode=process
 Restart=on-failure
 RestartSec=10s
