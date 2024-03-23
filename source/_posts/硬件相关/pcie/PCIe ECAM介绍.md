@@ -62,9 +62,7 @@ static inline PCIDevice *pcie_dev_find_by_mmcfg_addr(PCIBus *s,
 
 static void pcie_mmcfg_data_write(void *opaque, hwaddr mmcfg_addr,
                                   uint64_t val, unsigned len)
-{
-    PCIExpressHost *e = opaque;
-    PCIBus *s = e->pci.bus;
+{   ...
     PCIDevice *pci_dev = pcie_dev_find_by_mmcfg_addr(s, mmcfg_addr);
     uint32_t addr;
     uint32_t limit;
