@@ -8,4 +8,4 @@ tags:
 - mmio
 ---
 
-ECAM 全称：
+ECAM 全称：PCI Express Enhanced Configuration Access Mechanism
