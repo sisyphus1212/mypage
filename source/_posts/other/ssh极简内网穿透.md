@@ -31,8 +31,8 @@ local_port=65078
 remote_port=8088
 localhost="127.0.0.1"
 remotehost="192.168.2.71"
-user_name="lcj"
-passwd="lcj@ps-aux"
+user_name="root"
+passwd="12345xxx"
 remote_ssh_port=22
 
 cat << eof >  /usr/lib/systemd/system/ssh_nat.service
