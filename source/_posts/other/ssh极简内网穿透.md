@@ -29,7 +29,8 @@ sudo systemctl restart sshd
 ```sh
 local_port=65078
 remote_port=8088
-localhost="127.0.0.0"
+remote_port=8088
+localhost="127.0.0.1"
 remotehost="192.168.2.71"
 user_name="lcj"
 passwd="lcj@ps-aux"
