@@ -29,7 +29,7 @@ sudo systemctl restart sshd
 ```sh
 local_port=65078
 remote_port=8088
-remote_port=8088
+remote_ssh_port=22
 localhost="127.0.0.1"
 remotehost="192.168.2.71"
 user_name="lcj"
@@ -42,7 +42,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=sshpass -p ${passwd} ssh -NT -o StrictHostKeyChecking=no  -o ServerAliveInterval=60 -R ${remote_port}:${localhost}:${local_port} ${user_name}@${remotehost}
+ExecStart=sshpass -p ${passwd} ssh -NT -o StrictHostKeyChecking=no  -o ServerAliveInterval=60 -R ${remote_port}:${localhost}:${local_port} ${user_name}@${remotehost} -p ${remote_ssh_port}
 KillMode=process
 Restart=on-failure
 RestartSec=10s
