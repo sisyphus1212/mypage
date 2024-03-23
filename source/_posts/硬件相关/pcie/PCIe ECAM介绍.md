@@ -31,5 +31,11 @@ drivers/pci/ecam.c实现ECAM配置访问
 
 # qemu 软件仿真shixian
 ```c
-
+/* a helper function to get a PCIDevice for a given mmconfig address */
+static inline PCIDevice *pcie_dev_find_by_mmcfg_addr(PCIBus *s,
+                                                     uint32_t mmcfg_addr)
+{
+    return pci_find_device(s, PCIE_MMCFG_BUS(mmcfg_addr),
+                           PCIE_MMCFG_DEVFN(mmcfg_addr));
+}
 ```
