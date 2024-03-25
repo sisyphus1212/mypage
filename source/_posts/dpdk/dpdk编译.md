@@ -10,6 +10,7 @@ tags:
 
 # 依赖安装
 ```shell
+pip3 install pyelftools
 
 ```
 
