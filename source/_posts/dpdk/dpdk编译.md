@@ -8,6 +8,11 @@ tags:
 - 网络开发
 ---
 
+# 依赖安装
+```shell
+
+```
+
 # meson ninja 安装
 ```shell
 # 方法1：
