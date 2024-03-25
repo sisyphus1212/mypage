@@ -10,6 +10,8 @@ tags:
 
 # 依赖安装
 ```shell
+apt-get install libevent-dev
+
 pip3 install pyelftools
 
 ```
