@@ -11,7 +11,7 @@ tags:
 # 依赖安装
 ```shell
 apt-get install libevent-dev or dnf install libevent-devel
-
+apt-get install pkg-config   or dnf install pkg-config
 pip3 install pyelftools
 
 ```
