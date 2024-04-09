@@ -184,22 +184,4 @@ dpdk 程序运行中需要频繁的申请与释放 mbuf，这些过程每次都�
 
 对于这种场景，可以针对性创建 cache_size 为 0 的 pktmbuf_pool 解决之。
 
-# mbuf 与地址转换
-dpdk-19.11 中有如下代码：
 
-```c
-    m->buf_iova = rte_mempool_virt2iova(m) + mbuf_size;
-```
-**rte_mempool_virt2iova** 函数用于将 mbuf 的地址转化为物理地址，将物理地址加上 **mbuf_size** 执行 **mbuf** 中 **headroom** 起始位置的物理地址，可以从本文开篇出的那张图上看出来。
-
-感兴趣的读者可以阅读下 **rte_mempool_virt2iova** 函数的代码，看看 **dpdk** 如何实现将**虚拟地址转化为物理地址**。
-
-
-
-**那么问题来了：如何解决 headroom 大小的问题呢？只能裁剪数通引擎中的相关结构定义吗？**
-
-经过与同事的交流与思考，最终想到了一种解决方案：
-
-
-
-修改后测试确认问题得到解决。
