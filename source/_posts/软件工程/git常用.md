@@ -17,20 +17,24 @@ git config --global user.email <邮箱地址>
 git config -l
 
 ## 仓库操作
-1. 硬重置到远程分支最新状态：
-git reset --hard  origin/master
-1. 软重置到指定提交：
-git reset --soft <commit ID>
-
+### 分支操作
+git clone <远程仓库的网址> -b <分支名称> <本地目录>
 git remote set-url origin git@github.com:sisyphus1212/qemu_virtio_net_over_sriov.git
 git remote -v
 
 git push <远程主机名> <本地分支名> <远程分支名>
 git push origin lcj_qemu:master
+### 版本控制
+1. 硬重置到远程分支最新状态：
+git reset --hard  origin/master
+1. 软重置到指定提交：
+git reset --soft <commit ID>
+
+
 
 git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"
 
- git clone <远程仓库的网址> -b <分支名称> <本地目录>
+
 
 ## 创建分支
 git checkout -b <分支名称>
