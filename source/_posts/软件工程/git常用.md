@@ -18,10 +18,12 @@ git config -l
 
 ## 仓库操作
 ### 分支操作
-1. clone分支
-git clone <远程仓库的网址> -b <分支名称> <本地目录>
+1. 远程关联
 git remote set-url origin git@github.com:sisyphus1212/qemu_virtio_net_over_sriov.git
 git remote -v
+
+1. clone分支
+git clone <远程仓库的网址> -b <分支名称> <本地目录>
 
 git push <远程主机名> <本地分支名> <远程分支名>
 git push origin lcj_qemu:master
