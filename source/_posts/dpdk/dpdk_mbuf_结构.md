@@ -54,6 +54,20 @@ mbuf 的日常操作主要有如下几类：
 7. 使用 mbuf 的 headroom 在 dataroom 前插入指定长度数据
 8. 使用 mbuf 的 tailroom 在 dataroom 后插入指定长度数据
 9. 使用已有的 mbuf 克隆一个新的 mbuf
+```c
+struct rte_mempool *rte_mempool_create(const char *name,
+                                       unsigned int n,
+                                       unsigned int elt_size,
+                                       unsigned int cache_size,
+                                       uint16_t private_data_size,
+                                       rte_mempool_ctor_t *mp_init,
+                                       void *mp_init_arg,
+                                       rte_mempool_obj_cb_t *obj_init,
+                                       void *obj_init_arg,
+                                       int socket_id,
+                                       unsigned int flags);
+
+```
 
 以下代码分别创建了两个mbuf，给它们添加数据，最后将它们组合成链。在此过程中打印了上表中的一些数据，可以帮助理解各指针和长度的含义，其中省去了错误处理代码。
 ```c
