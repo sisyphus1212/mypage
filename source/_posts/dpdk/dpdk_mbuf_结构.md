@@ -162,3 +162,4 @@ rte_pktmbuf_tailroom(m): 184
 rte_pktmbuf_data_room_size(mpool): 1712
 rte_pktmbuf_priv_size(mpool): 16
 ```
+![(2) dump 结果](../../../../../medias/images_0/dpdk_mbuf_结构_image-3.png)
