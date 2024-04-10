@@ -54,7 +54,7 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 
 `git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"`
 
-### git 子模块
+## git 子模块
 `git submodule add git@github.com:sisyphus1212/mypage.git mypage`
 
 `git submodule init`
