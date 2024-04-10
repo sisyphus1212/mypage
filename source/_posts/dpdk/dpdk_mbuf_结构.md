@@ -97,3 +97,5 @@ static int mbuf_demo(void)
     return 0;
 }
 ```
+**(1)** dump 结果
+
