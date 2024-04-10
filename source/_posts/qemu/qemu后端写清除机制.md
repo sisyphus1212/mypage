@@ -3,7 +3,7 @@
 title: vhost_user协议
 date: 2023-12-21 14:53:25
 categories:
-- [qemu,网络开发]
+- [qemu,设备模拟]
 tags:
 - 代码片段
 ---
