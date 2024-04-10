@@ -56,3 +56,40 @@ mbuf 的日常操作主要有如下几类：
 9. 使用已有的 mbuf 克隆一个新的 mbuf
 
 以下代码分别创建了两个mbuf，给它们添加数据，最后将它们组合成链。在此过程中打印了上表中的一些数据，可以帮助理解各指针和长度的含义，其中省去了错误处理代码。
+```c
+static int mbuf_demo(void)
+{
+    int ret;
+    struct rte_mempool* mpool;
+    struct rte_mbuf *m, *m2;
+    struct rte_pktmbuf_pool_private priv;
+
+    priv.mbuf_data_room_size = 1600 + RTE_PKTMBUF_HEADROOM - 16;
+    priv.mbuf_priv_size = 16;
+    mpool = rte_mempool_create("test_pool",
+                               ITEM_COUNT,
+                               ITEM_SIZE,
+                               CACHE_SIZE,
+                               sizeof(struct rte_pktmbuf_pool_private),
+                               rte_pktmbuf_pool_init,
+                               &priv,
+                               rte_pktmbuf_init,
+                               NULL,
+                               0,
+                               MEMPOOL_F_SC_GET);
+    m = rte_pktmbuf_alloc(mpool);
+    mbuf_dump(m);   // (1)
+
+    rte_pktmbuf_append(m, 1400);
+    mbuf_dump(m);   // (2)
+
+    m2 = rte_pktmbuf_alloc(mpool);
+    rte_pktmbuf_append(m2, 500);
+    mbuf_dump(m2);
+
+    ret = rte_pktmbuf_chain(m, m2);
+    mbuf_dump(m);   // (3)
+
+    return 0;
+}
+```
