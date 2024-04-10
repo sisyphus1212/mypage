@@ -13,6 +13,9 @@ tags:
 ![rte_mbuf](../../../../../medias/images_0/dpdk_mbuf_结构_image-1.png)
 ![multi-segmented rte_mbuf](../../../../../medias/images_0/dpdk_mbuf_结构_image.png)
 图片摘自 [Mbuf Library](https://doc.dpdk.org/guides/prog_guide/mbuf_lib.html)。
+
+对于链式的mbuf，仅在第一个mbuf结构体中包含元数据信息。
+
 mbuf 可以分为四部分：
 1. mbuf 结构体
 2. headroom
