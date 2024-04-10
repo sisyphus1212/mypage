@@ -35,6 +35,9 @@ git remote -v
 git push <远程主机名> <本地分支名> <远程分支名>
 git push origin lcj_qemu:master
 
+1. 合并与变基
+
+
 ### 版本控制
 1. 硬重置到远程分支最新状态：
 git reset --hard  origin/master
