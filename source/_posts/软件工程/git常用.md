@@ -30,6 +30,8 @@ git push origin lcj_qemu:master
 
 git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"
 
+ git clone <远程仓库的网址> -b <分支名称> <本地目录>
+
 ## 创建分支
 git checkout -b <分支名称>
 
