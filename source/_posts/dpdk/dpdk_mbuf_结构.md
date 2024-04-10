@@ -66,7 +66,17 @@ struct rte_mempool *rte_mempool_create(const char *name,
                                        void *obj_init_arg,
                                        int socket_id,
                                        unsigned int flags);
-
+name: 内存池名称。
+n: 内存池中元素（即rte_mbuf结构体）的数量。
+elt_size: 每个元素的大小，通常为RTE_MBUF_DEFAULT_BUF_SIZE。
+cache_size: 每个逻辑核心缓存中可缓存的元素数目，通常为MBUF_CACHE_SIZE。
+private_data_size: 与每个元素相关联的私有数据大小，如果不需要私有数据则设为0。
+mp_init: 内存池初始化函数指针，在内存池创建时调用，可以为NULL。
+mp_init_arg: 初始化函数参数，在内存池初始化函数被调用时传入该参数，可以为NULL。
+obj_init: 元素初始化回调函数指针，在每次从内存池中取出元素时被调用，可以为NULL。
+obj_init_arg: 元素初始化回调函数参数，在每次从内存池中取出元素时传入该参数，可以为NULL。
+socket_id: 内存池在哪个NUMA节点上创建，可以为RTE_SOCKET_ID_ANY表示任意节点。
+flags: 内存池的一些标志位，例如RTE_MEMPOOL_F_SP_PUT等。
 ```
 
 以下代码分别创建了两个mbuf，给它们添加数据，最后将它们组合成链。在此过程中打印了上表中的一些数据，可以帮助理解各指针和长度的含义，其中省去了错误处理代码。
