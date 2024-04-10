@@ -19,21 +19,21 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 ## 仓库操作
 ### 分支操作
 1. clone分支
-git clone <远程仓库的网址> -b <分支名称> <本地目录>
+`git clone <远程仓库的网址> -b <分支名称> <本地目录>`
 
 1. 创建分支
-git checkout -b <分支名称>
+`git checkout -b <分支名称>`
 
 1. 删除分支
-git branch -d <分支名称> # 删除分支
-git push origin --delete <远程分支名>
+`git branch -d <分支名称> # 删除分支`
+`git push origin --delete <远程分支名>`
 
 1. 远程关联
-git remote set-url origin git@github.com:yourusername/yourrepo.git
-git remote -v
+`git remote set-url origin git@github.com:yourusername/yourrepo.git`
+`git remote -v`
 
-git push <远程主机名> <本地分支名> <远程分支名>
-git push origin lcj_qemu:master
+`git push <远程主机名> <本地分支名> <远程分支名>`
+`git push origin lcj_qemu:master`
 
 1. 合并与变基
 git merge <分支名称>
