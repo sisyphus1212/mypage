@@ -39,6 +39,7 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 `git merge <分支名称>`
 `git rebase -i <commit ID>`
 `git rebase master`
+`git cherry-pick <commit ID>`
 
 ### 版本控制
 1. 硬重置到远程分支最新状态：
@@ -53,16 +54,8 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 
 `git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"`
 
-
-
-
-
-## rebase
-`git rebase -i 58c8fed`
-`git rebase master`
-
 ## cherry-pick
-`git cherry-pick <commit ID>`
+
 
 ## merge
 `git merge <分支名称>`
@@ -93,11 +86,11 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 `git submodule sync --recursive # 更新submodule的url(防止出现域名替换等问题）`
 
 ## git 大文件
-git lfs install
+`git lfs install`
 
-git lfs migrate import --include-ref=master --include="PCI_Express_System_Architecture_ocred.pdf"
+`git lfs migrate import --include-ref=master --include="PCI_Express_System_Architecture_ocred.pdf"`
 
 **git** lfs track **"*.psd"**
 
-git add .gitattributes
+`git add .gitattributes`
 
