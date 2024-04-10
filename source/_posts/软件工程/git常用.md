@@ -12,6 +12,8 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 # git 常用操作
 ## 快速配置
 git config --global core.editor vim
+git config --global user.name <用户名>
+git config --global user.email <邮箱地址>
 git config -l
 
 ## 仓库操作
