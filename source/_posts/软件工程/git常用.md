@@ -6,3 +6,5 @@ categories:
 tags:
 - git
 ---
+
+git 命令选项非常多，对于软件开发只需熟练掌握其中十几个就可以cover 住90% 的场景了
