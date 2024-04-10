@@ -64,7 +64,7 @@ static int mbuf_demo(void)
     struct rte_mbuf *m, *m2;
     struct rte_pktmbuf_pool_private priv;
 
-    priv.mbuf_data_room_size = 1600 + RTE_PKTMBUF_HEADROOM - 16;
+    priv.mbuf_data_room_size = 1600 + RTE_PKTMBUF_HEADROOM - 16; /* */
     priv.mbuf_priv_size = 16;
     mpool = rte_mempool_create("test_pool",
                                ITEM_COUNT,
