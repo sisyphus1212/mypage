@@ -42,55 +42,55 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 
 ### 版本控制
 1. 硬重置到远程分支最新状态：
-git reset --hard  origin/master
+`git reset --hard  origin/master`
 
 1. 软重置到指定提交：
-git reset --soft <commit ID>
+`git reset --soft <commit ID>`
 
 1. 恢复文件
-git restore --staged <文件名>
-git checkout <commit ID> -- <文件名>
+`git restore --staged <文件名>`
+`git checkout <commit ID> -- <文件名>`
 
-git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"
+`git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"`
 
 
 
 
 
 ## rebase
-git rebase -i 58c8fed
-git rebase master
+`git rebase -i 58c8fed`
+`git rebase master`
 
 ## cherry-pick
-git cherry-pick <commit ID>
+`git cherry-pick <commit ID>`
 
 ## merge
-git merge <分支名称>
+`git merge <分支名称>`
 
 ### 恢复文件
-git restore --staged v2ray_config
-git checkout a1b2c3d -- v2ray_config
+`git restore --staged v2ray_config`
+`git checkout a1b2c3d -- v2ray_config`
 
 ## git 子模块
-git submodule add git@github.com:sisyphus1212/mypage.git mypage
+`git submodule add git@github.com:sisyphus1212/mypage.git mypage`
 
-git submodule init
+`git submodule init`
 
-git submodule update
+`git submodule update`
 
-git clone --recursive <主仓库的URL>
+`git clone --recursive <主仓库的URL>`
 
-git submodule update --remote --recursive
+`git submodule update --remote --recursive`
 
-git rm --cached medias
+`git rm --cached medias`
 
-rm -rf .git/modules/medias
+`rm -rf .git/modules/medias`
 
-rm -rf medias
+`rm -rf medias`
 
-git config -f .git/config --remove-section submodule.medias/image_0
+`git config -f .git/config --remove-section submodule.medias/image_0`
 
-git submodule sync --recursive # 更新submodule的url(防止出现域名替换等问题）
+`git submodule sync --recursive # 更新submodule的url(防止出现域名替换等问题）`
 
 ## git 大文件
 git lfs install
