@@ -9,7 +9,7 @@ tags:
 ---
 
 # mbuf 的结构
-![https://doc.dpdk.org/guides/prog_guide/mbuf_lib.html](https://img-blog.csdnimg.cn/2021061518410674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvbmd5dV93bHo=,size_16,color_FFFFFF,t_70)
+![alt text](../../../../../medias/images_0/dpdk_mbuf_结构_image-1.png)
 ![multi-segmented rte_mbuf](../../../../../medias/images_0/dpdk_mbuf_结构_image.png)
 图片摘自 [Mbuf Library](https://doc.dpdk.org/guides/prog_guide/mbuf_lib.html)。
 mbuf 可以分为四部分：
