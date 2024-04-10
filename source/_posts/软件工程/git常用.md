@@ -36,9 +36,9 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 `git push origin lcj_qemu:master`
 
 1. 合并与变基
-git merge <分支名称>
-git rebase -i <commit ID>
-git rebase master
+`git merge <分支名称>`
+`git rebase -i <commit ID>`
+`git rebase master`
 
 ### 版本控制
 1. 硬重置到远程分支最新状态：
