@@ -19,7 +19,7 @@ git config -l
 ## 仓库操作
 ### 分支操作
 1. 远程关联
-git remote set-url origin git@github.com:sisyphus1212/qemu_virtio_net_over_sriov.git
+git remote set-url origin git@github.com:yourusername/yourrepo.git
 git remote -v
 
 1. clone分支
