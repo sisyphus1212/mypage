@@ -125,7 +125,7 @@ static int mbuf_demo(void)
 ```
 
 **(1)** dump 结果
-```
+```shell
 RTE_PKTMBUF_HEADROOM: 128
 sizeof(mbuf): 128
 m: 0x7fbf1a810000
