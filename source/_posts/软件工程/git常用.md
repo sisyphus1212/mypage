@@ -4,6 +4,6 @@ date: 2020-11-01 14:31:09
 categories:
 - [其它]
 tags:
-- github
+- git
 - ci/cd
 ---
