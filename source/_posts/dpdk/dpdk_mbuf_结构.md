@@ -38,3 +38,16 @@ mbuf 的日常操作主要有如下几类：
 
 | mbuf成员 | 说明     |
 |--------------|----------------|
+|m	|首部，即mbuf结构体
+|m->buf_addr	|headroom起始地址
+|m->data_off	|data起始地址相对于buf_addr的偏移
+|m->buf_len	|mbuf和priv之后内存的长度，包含headroom
+|m->pkt_len	|整个mbuf链的data总长度
+|m->data_len	|实际data的长度
+|m->buf_addr+m->data_off	|实际data的起始地址
+|rte_pktmbuf_mtod(m)	|同上
+|rte_pktmbuf_data_len(m)	|同m->data_len
+|rte_pktmbuf_pkt_len	|同m->pkt_len
+|rte_pktmbuf_data_room_size	|同m->buf_len
+|rte_pktmbuf_headroom	|headroom长度
+|rte_pktmbuf_tailroom	|尾部剩余空间长度
