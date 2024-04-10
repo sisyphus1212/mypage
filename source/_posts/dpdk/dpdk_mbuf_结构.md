@@ -1,5 +1,13 @@
 ---
+title: dpdk 编译
+date: 2023-03-19 10:55:27
+categories:
+- [dpdk]
+tags:
+- dpdk
+- 网络开发
 ---
+
 
 # dpdk 中 mbuf 的结构
 ![https://doc.dpdk.org/guides/prog_guide/mbuf_lib.html](https://img-blog.csdnimg.cn/2021061518410674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0xvbmd5dV93bHo=,size_16,color_FFFFFF,t_70)
