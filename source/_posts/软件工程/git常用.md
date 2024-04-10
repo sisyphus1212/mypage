@@ -37,9 +37,9 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 
 1. 合并与变基
 `git merge <分支名称>`
+`git cherry-pick <commit ID>`
 `git rebase -i <commit ID>`
 `git rebase master`
-`git cherry-pick <commit ID>`
 
 ### 版本控制
 1. 硬重置到远程分支最新状态：
@@ -53,12 +53,6 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 `git checkout <commit ID> -- <文件名>`
 
 `git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"`
-
-## cherry-pick
-
-
-## merge
-`git merge <分支名称>`
 
 ### 恢复文件
 `git restore --staged v2ray_config`
