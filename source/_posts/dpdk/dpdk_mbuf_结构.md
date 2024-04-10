@@ -166,3 +166,19 @@ rte_pktmbuf_priv_size(mpool): 16
 
 **(3)** dump 结果
 之后创建m2并给它添加data，在(3)处将m与m2连接，m做为链的首节点，此时m的打印结果如下:
+```c
+m: 0x7fbf1a810000
+m->buf_addr: 0x7fbf1a810090
+m->data_off: 128
+m->buf_len: 1712
+m->pkt_len: 1900
+m->data_len: 1400
+m->buf_addr+m->data_off: 0x7fbf1a810110
+rte_pktmbuf_mtod(m): 0x7fbf1a810110
+rte_pktmbuf_data_len(m): 1400
+rte_pktmbuf_pkt_len(m): 1900
+rte_pktmbuf_headroom(m): 128
+rte_pktmbuf_tailroom(m): 184
+rte_pktmbuf_data_room_size(mpool): 1712
+rte_pktmbuf_priv_size(mpool): 16
+```
