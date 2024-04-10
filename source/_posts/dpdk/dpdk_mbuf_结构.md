@@ -146,3 +146,19 @@ rte_pktmbuf_priv_size(mpool): 16
 ![(1) dump 结果](../../../../../medias/images_0/dpdk_mbuf_结构_image-2.png)
 
 **(2)** dump 结果
+```c
+m: 0x7fbf1a810000
+m->buf_addr: 0x7fbf1a810090
+m->data_off: 128
+m->buf_len: 1712
+m->pkt_len: 1400
+m->data_len: 1400
+m->buf_addr+m->data_off: 0x7fbf1a810110
+rte_pktmbuf_mtod(m): 0x7fbf1a810110
+rte_pktmbuf_data_len(m): 1400
+rte_pktmbuf_pkt_len(m): 1400
+rte_pktmbuf_headroom(m): 128
+rte_pktmbuf_tailroom(m): 184
+rte_pktmbuf_data_room_size(mpool): 1712
+rte_pktmbuf_priv_size(mpool): 16
+```
