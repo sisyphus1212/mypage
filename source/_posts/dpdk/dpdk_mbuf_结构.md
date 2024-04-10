@@ -164,4 +164,5 @@ rte_pktmbuf_priv_size(mpool): 16
 ```
 ![(2) dump 结果](../../../../../medias/images_0/dpdk_mbuf_结构_image-3.png)
 
+**(3)** dump 结果
 之后创建m2并给它添加data，在(3)处将m与m2连接，m做为链的首节点，此时m的打印结果如下:
