@@ -50,4 +50,3 @@ mbuf 的日常操作主要有如下几类：
 7. 使用 mbuf 的 headroom 在 dataroom 前插入指定长度数据
 8. 使用 mbuf 的 tailroom 在 dataroom 后插入指定长度数据
 9. 使用已有的 mbuf 克隆一个新的 mbuf
-使用较为频繁的函数接口为申请 mbuf、释放 mbuf 等。
