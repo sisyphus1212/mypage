@@ -182,3 +182,4 @@ rte_pktmbuf_tailroom(m): 184
 rte_pktmbuf_data_room_size(mpool): 1712
 rte_pktmbuf_priv_size(mpool): 16
 ```
+注意pkt_len的变化，它已经加上了m2的500字节。如果此时打印m—>next， 会发现m->next == m2。
