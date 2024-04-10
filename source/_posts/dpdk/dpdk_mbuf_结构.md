@@ -50,4 +50,4 @@ mbuf 的日常操作主要有如下几类：
 |rte_pktmbuf_pkt_len	    |同m->pkt_len                           |
 |rte_pktmbuf_data_room_size	|同m->buf_len                           |
 |rte_pktmbuf_headroom	    |headroom长度                           |
-|rte_pktmbuf_tailroom	    |尾部剩余空间长度
+|rte_pktmbuf_tailroom	    |尾部剩余空间长度                        |
