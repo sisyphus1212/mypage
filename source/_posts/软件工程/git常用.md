@@ -48,7 +48,8 @@ git reset --hard  origin/master
 git reset --soft <commit ID>
 
 1. 恢复文件
-
+git restore --staged <文件名>
+git checkout <commit ID> -- <文件名>
 
 git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"
 
