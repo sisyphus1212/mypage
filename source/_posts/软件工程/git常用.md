@@ -14,9 +14,9 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 git config --global core.editor vim
 
 ## 仓库操作
-### 硬重置到远程分支最新状态：
+1. 硬重置到远程分支最新状态：
 git reset --hard  origin/master
-### 软重置到指定提交：
+1. 软重置到指定提交：
 git reset --soft <commit ID>
 
 git remote set-url origin git@github.com:sisyphus1212/qemu_virtio_net_over_sriov.git
