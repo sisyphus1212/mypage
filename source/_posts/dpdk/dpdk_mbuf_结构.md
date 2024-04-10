@@ -145,4 +145,4 @@ rte_pktmbuf_priv_size(mpool): 16
 ```
 ![(1) dump 结果](../../../../../medias/images_0/dpdk_mbuf_结构_image-2.png)
 
-**(2)**
+**(2)** dump 结果
