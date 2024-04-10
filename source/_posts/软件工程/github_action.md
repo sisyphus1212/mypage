@@ -2,9 +2,10 @@
 title: github  使用介绍
 date: 2023-10-01 17:38:45
 categories:
-- [github, ci/cd]
+- [其它]
 tags:
--其它
+- github
+- ci/cd
 ---
 # github action介绍
 
