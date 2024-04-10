@@ -43,9 +43,11 @@ git rebase master
 ### 版本控制
 1. 硬重置到远程分支最新状态：
 git reset --hard  origin/master
+
 1. 软重置到指定提交：
 git reset --soft <commit ID>
 
+1. 恢复文件
 
 
 git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"
