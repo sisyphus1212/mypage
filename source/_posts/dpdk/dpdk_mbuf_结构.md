@@ -57,6 +57,9 @@ mbuf 的日常操作主要有如下几类：
 
 以下代码分别创建了两个mbuf，给它们添加数据，最后将它们组合成链。在此过程中打印了上表中的一些数据，可以帮助理解各指针和长度的含义，其中省去了错误处理代码。
 ```c
+#define ITEM_COUNT 1024
+#define ITEM_SIZE  (1600 + sizeof(struct rte_mbuf) + RTE_PKTMBUF_HEADROOM)
+#define CACHE_SIZE 32
 static int mbuf_demo(void)
 {
     int ret;
