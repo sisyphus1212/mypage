@@ -73,7 +73,7 @@ static int mbuf_demo(void)
                                CACHE_SIZE,
                                sizeof(struct rte_pktmbuf_pool_private),
                                rte_pktmbuf_pool_init,
-                               &priv,
+                               &priv,                           /*传入priv*/
                                rte_pktmbuf_init,
                                NULL,
                                0,
