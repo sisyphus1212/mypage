@@ -24,6 +24,12 @@ git remote -v
 
 git push <远程主机名> <本地分支名> <远程分支名>
 git push origin lcj_qemu:master
+## 创建分支
+git checkout -b <分支名称>
+
+## 删除分支
+git branch -d <分支名称> # 删除分支
+git push origin --delete <远程分支名>、
 ### 版本控制
 1. 硬重置到远程分支最新状态：
 git reset --hard  origin/master
@@ -36,12 +42,7 @@ git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"
 
 
 
-## 创建分支
-git checkout -b <分支名称>
 
-## 删除分支
-git branch -d <分支名称> # 删除分支
-git push origin --delete <远程分支名>
 
 ## rebase
 git rebase -i 58c8fed
