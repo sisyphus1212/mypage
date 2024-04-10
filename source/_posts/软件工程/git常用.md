@@ -10,6 +10,7 @@ tags:
 git 命令选项非常多，对于软件开发只需熟练掌握其中十几个就可以cover 住90% 的场景了
 
 # git 常用操作
+## 快速配置
 git config --global core.editor vim
 
 git reset --hard  origin/master
