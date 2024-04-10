@@ -54,10 +54,6 @@ git 命令选项非常多，对于软件开发只需熟练掌握其中十几个�
 
 `git config --global url."http://192.168.2.114/".insteadOf "git@192.168.2.114:"`
 
-### 恢复文件
-`git restore --staged v2ray_config`
-`git checkout a1b2c3d -- v2ray_config`
-
 ## git 子模块
 `git submodule add git@github.com:sisyphus1212/mypage.git mypage`
 
