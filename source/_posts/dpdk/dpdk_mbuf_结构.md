@@ -65,7 +65,7 @@ static int mbuf_demo(void)
     struct rte_pktmbuf_pool_private priv;
 
     priv.mbuf_data_room_size = 1600 + RTE_PKTMBUF_HEADROOM - 16; /*mempool时传入了priv，                    */
-    priv.mbuf_priv_size = 16;                                    /*这将在每个mbuf的首部后面添加16字节的私有数据,然后才是*/
+    priv.mbuf_priv_size = 16;                                    /*这将在每个mbuf的首部后面添加16字节的私有数据,然后才是head room*/
 
     mpool = rte_mempool_create("test_pool",
                                ITEM_COUNT,
