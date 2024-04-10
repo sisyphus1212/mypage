@@ -77,6 +77,7 @@ obj_init:          元素初始化回调函数指针，在每次从内存池中�
 obj_init_arg:      元素初始化回调函数参数，在每次从内存池中取出元素时传入该参数，可以为NULL。
 socket_id:         内存池在哪个NUMA节点上创建，可以为RTE_SOCKET_ID_ANY表示任意节点。
 flags:             内存池的一些标志位，例如RTE_MEMPOOL_F_SP_PUT等。
+
 该函数会返回一个rte_mempool类型的指针，如果创建失败则返回NULL。
 ```
 
