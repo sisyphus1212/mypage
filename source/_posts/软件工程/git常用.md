@@ -5,5 +5,4 @@ categories:
 - [其它]
 tags:
 - git
-- ci/cd
 ---
