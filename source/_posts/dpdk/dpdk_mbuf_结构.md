@@ -9,6 +9,7 @@ tags:
 ---
 
 # mbuf 的结构
+目前仅占用2个cache line，且最常访问的成员在第1个cache line中。
 ![rte_mbuf](../../../../../medias/images_0/dpdk_mbuf_结构_image-1.png)
 ![multi-segmented rte_mbuf](../../../../../medias/images_0/dpdk_mbuf_结构_image.png)
 图片摘自 [Mbuf Library](https://doc.dpdk.org/guides/prog_guide/mbuf_lib.html)。
