@@ -9,7 +9,7 @@ struct scatterlist {
 #endif
 };
 ```
-page_link：
+**page_link**：
 
 对于chain sg 来说，记录下一个 SG 数组的首地址，并且用bit[0] 和 bit[1] 来表示是chain sg 还是 end sg；
 对于 end sg 来说，只有bit[1] 为1，其他无意义；
