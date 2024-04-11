@@ -7,7 +7,7 @@ tags:
 - virtio-net
 - tap
 - 网络设备
-- dpdk
+- dhcp
 - vhost-user
 ---
 ```sh
