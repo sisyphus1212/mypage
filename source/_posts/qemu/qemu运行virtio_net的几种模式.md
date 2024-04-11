@@ -21,7 +21,7 @@ qemu-system-x86_64 -M q35,accel=kvm,kernel-irqchip=split \
     -device pcie-root-port,bus=pcie.0,id=rp2,slot=2 \
     -device pcie-root-port,bus=pcie.0,id=rp3,slot=3,bus-reserve=3 \
     -netdev tap,id=tap_dev0,ifname=tap_dev0,vhost=off,script=/etc/qemu-ifup,downscript=no,queues=6,br=docker0 \
-    -device virtio-net-pci,netdev=tap_dev0,bus=rp2,multifunction=on,host_mtu=3500,mrg_rxbuf=on \
+    -device virtio-net-pci,netdev=tap_dev0,bus=rp2,multifunction=on,host_mtu=3500,mrg_rxbuf=off \
     -device e1000e,netdev=tap_dev1,bus=pcie.0 \
     -netdev tap,ifname=tap_dev1,id=tap_dev1,vhost=off,script=/etc/qemu-ifup,downscript=no,queues=6,br=docker0 \
     -monitor telnet:127.0.0.1:6666,server,nowait \
