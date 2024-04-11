@@ -31,6 +31,9 @@ qemu-system-x86_64 -M q35,accel=kvm,kernel-irqchip=split \
 
 # vhost-user 模式
 ```sh
+#dpdk vhost-user:
+
+#vm:
 qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off,kernel_irqchip=split -cpu host -m 1G \
                                         -object memory-backend-file,id=ram-node0,prealloc=yes,mem-path=/dev/hugepages/dpdk-vdpa,share=yes,size=1G \
                                         -numa node,nodeid=0,memdev=ram-node0 \
