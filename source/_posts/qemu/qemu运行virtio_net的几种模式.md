@@ -6,6 +6,7 @@ categories:
 tags:
 - virtio-net
 - tap
+- 网络设备
 ---
 
 ```sh
