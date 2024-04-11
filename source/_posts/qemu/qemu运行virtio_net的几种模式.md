@@ -5,7 +5,7 @@ categories:
 - [qemu,设备模拟]
 tags:
 - virtio-net
-- virtio
+- tap
 ---
 
 ```sh
