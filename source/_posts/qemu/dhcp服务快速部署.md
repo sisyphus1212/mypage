@@ -8,7 +8,6 @@ tags:
 - tap
 - 网络设备
 - dhcp
-- vhost-user
 ---
 ```sh
 dhcpd_cfg=/var/lcj/dhcpd.conf
