@@ -9,6 +9,12 @@ struct scatterlist {
 #endif
 };
 ```
+page_link：
+
+对于chain sg 来说，记录下一个 SG 数组的首地址，并且用bit[0] 和 bit[1] 来表示是chain sg 还是 end sg；
+对于 end sg 来说，只有bit[1] 为1，其他无意义；
+对于普通 sg 来说，记录的是关联的内存页块的地址；
+
 ![sgl 管理图](../../../../../../../medias/images_0/scatterlist_image.png)
 如图，假设这里有 4 个 sg 数组：
 
