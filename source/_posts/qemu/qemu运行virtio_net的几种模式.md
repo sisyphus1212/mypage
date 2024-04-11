@@ -1,4 +1,5 @@
-```c
+
+```sh
 qemu-system-x86_64 -M q35,accel=kvm,kernel-irqchip=split \
     -smp cores=4 -m 4G -hda ./test.raw -device intel-iommu,intremap=on \
     -device pxb-pcie,id=pcie.1,bus_nr=8,bus=pcie.0    \
