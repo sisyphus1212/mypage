@@ -50,3 +50,29 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
                                         -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:00:34:56,bus=pci.4,mq=on,host_mtu=3500 \
                                         -nographic -serial mon:stdio -monitor tcp:127.0.0.1:3333,server,nowait
 ```
+
+```sh
+#!/bin/sh
+set -e
+
+#echo $1
+#echo $2
+TAP_DEVICE="$1"
+
+echo $TAP_DEVICE
+BRIDGE=docker0
+
+# Check if the bridge exists
+if ! [ -d "/sys/class/net/${BRIDGE}/bridge" ]; then
+    echo "Error: ${BRIDGE} does not exist or is not a bridge."
+    exit 1
+fi
+
+# Set the TAP device up
+ip link set dev "${TAP_DEVICE}" up
+
+# Add the TAP device to the bridge
+ip link set "${TAP_DEVICE}" master "${BRIDGE}"
+
+exit 0
+```
