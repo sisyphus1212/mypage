@@ -1,10 +1,11 @@
 ---
 title: qemu后端写清除机制
-date: 2023-12-21 14:53:25
+date: 2023-07-21 14:11:21
 categories:
 - [qemu,设备模拟]
 tags:
-- 代码片段
+- virtio-net
+- virtio
 ---
 
 ```sh
