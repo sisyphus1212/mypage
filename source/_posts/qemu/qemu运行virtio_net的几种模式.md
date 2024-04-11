@@ -28,3 +28,5 @@ qemu-system-x86_64 -M q35,accel=kvm,kernel-irqchip=split \
     -qmp unix:/tmp/qmp-sock,server,nowait \
     -serial mon:stdio -nographic
 ```
+
+# tap 模式
