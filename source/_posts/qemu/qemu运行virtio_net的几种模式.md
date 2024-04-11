@@ -56,8 +56,6 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
 #!/bin/sh
 set -e
 
-#echo $1
-#echo $2
 TAP_DEVICE="$1"
 
 echo $TAP_DEVICE
