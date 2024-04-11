@@ -5,8 +5,10 @@ categories:
 - [qemu,设备模拟]
 tags:
 - virtio-net
-- tap, vhost
+- tap
 - 网络设备
+- dpdk
+- vhost-user
 ---
 
 ```sh
