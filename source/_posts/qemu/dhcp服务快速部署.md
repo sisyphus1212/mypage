@@ -1,5 +1,5 @@
 ---
-title: qemu运行virtio_net的几种模式
+title: qemu运行
 date: 2023-07-21 14:11:21
 categories:
 - [qemu,设备模拟]
