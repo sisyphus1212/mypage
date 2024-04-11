@@ -1,5 +1,5 @@
 ---
-title: qemu运行
+title: 为qemu运行快速部署dhcp服务.md
 date: 2023-07-21 14:11:21
 categories:
 - [qemu,设备模拟]
