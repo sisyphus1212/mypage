@@ -1,4 +1,11 @@
-
+---
+title: qemu后端写清除机制
+date: 2023-12-21 14:53:25
+categories:
+- [qemu,设备模拟]
+tags:
+- 代码片段
+---
 
 ```sh
 qemu-system-x86_64 -M q35,accel=kvm,kernel-irqchip=split \
