@@ -1,3 +1,15 @@
+---
+title: qemu运行virtio_net的几种模式
+date: 2023-07-21 14:11:21
+categories:
+- [qemu,设备模拟]
+tags:
+- virtio-net
+- tap
+- 网络设备
+- dpdk
+- vhost-user
+---
 ```sh
 dhcpd_cfg=/var/lcj/dhcpd.conf
 mkdir -p `dirname $dhcpd_cfg`
