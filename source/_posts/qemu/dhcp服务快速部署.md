@@ -1,6 +1,6 @@
 ---
 title: 为qemu运行快速部署dhcp服务
-date: 2023-12-21 14:11:21
+date: 2023-12-21 11:10:21
 categories:
 - [qemu,设备模拟]
 tags:
