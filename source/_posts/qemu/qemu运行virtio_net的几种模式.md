@@ -37,6 +37,7 @@ echo 1024 > /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 modprobe  vfio-pci
 ./usertools/dpdk-devbind.py -b vfio-pci ${bdf} --force
 gdb -args build/examples/dpdk-vdpa -c 0x2 -n 4 --socket-mem 128 -a ${bdf},vdpa=1,sw-live-migration=1 --iova-mode=va --log-level=.,8 -- --iface /tmp/vdpa-socket --client
+
 #vm:
 qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off,kernel_irqchip=split -cpu host -m 1G \
                                         -object memory-backend-file,id=ram-node0,prealloc=yes,mem-path=/dev/hugepages/dpdk-vdpa,share=yes,size=1G \
