@@ -63,6 +63,7 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
                                         -device pcie-root-port,port=0x10,chassis=1,id=pci.4,bus=pcie.0,multifunction=on,addr=0x2 \
                                         -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:00:34:56,bus=pci.4,mq=on,host_mtu=3500 \
                                         -chardev socket,id=charnet1,path=/usr/local/var/run/openvswitch/vhost-user2 \
+                                                                                -netdev vhost-user,chardev=charnet1,id=hostnet1,queues=6 \
                                         -device pcie-root-port,port=0x11,chassis=0,id=pci.5,bus=pcie.0,multifunction=on,addr=0x3 \
                                         -device virtio-net-pci,netdev=hostnet1,id=net1,mac=52:54:00:00:34:57,bus=pci.5,mq=on,host_mtu=3500 \
                                         -device e1000e,netdev=tap_dev1,bus=pcie.0 \
