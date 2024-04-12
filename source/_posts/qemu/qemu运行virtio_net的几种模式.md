@@ -65,6 +65,8 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
                                         -chardev socket,id=charnet1,path=/usr/local/var/run/openvswitch/vhost-user2,client=on \
                                         -device pcie-root-port,port=0x11,chassis=1,id=pci.5,bus=pcie.0,multifunction=on,addr=0x3 \
                                         -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:00:34:57,bus=pci.5,mq=on,host_mtu=3500 \
+                                        -device e1000e,netdev=tap_dev1,bus=pcie.0 \
+                                        -netdev tap,ifname=tap_dev1,id=tap_dev1,vhost=off,script=/etc/qemu-ifup,downscript=no,queues=6,br=docker0 \
                                         -nographic -serial mon:stdio -monitor tcp:127.0.0.1:3333,server,nowait
 ```
 
