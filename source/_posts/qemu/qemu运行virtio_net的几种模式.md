@@ -73,6 +73,7 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
 
 # qemu-ifup
 ```sh
+cat << 'EOF' >
 #!/bin/sh
 set -e
 
