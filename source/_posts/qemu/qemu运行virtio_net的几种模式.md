@@ -92,8 +92,7 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
                                         -device pcie-root-port,port=0x11,chassis=0,id=pci.5,bus=pcie.0,multifunction=on,addr=0x3 \
                                         -device virtio-net-pci,netdev=hostnet1,id=net1,mac=52:54:00:00:34:57,bus=pci.5,mq=on,host_mtu=3500 \
 
-qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off,kernel_irqchip=split -cpu host -m 1G                                         \
--object memory-backend-file,id=ram-node0,prealloc=yes,mem-path=/dev/hugepages/dpdk-vdpa,share=yes,size=1G                                         \
+qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off,kernel_irqchip=split -cpu host -m 1G  -object memory-backend-file,id=ram-node0,prealloc=yes,mem-path=/dev/hugepages/dpdk-vdpa,share=yes,size=1G                                         \
 -numa node,nodeid=0,memdev=ram-node0                                         \
 -smp 2 ./test.raw                                         \
 -enable-kvm                                         \
