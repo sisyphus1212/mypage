@@ -47,7 +47,7 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
                                         -netdev vhost-user,chardev=charnet0,id=hostnet0,queues=6 \
                                         -chardev socket,id=charnet0,path=/tmp/vdpa-socket0,server=on \
                                         -device pcie-root-port,port=0x10,chassis=1,id=pci.4,bus=pcie.0,multifunction=on,addr=0x2 \
-                                        -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:00:34:56,bus=pci.4,mq=on,host_mtu=3500 \
+                                        -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:00:34:56,bus=pci.4,mq=on,host_mtu=3500,mrg_rxbuf=off \
                                         -nographic -serial mon:stdio -monitor tcp:127.0.0.1:3333,server,nowait
 ```
 
