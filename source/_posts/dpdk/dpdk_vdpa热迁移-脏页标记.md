@@ -6,6 +6,8 @@ categories:
 tags:
 - dpdk
 - 网络开发
+- vdpa
+- 脏页标记
 ---
 
 ```c
