@@ -59,7 +59,7 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
                                         -smp 2 ./test.raw \
                                         -enable-kvm \
                                         -netdev vhost-user,chardev=charnet0,id=hostnet0,queues=6 \
-                                        -chardev socket,id=charnet0,path=/usr/local/var/run/openvswitch/vhost-user1,server=on \
+                                        -chardev socket,id=charnet0,path=/usr/local/var/run/openvswitch/vhost-user1,client=on \
                                         -device pcie-root-port,port=0x10,chassis=1,id=pci.4,bus=pcie.0,multifunction=on,addr=0x2 \
                                         -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:00:34:56,bus=pci.4,mq=on,host_mtu=3500 \
                                         -nographic -serial mon:stdio -monitor tcp:127.0.0.1:3333,server,nowait
