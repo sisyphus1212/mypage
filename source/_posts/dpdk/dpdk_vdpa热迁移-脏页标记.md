@@ -19,5 +19,5 @@ vhost_log_page(uint8_t *log_base, uint64_t page)
 ```
 log_base 每bit代表一个page, 0表示没有改变过，1表示改变过
 
-# 例子:
+## 例子:
 假设 page 的值为 9，这意味着我们需要标记第 9 个页面已修改。
