@@ -95,4 +95,5 @@ ip link set dev "${TAP_DEVICE}" up
 ip link set "${TAP_DEVICE}" master "${BRIDGE}"
 
 exit 0
+EOF
 ```
