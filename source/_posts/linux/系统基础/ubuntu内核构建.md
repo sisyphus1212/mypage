@@ -15,5 +15,5 @@ git fetch --depth 1 origin 948bd6b3f8eb95d50cf7acbd0f7d082ab7d8d9db
 git checkout 948bd6b3f8eb95
 unset FAKEROOTKEY
 fakeroot debian/rules clean
-
+fakeroot debian/rules editconfigs
 ```
