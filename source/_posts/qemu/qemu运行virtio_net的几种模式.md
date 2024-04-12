@@ -29,7 +29,7 @@ qemu-system-x86_64 -M q35,accel=kvm,kernel-irqchip=split \
     -serial mon:stdio -nographic
 ```
 
-# vhost-user 模式
+# vhost-user vdpa 模式
 ```sh
 #dpdk vhost-user:
 bdf=00:0a.0
@@ -50,6 +50,8 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
                                         -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:00:34:56,bus=pci.4,mq=on,host_mtu=3500 \
                                         -nographic -serial mon:stdio -monitor tcp:127.0.0.1:3333,server,nowait
 ```
+
+# vhost-user ovs 模式
 
 # qemu-ifup
 ```sh
