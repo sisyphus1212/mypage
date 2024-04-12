@@ -56,7 +56,7 @@ qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off
 
 
 qemu-system-x86_64 -machine q35,accel=kvm,usb=off,vmport=off,dump-guest-core=off,kernel_irqchip=split -cpu host -m 1G \
-                                        -object memory-backend-file,id=ram-node0,prealloc=yes,mem-path=/dev/hugepages/dpdk-vdpa,share=yes,size=1G \
+                                        -object memory-backend-file,id=ram-node0,prealloc=yes,mem-path=/dev/hugepages,share=yes,size=1G \
                                         -numa node,nodeid=0,memdev=ram-node0 \
                                         -smp 2 ./test.raw \
                                         -enable-kvm \
