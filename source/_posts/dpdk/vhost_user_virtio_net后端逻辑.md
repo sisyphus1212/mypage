@@ -10,4 +10,5 @@ tags:
 ---
 
 # 收包处理
-sync_mbuf_to_desc_seg
+mbuf_to_desc
+    sync_mbuf_to_desc_seg
