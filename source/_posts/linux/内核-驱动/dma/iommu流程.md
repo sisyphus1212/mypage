@@ -12,3 +12,4 @@ pci_map_single
 # TT为paasthrough的translation type是什么时候设置的
 init_dmars
     iommu_prepare_static_identity_mapping
+        domain_add_dev_info
