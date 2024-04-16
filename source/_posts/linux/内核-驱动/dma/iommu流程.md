@@ -14,3 +14,5 @@ init_dmars
     iommu_prepare_static_identity_mapping
         domain_add_dev_info
             domain_context_mapping_one
+
+IOVA-连续的内存块，建议使用rte_memzone_reserve()函数，并指定RTE_MEMZONE_IOVA_CONTIG标志
