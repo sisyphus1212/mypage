@@ -3,4 +3,5 @@ pci_map_single
         ops->map_page -> intel_map_page
             __intel_map_single
                 intel_alloc_iova
+                domain_pfn_mapping
 
