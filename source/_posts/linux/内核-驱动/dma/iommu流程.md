@@ -10,3 +10,4 @@ pci_map_single
 ![alt text](../../../../../../../medias/images_0/iommu流程_image.png)
 
 # TT为paasthrough的translation type是什么时候设置的
+init_dmars
