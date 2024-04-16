@@ -13,3 +13,4 @@ pci_map_single
 init_dmars
     iommu_prepare_static_identity_mapping
         domain_add_dev_info
+            domain_context_mapping_one
