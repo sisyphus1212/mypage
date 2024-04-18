@@ -10,8 +10,8 @@ tags:
 
 # 依赖安装
 ```shell
-apt-get install libevent-dev or dnf install libevent-devel
-apt-get install pkg-config   or dnf install pkg-config
+apt-get instll libevent-dev -y  or dnf install libevent-devel -y
+apt-get install pkg-config  -y or dnf install pkg-config -y
 pip3 install pyelftools
 
 ```
